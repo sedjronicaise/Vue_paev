@@ -16,5 +16,5 @@ import PraticienEdit from './praticiens/PraticienEdit.vue'
 
 export {
     AdminLayout, Dashboard, PatientIndex, PatientEdit, PatientAdd,
-    PraticienIndex, PraticienEdit, DossierMedical, Stats
+    PraticienIndex, PraticienEdit, DossierMedical, Stats 
 }

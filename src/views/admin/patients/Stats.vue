@@ -1,10 +1,10 @@
 <template>
     <div>
-            <div class="app-content content">
-        <div class="content-header row">
-        </div>
-        <div class="content-overlay"></div>
-        <div class="content-wrapper">
+        <div class="app-content content">
+            <div class="content-header row">
+            </div>
+            <div class="content-overlay"></div>
+            <div class="content-wrapper">
             <div class="content-body">
                 <!-- Hospital Info cards -->
                 <div class="row">
@@ -66,7 +66,7 @@
                 <!-- Appointment Bar Line Chart -->
                 <div class="row">
                     <div class="col-12">
-                       
+                    
                     </div>
                 </div>
                 <!-- Appointment Bar Line Chart Ends -->
@@ -78,7 +78,7 @@
                             <div class="card-header">
                                 <h4 class="card-title">Salle d'attente</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                               
+                            
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
                                         <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
@@ -117,10 +117,10 @@
                                                     <span class="">Gynecologie</span>
                                                 </td>
                                             </tr>
-                                           
+                                        
                                             <tr>
                                                 <td class="text-truncate p-1 border-bottom-0 ">
-                                                   02
+                                                02
                                                 </td>
                                                 <td class="text-truncate pl-0 border-top-0 border-bottom-0 ">
                                                     <div class="name">Colin Welch</div>
@@ -138,72 +138,72 @@
                     </div>
                     <div id="recent-appointments" class="col-12 col-md-8">
                         <div class="card" style="height: 318.25px;">
-                          
+                        
                             <div class="col-12">
-                              <div class="card">
-                                  <div class="card-header">
-                                      <h4 class="card-title">Traitement en cours</h4>
-                                      <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                                      <div class="heading-elements">
-                                          <ul class="list-inline mb-0">
-                                              <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                              <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                              <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                              <li><a data-action="close"><i class="ft-x"></i></a></li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                                  <div class="card-content collapse show">
-                                     
-                                      <div class="table-responsive">
-                                          <table class="table table-bordered mb-0">
-                                              <thead>
-                                                  <tr>
-                                                      <th>Patients</th>
-                                                      <th>Diagnostic</th>
-                                                      <th>Soins programmés</th>
-                                                      <th>Timings</th>
-                                                  </tr>
-                                              </thead>
-                                              <tbody>
-                                                  <tr>
-                                                      <td class="text-truncate p-1">
-                                                         ADOKOU BERNARD
-                                                      </td>
-                                                      <td>Ulcère</td>
-                                                      <td>Perfusion de 1 sérum de glucose</td>
-                                                      <td>22:02</td>
-                                                  </tr>
-                                                  <tr>
-                                                      <td class="text-truncate p-1">
-                                                         ADOKOU BERNARD
-                                                      </td>
-                                                      <td>éruptions cutanées</td>
-                                                      <td>Perfusion de 1 sérum de glucose</td>
-                                                      <td>20:10</td>
-                                                  </tr>
-                                                  <tr>
-                                                      <td class="text-truncate p-1">
-                                                         ADOKOU BERNARD
-                                                      </td>
-                                                      <td>douleurs musculaires</td>
-                                                      <td>Perfusion de 1 sérum de glucose</td>
-                                                      <td>13:30</td>
-                                                  </tr>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Traitement en cours</h4>
+                                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-content collapse show">
+                                    
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Patients</th>
+                                                    <th>Diagnostic</th>
+                                                    <th>Soins programmés</th>
+                                                    <th>Timings</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-truncate p-1">
+                                                        ADOKOU BERNARD
+                                                    </td>
+                                                    <td>Ulcère</td>
+                                                    <td>Perfusion de 1 sérum de glucose</td>
+                                                    <td>22:02</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-truncate p-1">
+                                                        ADOKOU BERNARD
+                                                    </td>
+                                                    <td>éruptions cutanées</td>
+                                                    <td>Perfusion de 1 sérum de glucose</td>
+                                                    <td>20:10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-truncate p-1">
+                                                        ADOKOU BERNARD
+                                                    </td>
+                                                    <td>douleurs musculaires</td>
+                                                    <td>Perfusion de 1 sérum de glucose</td>
+                                                    <td>13:30</td>
+                                                </tr>
                                                 
-                                              </tbody>
-                                          </table>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          </div>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
                     </div>
 
                     <div id="statistique" class="col-12 col-md-12">
                         <div class="card" style="height: 318.25px;">
                             
-                          <div class="col-12">
+                        <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Statistique de santé</h4>
@@ -247,7 +247,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Affection/Infection</th>
-                                                   
+                                                
                                                     <th>Nombre de cas</th>
                                                 </tr>
                                             </thead>
@@ -272,8 +272,8 @@
                 </div>
                 <!-- Appointment Table Ends -->
             </div>
+            </div>
         </div>
-    </div>
     </div>
 </template>
 

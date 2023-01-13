@@ -116,6 +116,7 @@
                   <li class=" navigation-header">
                       <span data-i18n="Professional"><em>Gestion Hôpital</em></span>
                   </li>
+
                   <div class="dropdown-divider"></div>
 
                   <li class=" nav-item">
@@ -151,15 +152,16 @@
                           </li>
                       </ul>
                   </li>
-
                   
                   <li class=" navigation-header"><span data-i18n="Apps"><em>Services  Outils</em></span><i class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right" data-original-title="Apps"></i>
                   </li>
                   <div class="dropdown-divider"></div>
 
                   <li class=" nav-item">
-                      <a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="Components">Pharmacie</span></a>
+                      <a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="Components">Nutrition</span></a>
                   </li>
+
+                  <div class="dropdown-divider"></div>
 
                   <li class=" nav-item"><a href=""><i class="la la-comments"></i><span class="menu-title" data-i18n="Chat">Messagerie</span></a>
                   </li>
@@ -193,9 +195,9 @@
 </template>
 
 <script>
-export default {
-    name : 'AdminSidebar'
-}
+    export default {
+        name : 'AdminSidebar'
+    }
 </script>
 
 <style>

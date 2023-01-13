@@ -3,10 +3,8 @@
         <div class="app-content content">
             <div class="content-overlay"></div>
             <div class="content-wrapper">
-                
                 <div class="content-body">
                     <!-- List Of All Patients -->
-
                     <section id="patients-list">
                         <div class="row">
                             <div class="col-12">
