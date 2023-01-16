@@ -25,9 +25,6 @@ const routes = [
         { path: 'patient/add', component: Admin.PatientAdd },
         { path: 'patient/dossier', component: Admin.DossierMedical },
         { path: 'patient/stats', component: Admin.Stats },
-
-
-
         { path: 'praticien/index', component: Admin.PraticienIndex },
         { path: 'praticien/edit/:id', component: Admin.PraticienEdit },
       
