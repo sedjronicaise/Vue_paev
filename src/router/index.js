@@ -13,6 +13,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import * as Admin from '@/views/admin'
 import * as Public from '@/views/public'
 
+import Login from '@/views/auth/Login.vue'
+
 const routes = [
   {
     path: '/admin',
@@ -21,13 +23,16 @@ const routes = [
     children: [
         { path: 'dashboard', name: 'dashboard', component: Admin.Dashboard },
         { path: 'patient/index', component: Admin.PatientIndex },
-        { path: 'patient/edit/:id', component: Admin.PatientEdit },
+        { path: 'patient/edit/:id(\\d+)', component: Admin.PatientEdit, props: true },
         { path: 'patient/add', component: Admin.PatientAdd },
         { path: 'patient/dossier', component: Admin.DossierMedical },
         { path: 'patient/stats', component: Admin.Stats },
         { path: 'praticien/index', component: Admin.PraticienIndex },
         { path: 'praticien/edit/:id', component: Admin.PraticienEdit },
-      
+        { path: 'ordonnance/index', component: Admin.OrdonnanceIndex },
+        {
+          path: '/:pathMatch(.*)*', redirect: '/admin/dashboard'
+        }
     ]
   },
   {
@@ -44,9 +49,15 @@ const routes = [
 
   
 
-  // {
-  //   path: '/:pathMatch(.*)*', redirect: '/'
-  // }
+  {
+    path: '/:pathMatch(.*)*', redirect: '/'
+  },
+
+  
+  { 
+    path: '/login', name: 'Login', component: Login 
+  },
+  
  
 ]
 

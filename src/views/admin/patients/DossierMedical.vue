@@ -503,7 +503,7 @@
 
                                                                     <form class="form">
                                                                         <h4 class="card-title" id="from-actions-top-bottom-center">
-                                                                            <strong>3- EXAMENS CLINIQUES</strong>
+                                                                            <strong>3- DONNÉES ANTHROPOMETRIQUE</strong>
                                                                         </h4>
 
                                                                         <div class="form-body">
@@ -617,65 +617,189 @@
 
                                                                     <form class="form">
                                                                         <h4 class="card-title" id="from-actions-top-bottom-center">
-                                                                            <STrong>5- ANALYSES BIOLOGIQUES</STrong> <a data-action="reload"><i class="ft-rotate-cw"></i></a></h4>
-                                                                        <div class="form-actions top text-right">
+                                                                        <strong>5- EXAMENS PARACLINIQUES</strong> <a data-action="reload"><i class="ft-rotate-cw"></i></a></h4>
+                                                                        
+                                                                        <h4 class="card-title text-center" id="from-actions-top-bottom-center">
+                                                                        <strong>5-1 EXAMENS PHYSIQUES</strong> 
+                                                                        </h4>
+                                                                                                                                                   
+                                                                       <div class="form-actions top text-right">
+                                        
+                                                                        <div class="card-content">
+                                                                            <div class="card-body text-center">
+                                                                                <div class="row" id="select" data-select2-id="select">
+                                                                                    <div class="col-12" data-select2-id="20">
+                                                                                        <div class="card" data-select2-id="19">
+                                                                                            <div class="card-header">
+                                                                                                <h4 class="card-title">Selectionnez le ou les types d'analyses</h4>
                                                                             
-                                                    
-                                                                            <div class="card-content">
-                                                                                <div class="card-body text-center">
-                                                                                    <div class="row" id="select" data-select2-id="select">
-                                                                                        <div class="col-12" data-select2-id="20">
-                                                                                            <div class="card" data-select2-id="19">
-                                                                                                <div class="card-header">
-                                                                                                    <h4 class="card-title">Selectionnez le ou les types d'analyses</h4>
-                                                                                
-                                                                                                </div>
-                                                                                                <div class="card-content collapse show" data-select2-id="18">
-                                                                                                    <div class="table-responsive" data-select2-id="17">
-                                                                                                        <table class="table table-bordered mb-0">
-                                                                                                            <tbody data-select2-id="16">
-                                                                                                                <tr> 
-                                                                                                                    <td class="width-350" data-select2-id="15">
-                                                                                                                        <div class="card-body">
-                                                                                                                            <div class="form-group">
-                                                                                                                                <select class="select2 form-control select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                                                                                                    <optgroup label="Analyses Biochimiques" data-select2-id="26">
-                                                                                                                                        <option value="AK" data-select2-id="3">Glycémie</option>
-                                                                                                                                        <option value="HI" data-select2-id="27">NFS</option>
-                                                                                                                                    </optgroup>
-                                                                                                                                    <optgroup label="" data-select2-id="28">
-                                                                                                                                        <option value="CA" data-select2-id="29">Natrémie</option>
-                                                                                                                                        <option value="NV" data-select2-id="30">Kaliémie</option>
-                                                                                                                                        <option value="OR" data-select2-id="31">ECG</option>
-                                                                                                                                        <option value="WA" data-select2-id="32">Créatininémie</option>
-                                                                                                                                    </optgroup>
+                                                                                            </div>
+                                                                                            <div class="card-content collapse show" >
+                                                                                                <div class="table-responsive">
+                                                                                                    <table class="table table-bordered mb-0">
+                                                                                                        <tbody data-select2-id="1">
+                                                                                                            <tr> 
+                                                                                                                <td class="width-350" data-select2-id="15">
+                                                                                                                    <div class="card-body">
+                                                                                                                        <div class="form-group">
+                                                                                                                            <select class="select2 form-control " data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                                                                                                                <optgroup >
+                                                                                                                                    <option value="" >Radiographie</option>
+                                                                                                                                    <option value="" >Scanner </option>
+                                                                                                                                    <option value="" >Mammographie</option>
+                                                                                                                                    <option value="" >Echographie</option>
+                                                                                                                                    <option value="" > IRM </option>
                                                                                                                                     
+                                                                                                                                </optgroup>
+                                                                                                                           
                                                                                                                             </select>
-                                                                                                                            </div>
+                                                                                                                            <span class="select2 select2-container select2-container--default select2-container--open 
+                                                                                                                            select2-container--focus select2-container--above" dir="ltr"  style="width: 100%;">
+                                                                                                                            <span class="selection"><span class="select2-selection select2-selection--single" role="combobox" 
+                                                                                                                                aria-haspopup="true" aria-expanded="true" tabindex="0" aria-disabled="false"
+                                                                                                                                 aria-labelledby="select2-gysu-container" aria-owns="select2-gysu-results"
+                                                                                                                                  aria-activedescendant="select2-gysu-result-ziee-HI">
+                                                                                                                                </span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
                                                                                                                         </div>
-                                                                                                                    </td>
-                                                                                                                    <td>Votre sélection </td>
-                                                                                                                </tr>
+                                                                                                                    </div>
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <div class="card-content">
+                                                                                                                        <div class="card-body text-center">
+                                                                                                                            <span class="alert-icon"><i class="la la-info-circle" style="font-size: 3.2rem; color:red;"></i></span>
+                                                                                                                            <p class="text-danger ">
+                                                                                                                                Aucune donnée disponible pour le moment!
+                                                                                                                            </p>
+                                                                                                                        </div>
+                                                                                                                    </div> 
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        
                                                                                                             
                                                                                                             
-                                                                                                                
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                                                                    </div>
+                                                                                                        </tbody>
+                                                                                                    </table>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>                                                       
+                                                                            </div>
+                                                                        </div>                                                       
+                                                                                                                                                                                                                                     
                                                                         </div>            
                                                                         <div class="form-body">
                                                                         </div> 
                                                                     </form>
+                                                                   
+                                                                    <form class="form">
+                                                                        <h4 class="card-title text-center" id="from-actions-top-bottom-center">
+                                                                            <STrong>5-2 ANALYSES BIOLOGIQUES</STrong></h4>
+                                                                        <div class="form-actions top text-right">
+                                                                            
+                                                    
+                                                                            <div class="card-content">
+                                                                            <div class="card-body text-center">
+                                                                                <div class="row" id="select" data-select2-id="select">
+                                                                                    <div class="col-12" data-select2-id="20">
+                                                                                        <div class="card" data-select2-id="19">
+                                                                                            <div class="card-header">
+                                                                                                <h4 class="card-title">Selectionnez le ou les types d'analyses</h4>
+                                                                            
+                                                                                            </div>
+                                                                                            <div class="card-content collapse show" >
+                                                                                                <div class="table-responsive">
+                                                                                                    <table class="table table-bordered mb-0">
+                                                                                                        <tbody data-select2-id="1">
+                                                                                                            <tr> 
+                                                                                                                <td class="width-350" data-select2-id="15">
+                                                                                                                    <div class="card-body">
+                                                                                                                        <div class="form-group">
+                                                                                                                            <select class="select2 form-control " data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                                                                                                                <optgroup >
+                                                                                                                                    <option value="" >Glycémie</option>
+                                                                                                                                    <option value="" >NFS</option>
+                                                                                                                                    <option value="" >Natrémie</option>
+                                                                                                                                    <option value="" >Kaliémie</option>
+                                                                                                                                    <option value="" >Chlorémie</option>
+                                                                                                                                    <option value="" >Calcémie</option>
+                                                                                                                                    <option value="" >Magnésémie</option>
+                                                                                                                                    <option value="" >Transaminases TGO + TGP</option>
+                                                                                                                                    <option value="" >Amylasémie</option>
+                                                                                                                                    <option value="" >Azotémie</option>
+                                                                                                                                    <option value="" >Créatininémie</option>
+                                                                                                                                    <option value="" >Uricémie</option>
+                                                                                                                                    <option value="" >ECG</option>
+                                                                                                                                    <option value="" >TCK</option>
+                                                                                                                                    <option value="" >TP/INR</option>
+                                                                                                                                    <option value="" >CPK</option>
+                                                                                                                                    <option value="" >Cholestérolémie T</option>
+                                                                                                                                    <option value="" >Cholestérolémie HDL</option>
+                                                                                                                                    
+                                                                                                                                    <option value="" >Triglycéridémie</option>
+                                                                                                                                    <option value="" >PSA totales</option>
+                                                                                                                                    <option value="" >PSA prostatiques/ FPSA</option>
+                                                                                                                                    <option value="" >Electrophorèse des protéines</option>
+                                                                                                                                    <option value="" >Electrophorèse de l'Hb</option>
+                                                                                                                                    <option value="" >Ag HBs</option>
+                                                                                                                                    <option value="" >Ag HBc</option>
+                                                                                                                                    <option value="" >G6PD</option>
+                                                                                                                                    <option value="" >Alpha foeto protéines</option>
+                                                                                                                                    <option value="" >Sérologie Rubéole</option>
+                                                                                                                                    <option value="" >Sérologie Toxoplasmose</option>
+                                                                                                                                    <option value="" >ASLO</option>
+                                                                                                                                    <option value="" >Biluribine D</option>
+                                                                                                                                    <option value="" >Biluribine I</option>
+                                                                                                                                    <option value="" >ECBU + Antibiogramme</option>
+                                                                                                                                    <option value="" >Spermoogramme + Antibiogramme</option>
+                                                                                                                                    <option value="" >Sérologie HIV</option>
+                                                                                                                                    <option value="" >GSRH</option>
+                                                                                                                                    
 
+                                                                                                                                </optgroup>
+                                                                                                                           
+                                                                                                                            </select>
+                                                                                                                            <span class="select2 select2-container select2-container--default select2-container--open 
+                                                                                                                            select2-container--focus select2-container--above" dir="ltr"  style="width: 100%;">
+                                                                                                                            <span class="selection"><span class="select2-selection select2-selection--single" role="combobox" 
+                                                                                                                                aria-haspopup="true" aria-expanded="true" tabindex="0" aria-disabled="false"
+                                                                                                                                 aria-labelledby="select2-gysu-container" aria-owns="select2-gysu-results"
+                                                                                                                                  aria-activedescendant="select2-gysu-result-ziee-HI">
+                                                                                                                                </span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </td>
+                                                                                                                <td> 
+                                                                                                                    <div class="card-content">
+                                                                                                                        <div class="card-body text-center">
+                                                                                                                            <span class="alert-icon"><i class="la la-info-circle" style="font-size: 3.2rem; color:red;"></i></span>
+                                                                                                                            <p class="text-danger ">
+                                                                                                                                Aucune donnée disponible pour le moment!
+                                                                                                                            </p>
+                                                                                                                        </div>
+                                                                                                                    </div> 
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        
+                                                                                                            
+                                                                                                            
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>                                                         
+                                                                        </div>            
+                                                                        <div class="form-body">
+                                                                        </div> 
+                                                                    </form>
+                                                                  
                                                                     <form class="form">
                                                                         <h4 class="card-title" id="from-actions-top-bottom-center">
-                                                                            <strong>6- DIAGNOSTIQUE</strong>
+                                                                            <strong>7- DIAGNOSTICS</strong>
                                                                         </h4>            
                                                                         <div class="form-body">
                                                                             <div class="row">
@@ -691,26 +815,6 @@
                                                                                 <i class="la la-check-square-o"></i> Enregistrer
                                                                             </button>
                                                                         </div>
-                                                                    </form>
-
-
-                                                                    <form class="form">
-                                                                        <h4 class="card-title" id="from-actions-top-bottom-center">
-                                                                        <strong>7- EXAMENS</strong> <a data-action="reload"><i class="ft-rotate-cw"></i></a></h4>
-                                                                        <div class="form-actions top text-right">
-                                                                        
-                                                                            
-                                                                            <div class="card-content">
-                                                                                <div class="card-body text-center">
-                                                                                    <span class="alert-icon"><i class="la la-info-circle" style="font-size: 3.2rem; color:red;"></i></span>
-                                                                                    <p class="text-danger ">
-                                                                                        Aucune donnée disponible pour le moment!
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>                                                       
-                                                                        </div>            
-                                                                        <div class="form-body">
-                                                                        </div> 
                                                                     </form>
 
                                                                     <form class="form">
@@ -886,14 +990,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="card-content">
-                                                                                <div class="card-body text-center">
-                                                                                    <span class="alert-icon"><i class="la la-info-circle" style="font-size: 3.2rem; color:red;"></i></span>
-                                                                                    <p class="text-danger ">
-                                                                                        Aucune donnée disponible pour le moment!
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>                                                      
+                                                                                                                                 
                                                                         </div>            
                                                                         <div class="form-body">
                                                                         </div> 
@@ -901,11 +998,13 @@
 
                                                                     <form class="form">
                                                                         <h4 class="card-title" id="from-actions-top-bottom-center">
-                                                                            <strong>9- ORDONNANCIER</strong> <a data-action="reload"><i class="ft-rotate-cw"></i></a></h4>
+                                                                            <strong>9- ORDONNANCIER</strong> 
+                                                                        </h4>
                                                                         <div class="form-actions top text-right">
-                                                                            <button type="button" class="btn btn-info mr-1">
-                                                                                + Ajouter
-                                                                            </button>
+                                                                           <router-link to="/admin/ordonnance/index" class="btn btn-info mr-1">
+                                                                                Faire une ordonnance
+                                                                           </router-link>
+                                                                            
                                                                             
                                                                             <div class="card-content">
                                                                                 <div class="card-body text-center">
@@ -1106,6 +1205,7 @@
                                                             <strong class="text-info"> ANALYSES BIOLOGIQUES</strong> | 19-12-2022 à 14h 50 min</h4>
                                                         <button class="btn btn-info btn-sm float-right"><i class="ft-plus white"></i> Imprimer</button>
                                                     </div>
+                                                    
                                                     <div class="card-content">
                                                         <div class="card-body">
                                                             <table class="table table-bordered">

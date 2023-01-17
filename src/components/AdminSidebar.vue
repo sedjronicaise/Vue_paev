@@ -135,20 +135,20 @@
                 
 
                   <li class=" nav-item">
-                      <a href="#">
-                          <i class="la la-clipboard"></i><span class="menu-title" data-i18n="Report">Certificat Médical</span>
-                      </a>
+                        <router-link to="/admin/ordonnance/index">
+                            <i class="la la-clipboard"></i><span class="menu-title" data-i18n="Report">Ordonnance</span>
+                        </router-link> 
                   </li>
                   
 
                   
-                  <li class=" nav-item"><a href="#"><i class="la la-edit"></i><span class="menu-title" data-i18n="Invoice">Ordonnance</span></a>
+                  <li class=" nav-item"><a href="#"><i class="la la-edit"></i><span class="menu-title" data-i18n="Invoice">Certificats médicales</span></a>
                       <ul class="menu-content">
-                          <li><a class="menu-item" href=""><i class="material-icons"></i><span data-i18n="Invoice Summary">Invoice Summary</span></a>
+                        <li><a class="menu-item" href=""><i class="material-icons"></i><span data-i18n="Invoice Summary">Certificat de repos</span></a>
                           </li>
-                          <li><a class="menu-item" href=""><i class="material-icons"></i><span data-i18n="Invoice Template">Invoice Template</span></a>
+                          <li><a class="menu-item" href=""><i class="material-icons"></i><span data-i18n="Invoice Template">Certificat de travail</span></a>
                           </li>
-                          <li><a class="menu-item" href=""><i class="material-icons"></i><span data-i18n="Invoice List">Invoice List</span></a>
+                          <li><a class="menu-item" href=""><i class="material-icons"></i><span data-i18n="Invoice List">Certificat de bonne santé</span></a>
                           </li>
                       </ul>
                   </li>

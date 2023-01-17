@@ -8,7 +8,7 @@ import PatientAdd from './patients/PatientAdd.vue'
 import DossierMedical from './patients/DossierMedical.vue'
 import Stats from './patients/Stats.vue'
 
-
+import OrdonnanceIndex from './ordonnance/OrdonnanceIndex.vue'
 
 import PraticienIndex from './praticiens/PraticienIndex.vue'
 import PraticienEdit from './praticiens/PraticienEdit.vue'
@@ -16,5 +16,5 @@ import PraticienEdit from './praticiens/PraticienEdit.vue'
 
 export {
     AdminLayout, Dashboard, PatientIndex, PatientEdit, PatientAdd,
-    PraticienIndex, PraticienEdit, DossierMedical, Stats 
+    PraticienIndex, PraticienEdit, DossierMedical, Stats, OrdonnanceIndex 
 }
