@@ -158,7 +158,10 @@
                   <div class="dropdown-divider"></div>
 
                   <li class=" nav-item">
-                      <a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="Components">Nutrition</span></a>
+                        <router-link to="/admin/nutrition">
+                            <i class="la la-server"></i><span class="menu-title" data-i18n="Components">Nutrition</span>
+                        </router-link>
+                      
                   </li>
 
                   <div class="dropdown-divider"></div>

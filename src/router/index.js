@@ -30,6 +30,10 @@ const routes = [
         { path: 'praticien/index', component: Admin.PraticienIndex },
         { path: 'praticien/edit/:id', component: Admin.PraticienEdit },
         { path: 'ordonnance/index', component: Admin.OrdonnanceIndex },
+        { path: 'nutrition', component: Admin.Nutrition },
+        { path: 'nutrition/dossier', component: Admin.DossierNutrition },
+
+
         {
           path: '/:pathMatch(.*)*', redirect: '/admin/dashboard'
         }
