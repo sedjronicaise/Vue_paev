@@ -23,6 +23,7 @@
                                             <table class="table table-striped table-bordered patients-list">
                                                 <thead>
                                                     <tr>
+                                                        <th>#</th>
                                                         <th>Nom & prénoms</th>
                                                         <th>Type de Consultation</th>
                                                         
@@ -33,13 +34,12 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Phil Gray</td>
-                                                        <td>Dental</td>
-                                                    
-                                                        <td>25</td>
-                                                        <td>+229 96030244</td>
-                                                        
+                                                    <tr v-for ="user in users" >
+                                                        <td>{{user.id}}</td>
+                                                        <td>{{user.nom  }} {{user.prenom}}</td>
+                                                        <td>{{user.typeconsultation}}</td>
+                                                        <td>{{user.age}}</td>
+                                                        <td>{{user.contact}}</td>
                                                         <td>
                                                             <router-link to="/admin/patient/dossier" class="btn btn-primary round btn-sm waves-effect waves-light">
                                                                   <i class="la la-plus font-small-2"></i>Dossier Médical
@@ -47,18 +47,14 @@
                                                             
                                                         </td>
                                                     </tr>
-
-                                                   
-                                              
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
+                                                        <th>#</th>
                                                         <th>Nom & prénoms</th>
                                                         <th>Type de Consultation</th>
-                                                        
                                                         <th>Age</th>
                                                         <th>Contact</th>
-                                                    
                                                         <th>Actions</th>
                                                     </tr>
                                                 </tfoot>
@@ -78,6 +74,18 @@
 <script>
 export default {
     name: 'PatientIndex',
+    data (){
+
+        return {
+                users: [
+                    { id: 1, nom: 'Martin', prenom: 'Eric', typeconsultation: "Medecine generale",  age: 30, contact: "960404040" },
+                    { id: 2, nom: 'ABOSSOU', prenom: 'EriJean ', typeconsultation: "Medecine generale",  age: 30, contact: "960404040" },
+                    { id: 3, nom: 'Akomon', prenom: 'Jennie', typeconsultation: "Gynecologie",  age: 30, contact: "960404040" },
+                    { id: 4, nom: 'Dansou', prenom: 'Firmin', typeconsultation: "Medecine generale",  age: 30, contact: "960000000" },
+                    
+                ]
+            }
+    }
 }
 </script>
 

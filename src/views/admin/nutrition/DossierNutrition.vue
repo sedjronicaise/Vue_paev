@@ -136,7 +136,6 @@
                                                     <strong class="text-info"> Fiche stresseur</strong></a>
                                             </li>
                                             
-
                                         </ul>
                                         <div class="tab-content px-1 pt-1">
                                             <!-- <ProfilePatient/> -->
@@ -295,9 +294,8 @@
                                                 <h4 class="card-title" id="from-actions-top-bottom-center">
                                                     <strong class="text-info">FICHE D'EVALUATION STRESSEUR</strong> 
                                                 </h4>   
-                                                  
+   
                                                 
-
                                             </div>
                                         </div>
                                     </div>
@@ -321,7 +319,7 @@
 export default {
     name: 'DossierNutrition',
     components : {
-        // ProfilePatient
+        
     }
 }
 </script>

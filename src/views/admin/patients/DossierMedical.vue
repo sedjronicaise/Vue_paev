@@ -1408,6 +1408,7 @@
 // import ProfilePatient from '@/components/ProfilePatient.vue'
 export default {
     name: 'DossierMedical',
+    
     components : {
         // ProfilePatient
     }
