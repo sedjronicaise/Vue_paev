@@ -79,15 +79,13 @@
                                 <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Lire tous les messages</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">John Doe</span><span class="avatar avatar-online"><img src="/hospital/app-assets/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span></a>
+                        <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700"> {{ users.name }} {{ users.username }} ({{ users.role }})  </span><span class="avatar avatar-online"><img src="/hospital/app-assets/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span></a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="#"><i class="material-icons"></i> Mon profil</a>
                                 <a class="dropdown-item" href="#"><i class="material-icons">playlist_add_check</i>Consultation</a>
                                 <a class="dropdown-item" href="#"><i class="material-icons">content_paste</i> Mes Rendez vous</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="" 
-                                    onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item"  @click.prevent="logout">
                                     <i class="material-icons">power_settings_new</i>
                                      Déconnexion
                                 </a>
@@ -197,10 +195,34 @@
   </div>
 </template>
 
-<script>
-    export default {
-        name : 'AdminSidebar'
+<script setup>
+    import { onMounted,reactive } from 'vue';
+    import { useRouter, useRoute } from "vue-router";
+    import { createToast } from "mosha-vue-toastify";
+    // import the styling for the toast
+    import "mosha-vue-toastify/dist/style.css";
+    const router = useRouter();
+    const route = useRoute();
+
+  const users = reactive({})
+  onMounted(() => {
+    const usersInfo = JSON.parse(localStorage.getItem('gestClinique'))
+    console.log(usersInfo)
+    if(usersInfo != null || usersInfo != undefined ) {
+      users.name = usersInfo.users.name
+      users.username = usersInfo.users.username
+      users.role = usersInfo.users.role
     }
+    
+  })
+  const toast = (message,type) => {
+    createToast(message,{type:type})
+  }
+  const logout = function() {
+    localStorage.removeItem('gestClinique')
+    toast('vous est déconnecté  ', 'success')
+    router.push('/login')
+  }
 </script>
 
 <style>
