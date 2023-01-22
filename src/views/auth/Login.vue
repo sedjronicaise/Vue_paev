@@ -82,6 +82,7 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+/* @import "/auth-asset/css/bootstrap.min.css";
+@import "/auth-asset/css/style.css"; */
 </style>

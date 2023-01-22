@@ -114,7 +114,7 @@
                   </li>
 
                   <li class=" navigation-header">
-                      <span data-i18n="Professional"><em>Gestion Hôpital</em></span>
+                      <span data-i18n="Professional"><em>Volet Médical</em></span>
                   </li>
 
                   <div class="dropdown-divider"></div>
@@ -153,7 +153,7 @@
                       </ul>
                   </li>
                   
-                  <li class=" navigation-header"><span data-i18n="Apps"><em>Services  Outils</em></span><i class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right" data-original-title="Apps"></i>
+                  <li class=" navigation-header"><span data-i18n="Apps"><em>Volet Nutritionnel</em></span><i class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right" data-original-title="Apps"></i>
                   </li>
                   <div class="dropdown-divider"></div>
 
@@ -161,23 +161,27 @@
                         <router-link to="/admin/nutrition">
                             <i class="la la-server"></i><span class="menu-title" data-i18n="Components">Nutrition</span>
                         </router-link>
-                      
+                  </li>
+
+                  <li class=" navigation-header">
+                      <span data-i18n="Professional"><em>Outils et Services</em></span>
                   </li>
 
                   <div class="dropdown-divider"></div>
 
-                  <li class=" nav-item"><a href=""><i class="la la-comments"></i><span class="menu-title" data-i18n="Chat">Messagerie</span></a>
+                  <li class=" nav-item">
+                    <a href=""><i class="la la-comments"></i><span class="menu-title" data-i18n="Chat">Messagerie</span></a>
                   </li>
                 
                 
-                  <li class=" nav-item"><a href="#"><i class="la la-dollar"></i><span class="menu-title" data-i18n="Payments">Comptabilité</span></a>
+                  <!-- <li class=" nav-item"><a href="#"><i class="la la-dollar"></i><span class="menu-title" data-i18n="Payments">Comptabilité</span></a>
                       <ul class="menu-content">
                           <li><a class="menu-item" href=""><i class="material-icons"></i><span>Caisse</span></a>
                           </li>
                           <li><a class="menu-item" href=""><i class="material-icons"></i><span>Factures</span></a>
                           </li>
                       </ul>
-                  </li>
+                  </li> -->
 
               </ul>
           </div>

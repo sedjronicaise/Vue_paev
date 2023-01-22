@@ -57,7 +57,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="firstName">
-                                                                    Prénom du patient(s):
+                                                                    Nom et Prénom du patient:
                                                                     <span class="danger">
                                                                         *
                                                                     </span>
@@ -65,15 +65,39 @@
                                                                 <input class="form-control " id="firstName" name="firstname" type="text" />
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-3">
                                                             <div class="form-group">
-                                                                <label for="lastName">
-                                                                    Nom du patient:
+                                                                
+                                                                <label for="dateA">
+                                                                    Date  d'arrivée
                                                                     <span class="danger">
                                                                         *
                                                                     </span>
                                                                 </label>
-                                                                <input class="form-control " id="lastName" name="lastname" type="text" />
+                                                                <input class="form-control " id="dateArrivee" name="dateArrivee" type="date" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="city">
+                                                                    Situation Matrimoniale
+                                                                </label>
+                                                                <select class="custom-select" id="city">
+                                                                    
+                                                                    <option value="Mariee">
+                                                                        Marié(e)
+                                                                    </option>
+                                                                    <option value="célibataire">
+                                                                        célibataire
+                                                                    </option>
+                                                                    <option value="Concubinage">
+                                                                        Concubinage
+                                                                    </option>
+                                                                    <option value="Veuf">
+                                                                        Veuf (ve)
+                                                                    </option>
+                                                               
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -106,24 +130,19 @@
                                                         <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label for="state">
-                                                                    Situation matrimoniale:
+                                                                    Type de consultation
                                                                 </label>
                                                                 <select class="custom-select" id="state">
                                                                     <option value="">
-                                                                       Marié(e)
+                                                                       Médecine Génerale
                                                                     </option>
                                                                     <option value="washingtondc">
-                                                                       Divorcé(e)
+                                                                       Nutrition
                                                                     </option>
                                                                     <option value="newyork">
-                                                                       Veuf(ve)
+                                                                       Gynécologie
                                                                     </option>
-                                                                    <option value="texas">
-                                                                        Célibataire
-                                                                    </option>
-                                                                    <option value="texas">
-                                                                        Concubinage
-                                                                    </option>
+                                                                    
                                                                 </select>
                                                             </div>
                                                         </div>
