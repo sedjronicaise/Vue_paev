@@ -310,9 +310,11 @@
                                             <div
                                               class="position-relative has-icon-left"
                                             >
+                                           
                                               <textarea
                                                 id="timesheetinput7"
                                                 rows="3"
+                                                v-model="formData.antecedantFamiliaux.medicaux"
                                                 class="form-control round border-primary"
                                                 name="antecedantsmedicaux"
                                                 placeholder=""
@@ -342,6 +344,7 @@
                                                       <textarea
                                                         id="timesheetinput7"
                                                         rows="3"
+                                                        v-model="formData.antecedantFamiliaux.chirurgicaux"
                                                         class="form-control round border-primary"
                                                         name="antecedantschirurgicaux"
                                                         placeholder=""
@@ -379,6 +382,8 @@
                                                         id="timesheetinput7"
                                                         rows="3"
                                                         class="form-control round border-primary"
+                                                        v-model="formData.antecedantFamiliaux.gynecologiques"
+
                                                         name="antecedantsgynecologiques"
                                                         placeholder=""
                                                       ></textarea>
@@ -415,6 +420,7 @@
                                                         rows="3"
                                                         class="form-control round border-primary"
                                                         name="antecedantsnutritionnels"
+                                                        v-model="formData.antecedantFamiliaux.nutritionnels"
                                                         placeholder=""
                                                       ></textarea>
                                                       <div
@@ -2758,6 +2764,27 @@
 	const route = useRoute()
 
 	const patients = ref([])
+  const formData = ref(
+    {
+      antecedantPersonnel: {
+       medicaux:'',
+       chirurgicaux:'',
+       gynecologiques:'',
+       nutritionnels:''
+      },
+      antecedantFamiliaux:{
+        ascendant:'',
+        colateraux:'',
+        descendant:'',
+      },
+      autres:{
+        allergieMedicament:'',
+        allergieAliment:'',
+        totem:'',
+        modeVie:''
+      }
+    }
+  )
 	const getData = JSON.parse(localStorage.getItem('patients'))
 	if(getData !=null || getData != undefined) {
 		const datas = getData
@@ -2767,7 +2794,7 @@
 	}
 	
 	patients.value = patients.value.filter(patient => patient.id ==route.params.id)
-	console.log(patients.value)
+	
 </script>
 
 <style></style>
