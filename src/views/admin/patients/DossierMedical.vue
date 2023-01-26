@@ -8,6 +8,7 @@
             <h3 class="content-header-title">
               Dossier Médical : {{patients[0].infoGeneral.fullName}}
             </h3>
+      
           </div>
           <div class="content-header-right col-md-6 col-12">
             <div
@@ -310,9 +311,11 @@
                                             <div
                                               class="position-relative has-icon-left"
                                             >
+                                           
                                               <textarea
                                                 id="timesheetinput7"
                                                 rows="3"
+                                                v-model="formData.antecedantPersonnel.medicaux"
                                                 class="form-control round border-primary"
                                                 name="antecedantsmedicaux"
                                                 placeholder=""
@@ -342,6 +345,7 @@
                                                       <textarea
                                                         id="timesheetinput7"
                                                         rows="3"
+                                                        v-model="formData.antecedantPersonnel.chirurgicaux"
                                                         class="form-control round border-primary"
                                                         name="antecedantschirurgicaux"
                                                         placeholder=""
@@ -379,6 +383,8 @@
                                                         id="timesheetinput7"
                                                         rows="3"
                                                         class="form-control round border-primary"
+                                                        v-model="formData.antecedantPersonnel.gynecologiques"
+
                                                         name="antecedantsgynecologiques"
                                                         placeholder=""
                                                       ></textarea>
@@ -415,6 +421,7 @@
                                                         rows="3"
                                                         class="form-control round border-primary"
                                                         name="antecedantsnutritionnels"
+                                                        v-model="formData.antecedantPersonnel.nutritionnels"
                                                         placeholder=""
                                                       ></textarea>
                                                       <div
@@ -432,13 +439,28 @@
                                               class="form-actions text-right"
                                             >
                                               <button
+                                                @click.prevent="addAntecedantPersonnel"
                                                 type="submit"
                                                 class="btn btn-primary"
                                               >
-                                                <i
+                                              <span class="fs-5 fs-semibold" v-if="!chargementPersonel">
+                                                  <i
                                                   class="la la-check-square-o"
                                                 ></i>
-                                                Enregistrer
+                                                  Enregistrer
+                                                </span>
+                                                <span v-else class="d-flex align-items-center">
+                                                  <span class="mx-2 fs-semibold text-light">
+                                                    chargement ...
+                                                  </span>
+                                                  <div
+                                                    style="width: 1.5rem; height: 1.5rem"
+                                                    class="spinner-border text-light"
+                                                    role="status"
+                                                  >
+                                                    <span class="sr-only">Loading...</span>
+                                                  </div>
+                                                  </span>
                                               </button>
                                             </div>
                                           </form>
@@ -460,6 +482,7 @@
                                               <textarea
                                                 id="timesheetinput7"
                                                 rows="3"
+                                                v-model="formData.antecedantFamiliaux.ascendant"
                                                 class="form-control round border-primary"
                                                 name="antecedantsmedicaux"
                                                 placeholder=""
@@ -488,6 +511,7 @@
                                                       <textarea
                                                         id="timesheetinput7"
                                                         rows="3"
+                                                        v-model="formData.antecedantFamiliaux.colateraux"
                                                         class="form-control round border-primary"
                                                         name="antecedantschirurgicaux"
                                                         placeholder=""
@@ -524,6 +548,7 @@
                                                         rows="3"
                                                         class="form-control round border-primary"
                                                         name="antecedantsnutritionnels"
+                                                        v-model="formData.antecedantFamiliaux.descendant"
                                                         placeholder=""
                                                       ></textarea>
                                                       <div
@@ -541,13 +566,29 @@
                                               class="form-actions text-right"
                                             >
                                               <button
+                                              @click.prevent="addAntecedantFamiliaux"
                                                 type="submit"
                                                 class="btn btn-primary"
                                               >
-                                                <i
+                                               
+                                                <span class="fs-5 fs-semibold" v-if="!chargementFamiliaux">
+                                                  <i
                                                   class="la la-check-square-o"
                                                 ></i>
-                                                Enregistrer
+                                                  Enregistrer
+                                                </span>
+                                                <span v-else class="d-flex align-items-center">
+                                                  <span class="mx-2 fs-semibold text-light">
+                                                    chargement ...
+                                                  </span>
+                                                  <div
+                                                    style="width: 1.5rem; height: 1.5rem"
+                                                    class="spinner-border text-light"
+                                                    role="status"
+                                                  >
+                                                    <span class="sr-only">Loading...</span>
+                                                  </div>
+                                                  </span>
                                               </button>
                                             </div>
                                           </form>
@@ -577,6 +618,7 @@
                                               <textarea
                                                 id="timesheetinput7"
                                                 rows="2"
+                                                v-model="formData.autres.allergieMedicament"
                                                 class="form-control round border-primary"
                                                 name="allergiesmedicaments"
                                                 placeholder=""
@@ -602,6 +644,7 @@
                                               <textarea
                                                 id="timesheetinput7"
                                                 rows="2"
+                                                v-model="formData.autres.allergieAliment"
                                                 class="form-control round border-primary"
                                                 name="allergiestotems"
                                                 placeholder=""
@@ -626,6 +669,7 @@
                                               <textarea
                                                 id="timesheetinput7"
                                                 rows="2"
+                                                v-model="formData.autres.totem"
                                                 class="form-control round border-primary"
                                                 name="allergiesaliments"
                                                 placeholder=""
@@ -650,6 +694,7 @@
                                               <textarea
                                                 id="timesheetinput7"
                                                 rows="2"
+                                                v-model="formData.autres.modeVie"
                                                 class="form-control round border-primary"
                                                 name="modedevie"
                                                 placeholder=""
@@ -667,11 +712,28 @@
 
                                     <div class="form-actions text-right">
                                       <button
+                                        @click.prevent="addAutre"
                                         type="submit"
                                         class="btn btn-primary"
                                       >
-                                        <i class="la la-check-square-o"></i>
-                                        Enregistrer
+                                      <span class="fs-5 fs-semibold" v-if="!chargementAutre">
+                                                  <i
+                                                  class="la la-check-square-o"
+                                                ></i>
+                                                  Enregistrer
+                                      </span>
+                                      <span v-else class="d-flex align-items-center">
+                                        <span class="mx-2 fs-semibold text-light">
+                                          chargement ...
+                                        </span>
+                                        <div
+                                          style="width: 1.5rem; height: 1.5rem"
+                                          class="spinner-border text-light"
+                                          role="status"
+                                          >
+                                          <span class="sr-only">Loading...</span>
+                                          </div>
+                                        </span>
                                       </button>
                                     </div>
                                   </form>
@@ -701,28 +763,7 @@
                                 </div>
                                 <div class="card-content collpase show">
                                   <div class="card-body">
-                                    <div class="card-text">
-                                      <div
-                                        class="alert alert-icon-right alert-info alert-dismissible mb-2"
-                                        role="alert"
-                                      >
-                                        <span class="alert-icon"
-                                          ><i class="la la-info"></i
-                                        ></span>
-                                        <button
-                                          type="button"
-                                          class="close"
-                                          data-dismiss="alert"
-                                          aria-label="Close"
-                                        >
-                                          <span aria-hidden="true">×</span>
-                                        </button>
-                                        <strong
-                                          >Enregistrement effectué avec
-                                          succès</strong
-                                        >
-                                      </div>
-                                    </div>
+                                    
                                     <form class="form">
                                       <div class="form-body">
                                         <div class="row">
@@ -730,6 +771,7 @@
                                             <input
                                               type="text"
                                               id="eventInput1"
+                                              v-model=consultation.motif
                                               class="form-control round border-primary"
                                               placeholder="Entrer le motif de consultation"
                                               name="motifconsultattion"
@@ -740,11 +782,29 @@
 
                                       <div class="form-actions text-right">
                                         <button
-                                          type="submit"
-                                          class="btn btn-primary"
-                                        >
-                                          <i class="la la-check-square-o"></i>
-                                          Enregistrer
+                                              @click.prevent="addConsultationMotif"
+                                                type="submit"
+                                                class="btn btn-primary"
+                                              >
+                                               
+                                                <span class="fs-5 fs-semibold" v-if="!chargementMotif">
+                                                  <i
+                                                  class="la la-check-square-o"
+                                                ></i>
+                                                  Enregistrer
+                                                </span>
+                                                <span v-else class="d-flex align-items-center">
+                                                  <span class="mx-2 fs-semibold text-light">
+                                                    chargement ...
+                                                  </span>
+                                                  <div
+                                                    style="width: 1.5rem; height: 1.5rem"
+                                                    class="spinner-border text-light"
+                                                    role="status"
+                                                  >
+                                                    <span class="sr-only">Loading...</span>
+                                                  </div>
+                                                  </span>
                                         </button>
                                       </div>
                                     </form>
@@ -766,6 +826,7 @@
                                             <input
                                               type="text"
                                               id="userinput1"
+                                              v-model="consultation.anamnese.debut"
                                               class="form-control round border-primary"
                                               placeholder=""
                                               name="debutanamnese"
@@ -778,6 +839,7 @@
                                             <input
                                               type="text"
                                               id="userinput1"
+                                               v-model="consultation.anamnese.signeAssocie"
                                               class="form-control round border-primary"
                                               placeholder=""
                                               name="signeassocie"
@@ -791,6 +853,7 @@
                                             <input
                                               type="text"
                                               id="userinput1"
+                                               v-model="consultation.anamnese.signeNegatif"
                                               class="form-control round border-primary"
                                               placeholder=""
                                               name="Signesnegatifs"
@@ -803,6 +866,7 @@
                                             <input
                                               type="text"
                                               id="userinput1"
+                                               v-model="consultation.anamnese.traitementAvantAdmission"
                                               class="form-control round border-primary"
                                               placeholder=""
                                               name="traitementavantadmission"
@@ -818,6 +882,7 @@
                                               id="userinput1"
                                               class="form-control round border-primary"
                                               placeholder=""
+                                               v-model="consultation.anamnese.bilanAvantAdmission"
                                               name="bilanavantadmission"
                                             />
                                           </div>
@@ -828,6 +893,7 @@
                                             <input
                                               type="text"
                                               id="userinput1"
+                                              v-model="consultation.anamnese.evolution"
                                               class="form-control round border-primary"
                                               placeholder=""
                                               name="evolutionanamese"
@@ -838,12 +904,30 @@
 
                                       <div class="form-actions text-right">
                                         <button
-                                          type="submit"
-                                          class="btn btn-primary"
-                                        >
-                                          <i class="la la-check-square-o"></i>
-                                          Enregistrer
-                                        </button>
+                                              @click.prevent="addConsultationAnamnese"
+                                                type="submit"
+                                                class="btn btn-primary"
+                                              >
+                                               
+                                                <span class="fs-5 fs-semibold" v-if="!chargementAnamnese">
+                                                  <i
+                                                  class="la la-check-square-o"
+                                                ></i>
+                                                  Enregistrer
+                                                </span>
+                                                <span v-else class="d-flex align-items-center">
+                                                  <span class="mx-2 fs-semibold text-light">
+                                                    chargement ...
+                                                  </span>
+                                                  <div
+                                                    style="width: 1.5rem; height: 1.5rem"
+                                                    class="spinner-border text-light"
+                                                    role="status"
+                                                  >
+                                                    <span class="sr-only">Loading...</span>
+                                                  </div>
+                                                  </span>
+                                              </button>
                                       </div>
                                     </form>
 
@@ -867,8 +951,10 @@
                                               <input
                                                 type="text"
                                                 id="userinput1"
+                                                v-model="consultation.donneesAnthropometrique.taille"
                                                 class="form-control round border-primary"
                                                 placeholder=""
+                                                @change="calculIMC"
                                                 name="taille"
                                               />
                                               <div class="input-group-append">
@@ -886,8 +972,10 @@
                                               <input
                                                 type="text"
                                                 id="userinput1"
+                                                v-model="consultation.donneesAnthropometrique.poids"
                                                 class="form-control round border-primary"
                                                 placeholder=""
+                                                @change="calculIMC"
                                                 name="poids"
                                               />
                                               <div class="input-group-append">
@@ -905,6 +993,7 @@
                                                 id="userinput1"
                                                 class="form-control round border-primary"
                                                 placeholder=""
+                                                v-model="consultation.donneesAnthropometrique.icm"
                                                 name="imc"
                                               />
                                               <div class="input-group-append">
@@ -925,6 +1014,7 @@
                                                 id="userinput1"
                                                 class="form-control round border-primary"
                                                 placeholder=""
+                                                v-model="consultation.donneesAnthropometrique.temperature"
                                                 name="temperature"
                                               />
                                               <div class="input-group-append">
@@ -942,6 +1032,7 @@
                                               <input
                                                 type="text"
                                                 id="userinput1"
+                                                v-model="consultation.donneesAnthropometrique.pouls"
                                                 class="form-control round border-primary"
                                                 placeholder=""
                                                 name="pouls"
@@ -960,6 +1051,7 @@
                                             <select
                                               name="etatgeneral"
                                               id=""
+                                              v-model="consultation.donneesAnthropometrique.etatGenerl"
                                               class="form-control round border-primary"
                                             >
                                               <option value="">
@@ -987,6 +1079,7 @@
                                                 id="userinput1"
                                                 class="form-control round border-primary"
                                                 placeholder=""
+                                                v-model="consultation.donneesAnthropometrique.brasGauche"
                                                 name="brasgauche"
                                               />
                                               <div class="input-group-append">
@@ -1005,6 +1098,7 @@
                                                 type="text"
                                                 id="userinput1"
                                                 class="form-control round border-primary"
+                                                v-model="consultation.donneesAnthropometrique.brasDroit"
                                                 placeholder=""
                                                 name="brasdroit"
                                               />
@@ -1018,22 +1112,58 @@
 
                                           <div class="form-group col-md-4 mb-2">
                                             <label for="userinput1"
-                                              ><i class="la la-plus"></i>
+                                            class="curseur"
+                                              @click.prevent="addChamp"
+                                              ><i class="la la-plus "></i>
                                               Ajouter un organe à
                                               examiner</label
                                             >
+                                          </div>
+                                          
+                                          <div v-for="(champs,index) in consultation.donneesAnthropometrique.autres" :key=index class="form-group col-md-4 mb-2">
+                                            <input type="text" class='customInput' v-model="champs.libelle" placeholder="libellé" />
+                                            <span @click="supprimerChamps(index)" class="supprimer curseur">X</span>
+                                            <div class="input-group mt-2">
+                                              <input
+                                                type="text"
+                                                id="userinput1"
+                                                class="form-control round border-primary"
+                                                v-model="champs.data"
+                                                placeholder="valeur"
+                                                name="brasdroit"
+                                              />
+                                              
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
 
                                       <div class="form-actions text-right">
                                         <button
-                                          type="submit"
-                                          class="btn btn-primary"
-                                        >
-                                          <i class="la la-check-square-o"></i>
-                                          Enregistrer
-                                        </button>
+                                              @click.prevent="addConsultationAntro"
+                                                type="submit"
+                                                class="btn btn-primary"
+                                              >
+                                               
+                                                <span class="fs-5 fs-semibold" v-if="!chargementAntro">
+                                                  <i
+                                                  class="la la-check-square-o"
+                                                ></i>
+                                                  Enregistrer
+                                                </span>
+                                                <span v-else class="d-flex align-items-center">
+                                                  <span class="mx-2 fs-semibold text-light">
+                                                    chargement ...
+                                                  </span>
+                                                  <div
+                                                    style="width: 1.5rem; height: 1.5rem"
+                                                    class="spinner-border text-light"
+                                                    role="status"
+                                                  >
+                                                    <span class="sr-only">Loading...</span>
+                                                  </div>
+                                                  </span>
+                                              </button>
                                       </div>
                                     </form>
 
@@ -1054,6 +1184,7 @@
                                               id="eventInput1"
                                               class="form-control round border-primary"
                                               placeholder=""
+                                              v-model="consultation.hypotheseDiagnostics"
                                               name="hypothesediagnostic"
                                             />
                                           </div>
@@ -1062,12 +1193,30 @@
 
                                       <div class="form-actions text-right">
                                         <button
-                                          type="submit"
-                                          class="btn btn-primary"
-                                        >
-                                          <i class="la la-check-square-o"></i>
-                                          Enregistrer
-                                        </button>
+                                              @click.prevent="addConsultationDiagnostic"
+                                                type="submit"
+                                                class="btn btn-primary"
+                                              >
+                                               
+                                                <span class="fs-5 fs-semibold" v-if="!chargementDiagnosticsHypothese">
+                                                  <i
+                                                  class="la la-check-square-o"
+                                                ></i>
+                                                  Enregistrer
+                                                </span>
+                                                <span v-else class="d-flex align-items-center">
+                                                  <span class="mx-2 fs-semibold text-light">
+                                                    chargement ...
+                                                  </span>
+                                                  <div
+                                                    style="width: 1.5rem; height: 1.5rem"
+                                                    class="spinner-border text-light"
+                                                    role="status"
+                                                  >
+                                                    <span class="sr-only">Loading...</span>
+                                                  </div>
+                                                  </span>
+                                              </button>
                                       </div>
                                     </form>
 
@@ -1116,122 +1265,23 @@
                                                   <div
                                                     class="card-content collapse show"
                                                   >
-                                                    <div
-                                                      class="table-responsive"
-                                                    >
-                                                      <table
-                                                        class="table table-bordered mb-0"
-                                                      >
-                                                        <tbody
-                                                          data-select2-id="1"
-                                                        >
-                                                          <tr>
-                                                            <td
-                                                              class="width-350"
-                                                              data-select2-id="15"
-                                                            >
-                                                              <div
-                                                                class="card-body"
-                                                              >
-                                                                <div
-                                                                  class="form-group"
-                                                                >
-                                                                  <select
-                                                                    class="select2 form-control"
-                                                                    data-select2-id="1"
-                                                                    tabindex="-1"
-                                                                    aria-hidden="true"
-                                                                  >
-                                                                    <optgroup>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Radiographie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Scanner
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Mammographie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Echographie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        IRM
-                                                                      </option>
-                                                                    </optgroup>
-                                                                  </select>
-                                                                  <span
-                                                                    class="select2 select2-container select2-container--default select2-container--open select2-container--focus select2-container--above"
-                                                                    dir="ltr"
-                                                                    style="
-                                                                      width: 100%;
-                                                                    "
-                                                                  >
-                                                                    <span
-                                                                      class="selection"
-                                                                      ><span
-                                                                        class="select2-selection select2-selection--single"
-                                                                        role="combobox"
-                                                                        aria-haspopup="true"
-                                                                        aria-expanded="true"
-                                                                        tabindex="0"
-                                                                        aria-disabled="false"
-                                                                        aria-labelledby="select2-gysu-container"
-                                                                        aria-owns="select2-gysu-results"
-                                                                        aria-activedescendant="select2-gysu-result-ziee-HI"
-                                                                      >
-                                                                      </span></span
-                                                                    ><span
-                                                                      class="dropdown-wrapper"
-                                                                      aria-hidden="true"
-                                                                    ></span
-                                                                  ></span>
-                                                                </div>
-                                                              </div>
-                                                            </td>
-                                                            <td>
-                                                              <div
-                                                                class="card-content"
-                                                              >
-                                                                <div
-                                                                  class="card-body text-center"
-                                                                >
-                                                                  <span
-                                                                    class="alert-icon"
-                                                                    ><i
-                                                                      class="la la-info-circle"
-                                                                      style="
-                                                                        font-size: 3.2rem;
-                                                                        color: red;
-                                                                      "
-                                                                    ></i
-                                                                  ></span>
-                                                                  <p
-                                                                    class="text-danger"
-                                                                  >
-                                                                    Aucune
-                                                                    donnée
-                                                                    disponible
-                                                                    pour le
-                                                                    moment!
-                                                                  </p>
-                                                                </div>
-                                                              </div>
-                                                            </td>
-                                                          </tr>
-                                                        </tbody>
-                                                      </table>
-                                                    </div>
+                                                   <VueMultiselect
+                                                      v-model="taggingSelectedType"
+                                                      :options="taggingOptionsType"
+                                                      :multiple="true"
+                                                      :taggable="true"
+                                                      :hideSelected="true" 
+                                                      :closeOnSelect="false"
+                                                      :selectLabel="'Appuyez sur Entrée pour sélectionner'" 
+                                                      :deselectLabel="'Appuyez sur Entrée pour supprimer'"
+                                                      selectedLabel="Selectionné"
+                                                      @tag="addTagType"
+                                                      tag-placeholder="Ajouter un nouveau element"
+                                                      placeholder="Selectionnez les types d'analyse"
+                                                      label="name"
+                                                      track-by="code"
+                                                    />
+                                                                                          
                                                   </div>
                                                 </div>
                                               </div>
@@ -1276,298 +1326,23 @@
                                                   <div
                                                     class="card-content collapse show"
                                                   >
-                                                    <div
-                                                      class="table-responsive"
-                                                    >
-                                                      <table
-                                                        class="table table-bordered mb-0"
-                                                      >
-                                                        <tbody
-                                                          data-select2-id="1"
-                                                        >
-                                                          <tr>
-                                                            <td
-                                                              class="width-350"
-                                                              data-select2-id="15"
-                                                            >
-                                                              <div
-                                                                class="card-body"
-                                                              >
-                                                                <div
-                                                                  class="form-group"
-                                                                >
-                                                                  <select
-                                                                    class="select2 form-control"
-                                                                    data-select2-id="1"
-                                                                    tabindex="-1"
-                                                                    aria-hidden="true"
-                                                                  >
-                                                                    <optgroup>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Glycémie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        NFS
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Natrémie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Kaliémie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Chlorémie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Calcémie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Magnésémie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Transaminases
-                                                                        TGO +
-                                                                        TGP
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Amylasémie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Azotémie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Créatininémie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Uricémie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        ECG
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        TCK
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        TP/INR
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        CPK
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Cholestérolémie
-                                                                        T
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Cholestérolémie
-                                                                        HDL
-                                                                      </option>
-
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Triglycéridémie
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        PSA
-                                                                        totales
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        PSA
-                                                                        prostatiques/
-                                                                        FPSA
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Electrophorèse
-                                                                        des
-                                                                        protéines
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Electrophorèse
-                                                                        de l'Hb
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Ag HBs
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Ag HBc
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        G6PD
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Alpha
-                                                                        foeto
-                                                                        protéines
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Sérologie
-                                                                        Rubéole
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Sérologie
-                                                                        Toxoplasmose
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        ASLO
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Biluribine
-                                                                        D
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Biluribine
-                                                                        I
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        ECBU +
-                                                                        Antibiogramme
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Spermoogramme
-                                                                        +
-                                                                        Antibiogramme
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Sérologie
-                                                                        HIV
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        GSRH
-                                                                      </option>
-                                                                    </optgroup>
-                                                                  </select>
-                                                                  <span
-                                                                    class="select2 select2-container select2-container--default select2-container--open select2-container--focus select2-container--above"
-                                                                    dir="ltr"
-                                                                    style="
-                                                                      width: 100%;
-                                                                    "
-                                                                  >
-                                                                    <span
-                                                                      class="selection"
-                                                                      ><span
-                                                                        class="select2-selection select2-selection--single"
-                                                                        role="combobox"
-                                                                        aria-haspopup="true"
-                                                                        aria-expanded="true"
-                                                                        tabindex="0"
-                                                                        aria-disabled="false"
-                                                                        aria-labelledby="select2-gysu-container"
-                                                                        aria-owns="select2-gysu-results"
-                                                                        aria-activedescendant="select2-gysu-result-ziee-HI"
-                                                                      >
-                                                                      </span></span
-                                                                    ><span
-                                                                      class="dropdown-wrapper"
-                                                                      aria-hidden="true"
-                                                                    ></span
-                                                                  ></span>
-                                                                </div>
-                                                              </div>
-                                                            </td>
-                                                            <td>
-                                                              <div
-                                                                class="card-content"
-                                                              >
-                                                                <div
-                                                                  class="card-body text-center"
-                                                                >
-                                                                  <span
-                                                                    class="alert-icon"
-                                                                    ><i
-                                                                      class="la la-info-circle"
-                                                                      style="
-                                                                        font-size: 3.2rem;
-                                                                        color: red;
-                                                                      "
-                                                                    ></i
-                                                                  ></span>
-                                                                  <p
-                                                                    class="text-danger"
-                                                                  >
-                                                                    Aucune
-                                                                    donnée
-                                                                    disponible
-                                                                    pour le
-                                                                    moment!
-                                                                  </p>
-                                                                </div>
-                                                              </div>
-                                                            </td>
-                                                          </tr>
-                                                        </tbody>
-                                                      </table>
-                                                    </div>
+                                                  <VueMultiselect
+                                                      v-model="taggingSelectedBio"
+                                                      :options="taggingOptionsBio"
+                                                      :multiple="true"
+                                                      :hideSelected="true" 
+                                                      :closeOnSelect="false"
+                                                      :taggable="true"
+                                                      :selectLabel="'Appuyez sur Entrée pour sélectionner'" 
+                                                      :deselectLabel="'Appuyez sur Entrée pour supprimer'"
+                                                      selectedLabel="Selectionné"
+                                                      @tag="addTagBio"
+                                                      tag-placeholder="Ajouter un nouveau element"
+                                                      placeholder="Selectionnez une (des) analyses biologiques"
+                                                      label="name"
+                                                      track-by="code"
+                                                    />
+                                                    
                                                   </div>
                                                 </div>
                                               </div>
@@ -1591,6 +1366,7 @@
                                             <input
                                               type="text"
                                               id="eventInput1"
+                                              v-model="consultation.diagnostics"
                                               class="form-control round border-primary"
                                               placeholder=""
                                               name="hypothesediagnostic"
@@ -1601,11 +1377,29 @@
 
                                       <div class="form-actions text-right">
                                         <button
-                                          type="submit"
-                                          class="btn btn-primary"
-                                        >
-                                          <i class="la la-check-square-o"></i>
-                                          Enregistrer
+                                              @click.prevent="addDiagnostic"
+                                                type="submit"
+                                                class="btn btn-primary"
+                                              >
+                                               
+                                                <span class="fs-5 fs-semibold" v-if="!chargementDiagnostics">
+                                                  <i
+                                                  class="la la-check-square-o"
+                                                ></i>
+                                                  Enregistrer
+                                                </span>
+                                                <span v-else class="d-flex align-items-center">
+                                                  <span class="mx-2 fs-semibold text-light">
+                                                    chargement ...
+                                                  </span>
+                                                  <div
+                                                    style="width: 1.5rem; height: 1.5rem"
+                                                    class="spinner-border text-light"
+                                                    role="status"
+                                                  >
+                                                    <span class="sr-only">Loading...</span>
+                                                  </div>
+                                                  </span>
                                         </button>
                                       </div>
                                     </form>
@@ -2605,10 +2399,154 @@
 	import {ref,reactive} from 'vue'
 	import {Patients} from "../../../api/patient"
 	import { useRouter, useRoute } from "vue-router"
+  import { createToast } from "mosha-vue-toastify";
+  import VueMultiselect from 'vue-multiselect'
+  import "mosha-vue-toastify/dist/style.css";
+
 	const router = useRouter()
 	const route = useRoute()
 
 	const patients = ref([])
+  const formData = ref(
+    {
+      antecedantPersonnel: {
+       medicaux:'medicaux',
+       chirurgicaux:'chirugicaux',
+       gynecologiques:'gynecoloque',
+       nutritionnels:'nutritionnels'
+      },
+      antecedantFamiliaux:{
+        ascendant:'ascendant',
+        colateraux:'colateraux',
+        descendant:'descendant',
+      },
+      autres:{
+        allergieMedicament:'allergie medi',
+        allergieAliment:'allergie',
+        totem:'totem ',
+        modeVie:'mode vie'
+      }
+    }
+  )
+  const consultation = reactive({
+    motif:'demo',
+    anamnese:{
+      debut: 'demo',
+      signeAssocie:'demo',
+      signeNegatif:'demo',
+      traitementAvantAdmission:'demo',
+      bilanAvantAdmission:'demo',
+      evolution:'demo',
+      
+    },
+    donneesAnthropometrique: {
+      taille:170,
+      poids:78,
+      icm:26.99,
+      temperature:'demo',
+      pouls:'demo',
+      etatGeneral:'demo',
+      brasGauche:'demo',
+      brasDroit:'demo',
+      autres:[]
+    },
+    hypotheseDiagnostics :'demo',
+    examenParaclinique:{
+      typeAnalyse:'demo',
+      analyseBiologique:'demo',
+    },
+    diagnostics:'demo'
+  }
+
+  )
+  //multiselected option
+  const  taggingSelectedType = ref(null)
+  const  taggingOptionsType = ref(
+   [
+    { name: 'Radiographie', code:"ra" },
+    { name: 'Scanner',code:'sc' },
+    { name: 'Mammographie', code:'ma' },
+    { name: 'Echographie',code:'ec'  },
+    { name: 'IRM',code:'irm'  },
+    ]
+  )
+  const  taggingSelectedBio = ref(null)
+  const  taggingOptionsBio = ref(
+   [
+    { name: 'Glycémie', code:"gl" },
+    { name: ' NFS',code:'nsf' },
+    { name: 'Natrémie', code:'na' },
+    { name: 'Kaliémie',code:'ka'  },
+    { name: 'Chlorémie',code:'ch'  },
+    { name: 'Calcémie',code:'ca'  },
+    { name: 'Magnésémie',code:'ma'  },
+    { name: 'Transaminases + TGO +TGT',code:'tr'  },
+    { name: 'Amylasémie',code:'amy'  },
+    { name: 'Azotémie',code:'azo'  },
+    { name: 'Créatininémie',code:'cre'  },
+    { name: 'Uricémie',code:'urc'  },
+    { name: 'ECG',code:'ecg'  },
+    { name: 'TCK',code:'tck'  },
+    { name: 'TP / INR',code:'tp'  },
+    { name: 'CPK',code:'cpk'  },
+    { name: 'Cholestérolémie T',code:'chot'  },
+    { name: 'Cholestérolémie HDL',code:'chohdl'  },
+    { name: 'Triglycéridémie',code:'trig'  },
+    { name: 'PSA totales ',code:'psat'  },
+    { name: 'PSA prostatiques/',code:'psap'  },
+    { name: 'FPSA',code:'fpsa'  },
+    { name: 'Electrophorèse des protéines',code:'elecP'  },
+    { name: "Electrophorèse de l'HB",code:'elech'  },
+    { name: "Ag HBs",code:'ags'  },
+    { name: "Ag HBc",code:'agc'  },
+    { name: "G6PD",code:'g6pd'  },
+    { name: "Alpha foeto protéines",code:'afp'  },
+    { name: "Sérologie Rubéole",code:'seror'  },
+    { name: "Sérologie Toxoplasmose ",code:'serot'  },
+    { name: "ASLO ",code:'aslo'  },
+    { name: "Biluribine D",code:'bild'  },
+    { name: "Biluribine I",code:'bili'  },
+    { name: "ECBU + Antibiogramme ",code:'ecbu'  },
+    { name: "Spermoogramme + Antibiogramme ",code:'sperAn'  },
+    { name: "Sérologie HVI",code:'serohvi'  },
+    { name: "GSRH",code:'gsrh'  },
+    ]
+  )
+
+
+// tag selected 
+const addTagType = function (newTag) {
+  const tag = {
+    name: newTag,
+    code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+  }
+  taggingOptionsType.push(tag)
+  taggingSelectedType.push(tag)
+}
+const addTagBio = function (newTag) {
+  const tag = {
+    name: newTag,
+    code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+  }
+  taggingOptionsBio.push(tag)
+  taggingSelectedBio.push(tag)
+}
+  //les chargements
+  const chargementPersonel = ref(false)
+  const chargementFamiliaux = ref(false)
+  const chargementAutre = ref(false)
+  const chargementDiagnosticsHypothese = ref(false)
+  const chargementDiagnostics = ref(false)
+  const chargementAntro = ref(false)
+  const chargementAnamnese = ref(false)
+  const  chargementMotif = ref(false)
+  //addConsultantDiagnostic
+  //addConsultationAntro
+  //addConsultationAnamnes
+  //addConsultationMotif
+  //chargementAntro
+
+  //get data
 	const getData = JSON.parse(localStorage.getItem('patients'))
 	if(getData !=null || getData != undefined) {
 		const datas = getData
@@ -2618,7 +2556,127 @@
 	}
 	
 	patients.value = patients.value.filter(patient => patient.id ==route.params.id)
-	console.log(patients.value)
-</script>
 
-<style></style>
+  const toast = (message,type) => {
+    createToast(message,{type:type})
+  }
+  const calculIMC = function () {
+    const mettre  = (consultation.donneesAnthropometrique.taille) /100
+    const mettreCarre = mettre * mettre
+    const poids = consultation.donneesAnthropometrique.poids
+    
+    const resultat = poids / mettreCarre
+    consultation.donneesAnthropometrique.icm = resultat.toFixed(2)
+  }
+  const addAntecedantPersonnel = function () {
+    if(chargementPersonel.value == false) {
+      chargementPersonel.value = true
+      setTimeout(() => {
+        chargementPersonel.value = false
+        toast('Nouveau enregistrment', 'success')
+      }, 7000)
+     
+    }
+   
+  }
+  const addAntecedantFamiliaux = function() {
+    if(chargementFamiliaux.value == false) {
+      chargementFamiliaux.value = true
+      setTimeout(() => {
+        chargementFamiliaux.value = false
+        toast('Nouveau enregistrment', 'success')
+      }, 7000)
+      
+    }
+    
+  }
+  const addAutre  = function() {
+    if(chargementAutre.value == false) {
+      chargementAutre.value = true
+      setTimeout(() => {
+        chargementAutre.value = false
+        toast('Nouveau enregistrment', 'success')
+      }, 7000)
+      
+    }
+    
+  }
+  //addConsultantDiagnostic
+  //addConsultationAntro
+  //addConsultationAnamnes
+  const addConsultationDiagnostic = function() {
+    if(chargementDiagnosticsHypothese.value == false) {
+      chargementDiagnosticsHypothese.value = true
+      setTimeout(() => {
+        chargementDiagnosticsHypothese.value = false
+        toast('Nouveau enregistrment', 'success')
+      }, 7000)
+     
+    }
+  }
+  const addConsultationAntro = function() {
+    if(chargementAntro.value == false) {
+      chargementAntro.value = true
+      setTimeout(() => {
+        chargementAntro.value = false
+        toast('Nouveau enregistrment', 'success')
+      }, 7000)
+     
+    }
+  }
+  const addConsultationAnamnese = function() {
+    if(chargementAnamnese.value == false) {
+      chargementAnamnese.value = true
+      setTimeout(() => {
+        chargementAnamnese.value = false
+        toast('Nouveau enregistrment', 'success')
+      }, 7000)
+     
+    }
+  }
+  const addConsultationMotif = function() {
+    if(chargementMotif.value == false) {
+      chargementMotif.value = true
+      setTimeout(() => {
+        chargementMotif.value = false
+        toast('Nouveau enregistrment', 'success')
+      }, 7000)
+     
+    }
+  }
+  const addDiagnostic = function() {
+    if(chargementDiagnostics.value == false) {
+      chargementDiagnostics.value = true
+      setTimeout(() => {
+        chargementDiagnostics.value = false
+        toast('Nouveau enregistrment', 'success')
+      }, 7000)
+     
+    }
+  }
+
+  const addChamp = function() {
+    consultation.donneesAnthropometrique.autres.push({libelle:'',data:''})
+  }
+  const supprimerChamps = function(index) {
+    consultation.donneesAnthropometrique.autres.splice(index, 1);
+  }
+	
+</script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
+<style scoped>
+.curseur {
+  cursor:pointer
+}
+.customInput {
+  border:none;
+  border-bottom:1px solid black;
+  outline:none;
+  margin:2px 5px;
+}
+.supprimer {
+  color:red;
+  text-size:16px;
+  font-weight:bold
+}
+</style>

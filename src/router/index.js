@@ -23,7 +23,7 @@ const routes = [
     children: [
         { path: 'dashboard', name: 'dashboard', component: Admin.Dashboard },
         { path: 'patient/index', component: Admin.PatientIndex },
-        { path: 'patient/edit/:id(\\d+)', component: Admin.PatientEdit, props: true },
+        { path: 'patient/edit/:id', component: Admin.PatientEdit, name:'patientEdit' },
         { path: 'patient/add', component: Admin.PatientAdd },
         { path: 'patient/dossier/:id',name:"dossierMedical", component: Admin.DossierMedical },
         { path: 'patient/stats', component: Admin.Stats },
