@@ -33,10 +33,8 @@
                             <th>#</th>
                             <th>Nom & prénoms</th>
                             <th>Type de Consultation</th>
-
                             <th>Age</th>
                             <th>Contact</th>
-
                             <th>Actions</th>
                           </tr>
                         </thead>

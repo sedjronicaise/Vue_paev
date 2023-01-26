@@ -1764,12 +1764,8 @@
                                                         <div
                                                           class="card-content"
                                                         >
-                                                          <div
-                                                            class="card-body"
-                                                          >
-                                                            <div
-                                                              class="tab-content px-1 pt-1"
-                                                            >
+                                                          <div class="card-body">
+                                                            <div class="tab-content px-1 pt-1" >
                                                               <div
                                                                 role="tabpanel"
                                                                 class="tab-pane active"
@@ -1780,195 +1776,45 @@
                                                                 <div
                                                                   class="row"
                                                                 >
-                                                                  <div
-                                                                    class="form-group col-md-3 mb-2"
-                                                                  >
-                                                                    <label
-                                                                      for="userinput1"
-                                                                      >Soin
-                                                                      *</label
+                                                                  <div class="form-group col-md-4 mb-2">
+                                                                    <label for="userinput1" >Soin  *</label
                                                                     >
-                                                                    <select
-                                                                      name=""
+                                                                    <select name=""
                                                                       id=""
                                                                       class="form-control round border-primary"
                                                                     >
                                                                       <option
                                                                         value=""
                                                                       >
-                                                                        soin1
+                                                                        Pansement
                                                                       </option>
                                                                       <option
                                                                         value=""
                                                                       >
-                                                                        soin2
+                                                                        Perfusion 
                                                                       </option>
                                                                       <option
                                                                         value=""
                                                                       >
-                                                                        soin3
+                                                                        Injection en IV
                                                                       </option>
                                                                       <option
                                                                         value=""
                                                                       >
-                                                                        soin4
+                                                                        Injection en IM
                                                                       </option>
                                                                     </select>
                                                                   </div>
-                                                                  <div
-                                                                    class="form-group col-md-5 mb-2"
-                                                                  >
-                                                                    <label
-                                                                      for="userinput1"
-                                                                      >Produit</label
-                                                                    >
-                                                                    <select
-                                                                      name=""
-                                                                      id=""
-                                                                      class="form-control round border-primary"
-                                                                    >
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        produit1
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        produit1
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        produit1
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        produit1
-                                                                      </option>
-                                                                    </select>
-                                                                    <span
-                                                                      class="mb-2"
-                                                                    >
-                                                                      <a href=""
-                                                                        >+
-                                                                        Ajouter
-                                                                        un
-                                                                        produit</a
-                                                                      ></span
-                                                                    >
+                                                                  <div class="form-group col-md-8 mb-2">
+                                                                    <label for="userinput1" >Description du soin: Produit, quantité dosage consommable</label >
+                                                                     <textarea name="" class="form-control round border-primary" id="" cols="30" rows="10"></textarea>
+                                                                    
                                                                   </div>
-                                                                  <div
-                                                                    class="form-group col-md-2 mb-2"
-                                                                  >
-                                                                    <label
-                                                                      for="userinput1"
-                                                                      >Quantité</label
-                                                                    >
-                                                                    <input
-                                                                      type="number"
-                                                                      id="qte"
-                                                                      class="form-control round border-primary"
-                                                                      placeholder=""
-                                                                      name="qte"
-                                                                    />
-                                                                  </div>
-                                                                  <div
-                                                                    class="form-group col-md-2 mb-2"
-                                                                  >
-                                                                    <label
-                                                                      for="userinput1"
-                                                                      >Dosage</label
-                                                                    >
-                                                                    <input
-                                                                      type="text"
-                                                                      id="userinput1"
-                                                                      class="form-control round border-primary"
-                                                                      placeholder=""
-                                                                      name="dosage"
-                                                                    />
-                                                                    <span
-                                                                      class="mb-2"
-                                                                    >
-                                                                      <a
-                                                                        href=""
-                                                                        class="text-danger"
-                                                                        >x
-                                                                        supprimer</a
-                                                                      ></span
-                                                                    >
-                                                                  </div>
-
-                                                                  <div
-                                                                    class="form-group col-md-6 offset-md-3 mb-2"
-                                                                  >
-                                                                    <label
-                                                                      for="userinput1"
-                                                                      >Consommable</label
-                                                                    >
-                                                                    <select
-                                                                      name=""
-                                                                      id=""
-                                                                      class="form-control round border-primary"
-                                                                    >
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Consommable
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Consommable
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Consommable
-                                                                      </option>
-                                                                      <option
-                                                                        value=""
-                                                                      >
-                                                                        Consommable
-                                                                      </option>
-                                                                    </select>
-                                                                    <span>
-                                                                      <a href=""
-                                                                        >+
-                                                                        Ajouter
-                                                                        un
-                                                                        consommable</a
-                                                                      ></span
-                                                                    >
-                                                                  </div>
-                                                                  <div
-                                                                    class="form-group col-md-2 mb-2"
-                                                                  >
-                                                                    <label
-                                                                      for="userinput1"
-                                                                      >Quantité</label
-                                                                    >
-                                                                    <input
-                                                                      type="number"
-                                                                      id="qte"
-                                                                      class="form-control round border-primary"
-                                                                      placeholder=""
-                                                                      name="qte"
-                                                                    />
-                                                                    <span
-                                                                      class="mb-2"
-                                                                    >
-                                                                      <a
-                                                                        href=""
-                                                                        class="text-danger"
-                                                                        >x
-                                                                        supprimer
-                                                                      </a></span
-                                                                    >
-                                                                  </div>
+                                                                    
                                                                 </div>
                                                               </div>
+
+                                                             
 
                                                               <div
                                                                 class="tab-pane"
@@ -1996,6 +1842,7 @@
                                                                   cupcake.
                                                                 </p>
                                                               </div>
+
                                                               <div
                                                                 class="tab-pane"
                                                                 id="pill33"
@@ -2022,7 +1869,11 @@
                                                                   snaps.
                                                                 </p>
                                                               </div>
+
                                                             </div>
+                                                            <span class="mb-2">
+                                                                <a href="" >+ Ajouter un soin</a>
+                                                            </span>
                                                           </div>
                                                         </div>
                                                       </div>

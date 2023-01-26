@@ -94,7 +94,7 @@
                     </div>
                     <div class="row match-height">
                         
-                        <div class="col-xl-10 col-lg-10 offset-xl-1 offset-lg-1">
+                        <div class="col-xl-12 col-lg-12 ">
                             <div class="card" >
                                 <div class="card-header">
                                     <h4 class="card-title" id="from-actions-top-bottom-center">Fiche de consultation en nutrition</h4>
@@ -294,7 +294,114 @@
                                                 <h4 class="card-title" id="from-actions-top-bottom-center">
                                                     <strong class="text-info">FICHE D'EVALUATION STRESSEUR</strong> 
                                                 </h4>   
-   
+                                                
+                                                <div class="card-body">
+                                                    <p class="card-text">
+                                                        Fiche d'évaluation du stresseur
+                                                    </p>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th># </th>
+                                                                <th>Pas du tout</th>
+                                                                <th>Faiblement </th>
+                                                                <th>Un peu</th>
+                                                                <th>Assez</th>
+                                                                <th>Beaucoup</th>
+                                                                <th>Extremement</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">Cote</th>
+                                                                <th scope="row">1</th>
+                                                                <th scope="row">2</th>
+                                                                <th scope="row">3</th>
+                                                                <th scope="row">4</th>
+                                                                <th scope="row">5</th>
+                                                                <th scope="row">6</th>
+                                                                
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">Ai-je subi, tout au cours de ma vie, des situations traumatiques <br>
+                                                                    (Décès, perte d’emploi ; déception amoureuse ; etc...)</th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">Suis-je entrain de vivre une situation traumatique ?</th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">Est-ce que je subis une surcharge de travail fréquente ou permanente ? <br> 
+                                                                    Ou/et suis souvent pris dans l’urgence ou /et existe-t-il une ambiance très compétitive dans mon emploi ?</th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                
+                                                            </tr>
+                                                           
+                                                            <tr>
+                                                                <th scope="row">Mon travail ne me convient pas, il ne correspond pas à ce que je souhaiterais faire  <br>
+                                                                    ou est source d’insatisfaction ; 
+                                                                    me donne l’impression de perdre mon temps. Au maximum me déprime.</th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">Ai-je des soucis familiaux importants ? (Couple, enfants, parents etc.) ? <br> 
+                                                                </th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row"><br> 
+                                                                    suis-je endetté, ai-je un revenu trop faible par rapport à mon mode de vie, 
+                                                                    est ce que cela me cause du souci ? <br>
+                                                                </th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                
+                                                            </tr>
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                                 
                                             </div>
                                         </div>
