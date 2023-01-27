@@ -284,6 +284,59 @@
                                                                     <strong>Rappel des 24H</strong>
                                                                 </h4>
                                                             </div>
+
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead class="thead-dark">
+                                                                        <tr>
+                                                                            <th>#</th>
+                                                                            <th class="text-left">Heure </th>
+                                                                            <th class="text-left">Lieu  </th>
+                                                                            <th class="text-left">ALIMENTS </th>
+                                                                           
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th scope="row">PETIT DEJEUNER</th>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">COLLATION </th>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">DEJEUNER</th>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">COLLATION </th>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">DINER  </th>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <th scope="row">SOUPER  </th>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                             
                                                         </div>
                                                     </div>
@@ -291,15 +344,10 @@
                                             </div>
                                             <!-- FICHE STRESSEUR -->
                                             <div role="tabpanel" class="tab-pane active" id="activeIcon12" aria-labelledby="activeIcon12-tab1" aria-expanded="true">
-                                                <h4 class="card-title" id="from-actions-top-bottom-center">
-                                                    <strong class="text-info">FICHE D'EVALUATION STRESSEUR</strong> 
-                                                </h4>   
-                                                
-                                                <div class="card-body">
-                                                    <p class="card-text">
-                                                        Fiche d'évaluation du stresseur
-                                                    </p>
-                                                </div>
+                                                <h2 class="card-title text-center">
+                                                    <strong class="text-danger">Evaluation des éléments stresseurs</strong> 
+                                                </h2>   
+                                                            
                                                 <div class="table-responsive">
                                                     <table class="table table-bordered table-striped">
                                                         <thead>
@@ -326,7 +374,7 @@
                                                             </tr>
 
                                                             <tr>
-                                                                <th scope="row">Ai-je subi, tout au cours de ma vie, des situations traumatiques <br>
+                                                                <th scope="row">Ai-je subi, tout au cours de ma vie, des situations <br> traumatiques 
                                                                     (Décès, perte d’emploi ; déception amoureuse ; etc...)</th>
                                                                 <td> <input type="radio" value="">   </td>
                                                                 <td> <input type="radio" value="">   </td>
@@ -349,8 +397,9 @@
                                                             </tr>
 
                                                             <tr>
-                                                                <th scope="row">Est-ce que je subis une surcharge de travail fréquente ou permanente ? <br> 
-                                                                    Ou/et suis souvent pris dans l’urgence ou /et existe-t-il une ambiance très compétitive dans mon emploi ?</th>
+                                                                <th scope="row">Est-ce que je subis une surcharge de travail <br> fréquente ou permanente ? 
+                                                                    Ou/et suis souvent pris dans l’urgence <br>
+                                                                    ou /et existe-t-il une ambiance très compétitive dans mon emploi ?</th>
                                                                 <td> <input type="radio" value="">   </td>
                                                                 <td> <input type="radio" value="">   </td>
                                                                 <td> <input type="radio" value="">   </td>
@@ -361,9 +410,10 @@
                                                             </tr>
                                                            
                                                             <tr>
-                                                                <th scope="row">Mon travail ne me convient pas, il ne correspond pas à ce que je souhaiterais faire  <br>
-                                                                    ou est source d’insatisfaction ; 
-                                                                    me donne l’impression de perdre mon temps. Au maximum me déprime.</th>
+                                                                <th scope="row">Mon travail ne me convient pas, il ne correspond pas <br> 
+                                                                    à ce que je souhaiterais faire  <br> ou est source d’insatisfaction ; 
+                                                                    me donne l’impression de perdre mon temps. <br>
+                                                                     Au maximum me déprime.</th>
                                                                 <td> <input type="radio" value="">   </td>
                                                                 <td> <input type="radio" value="">   </td>
                                                                 <td> <input type="radio" value="">   </td>
@@ -374,7 +424,7 @@
                                                             </tr>
 
                                                             <tr>
-                                                                <th scope="row">Ai-je des soucis familiaux importants ? (Couple, enfants, parents etc.) ? <br> 
+                                                                <th scope="row">Ai-je des soucis familiaux importants ? <br> (Couple, enfants, parents etc.) ? 
                                                                 </th>
                                                                 <td> <input type="radio" value="">   </td>
                                                                 <td> <input type="radio" value="">   </td>
@@ -386,23 +436,249 @@
                                                             </tr>
 
                                                             <tr>
-                                                                <th scope="row"><br> 
-                                                                    suis-je endetté, ai-je un revenu trop faible par rapport à mon mode de vie, 
-                                                                    est ce que cela me cause du souci ? <br>
+                                                                <th scope="row">
+                                                                    suis-je endetté, ai-je un revenu trop faible  <br> par rapport à mon mode de vie, 
+                                                                    est ce que cela me cause du souci ? 
                                                                 </th>
                                                                 <td> <input type="radio" value="">   </td>
                                                                 <td> <input type="radio" value="">   </td>
                                                                 <td> <input type="radio" value="">   </td>
                                                                 <td> <input type="radio" value="">   </td>
                                                                 <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>                                                          
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    Ai-je beaucoup d’activités extra professionnelles, <br>
+                                                                     sont-elles source de fatigue ou de tensions ?<br>   (association, sports etc.)
+                                                                </th>
                                                                 <td> <input type="radio" value="">   </td>
-                                                                
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>                                   
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    Ai-je une maladie ? : Sa gravité <br> ou l’importance de la gêne pour vous ?
+                                                                </th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>                                   
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row" class="text-right ">
+                                                                    Total géneral
+                                                                </th>
+                                                                <td colspan="6" class="text-center">  <strong>15</strong> </td>
+                                                                                             
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row" class="text-right">
+                                                                    Interpretation 
+                                                                </th>
+                                                                <td colspan="6" class="text-center">  <strong>Stress très bas</strong> </td>                              
                                                             </tr>
                                                             
                                                         </tbody>
                                                     </table>
-                                                </div>
+                                                </div>   
                                                 
+                                                
+                                                <h2 class="card-title mt-5 text-center">
+                                                    <strong class="text-danger">Evaluation du niveau de stress</strong> 
+                                                </h2>   
+                                                            
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th># </th>
+                                                                <th>Pas du tout</th>
+                                                                <th>Faiblement </th>
+                                                                <th>Un peu</th>
+                                                                <th>Assez</th>
+                                                                <th>Beaucoup</th>
+                                                                <th>Extremement</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">Cote</th>
+                                                                <th scope="row">1</th>
+                                                                <th scope="row">2</th>
+                                                                <th scope="row">3</th>
+                                                                <th scope="row">4</th>
+                                                                <th scope="row">5</th>
+                                                                <th scope="row">6</th>
+                                                                
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">Suis-je émotif, sensible aux remarques, aux critiques d’autrui ?<br>  
+                                                                </th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">Suis-je colérique ou rapidement irritable ?</th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">Suis-je perfectionniste, ai-je tendance à ne pas être <br>
+                                                                     satisfait de ce que j’ai fait ou de ce que les autres ont fait ?</th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                
+                                                            </tr>
+                                                           
+                                                            <tr>
+                                                                <th scope="row">Ai-je le cœur qui bat vite, de la transpiration <br> des tremblements, 
+                                                                    des secousses musculaires, <br> par exemple au niveau du visage, des paupières ?</th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    Est-ce que je me sens tendu au niveau des muscles, <br>
+                                                                    ai-je une sensation de crispation au niveau des mâchoires <br> du visage, du corps en général ?
+                                                                </th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    Ai-je des problèmes de sommeil ? <br> 
+                                                                </th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>                                                          
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    Suis-je anxieux, est ce que <br> je me fais souvent du souci ?
+                                                                </th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>                                   
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    Ai-je des manifestations corporelles comme un trouble digestif, <br>
+                                                                     des douleurs, des maux de tête, des allergies, de l’eczéma  <br>
+                    
+                                                                </th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>                                   
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    Est-ce que je suis fatigué(e)<br>
+                                                                </th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>                                   
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    Ai-je des problèmes de santé plus importants comme <br> un ulcère d’estomac,
+                                                                     une maladie de peau, un problème de cholestérol, <br>
+                                                                     de l’hypertension artérielle, un trouble cardio vasculaire ?<br>
+                                                                </th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>                                   
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    Est-ce que je fume ou bois de l’alcool pour 
+                                                                    me stimuler ou me calmer ? <br>
+                                                                    est-ce que j’utilise d’autres produits <br> 
+                                                                    ou des médicaments dans ce but ?<br>
+                                                                </th>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> <input type="radio" value="">   </td>                                   
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row" class="text-right">
+                                                                    Total géneral
+                                                                </th>
+                                                                <td colspan="6" class="text-center">  <strong>15</strong> </td>
+                                                                                             
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th scope="row" class="text-right">
+                                                                    Interpretation 
+                                                                </th>
+                                                                <td colspan="6" class="text-center">  <strong>Stress très bas</strong> </td>                              
+                                                            </tr>
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div>  
                                             </div>
                                         </div>
                                     </div>
