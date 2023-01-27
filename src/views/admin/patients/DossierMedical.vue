@@ -1485,6 +1485,7 @@
                                                               id="userinput1"
                                                               class="form-control round border-primary"
                                                               placeholder=""
+                                                              v-model="consultation.protocoleSoins.date"
                                                               name="protocole_date"
                                                             />
                                                           </div>
@@ -1500,6 +1501,7 @@
                                                               id="userinput1"
                                                               class="form-control round border-primary"
                                                               placeholder=""
+                                                              v-model="consultation.protocoleSoins.heure"
                                                               name="protocole_heure"
                                                             />
                                                           </div>
@@ -1568,47 +1570,51 @@
                                                                 aria-labelledby="base-pill31"
                                                               >
                                                                 <div
+                                                                  v-for="(data,index) in consultation.protocoleSoins.admissions.ambulatoire"
+                                                                  :key=index
                                                                   class="row"
                                                                 >
                                                                   <div class="form-group col-md-4 mb-2">
                                                                     <label for="userinput1" >Soin  *</label
                                                                     >
-                                                                    <select name=""
+                                                                    <select v-model="data.soin" name=""
                                                                       id=""
                                                                       class="form-control round border-primary"
                                                                     >
                                                                       <option
-                                                                        value=""
+                                                                        value="pansement"
                                                                       >
                                                                         Pansement
                                                                       </option>
                                                                       <option
-                                                                        value=""
+                                                                        value="perfusion"
                                                                       >
                                                                         Perfusion 
                                                                       </option>
                                                                       <option
-                                                                        value=""
+                                                                        value="injection en iv"
                                                                       >
                                                                         Injection en IV
                                                                       </option>
                                                                       <option
-                                                                        value=""
+                                                                        value="injection en im"
                                                                       >
                                                                         Injection en IM
                                                                       </option>
                                                                     </select>
                                                                   </div>
-                                                                  <div class="form-group col-md-8 mb-2">
-                                                                    <label for="userinput1" >Description du soin: Produit, quantité dosage consommable</label >
-                                                                     <textarea name="" class="form-control round border-primary" id="" cols="30" rows="10"></textarea>
-                                                                    
+                                                                  <div class="form-group col-md-7 mb-2">
+                                                                    <label for="userinput1" >Description </label >
+                                                                     <textarea name="" v-model="data.description" placeholder="Produit, quantité dosage consommable..." class="form-control round border-primary" id="" cols="30" rows="2"></textarea>
+                                                                  </div>
+                                                                  <div class="col-md-1 mb-2">
+                                                                    <button @click.prevent="supprimerSoin(index)" class="btn btn-danger"> x </button>
                                                                   </div>
                                                                     
                                                                 </div>
                                                               </div>
 
-                                                             
+                                                      
 
                                                               <div
                                                                 class="tab-pane"
@@ -1666,7 +1672,8 @@
 
                                                             </div>
                                                             <span class="mb-2">
-                                                                <a href="" >+ Ajouter un soin</a>
+                                                              <button @click.prevent="addSoin" class="btn btn-primary"> Ajouter un soin </button>
+                                                               
                                                             </span>
                                                           </div>
                                                         </div>
@@ -1677,72 +1684,14 @@
                                                     <div class="card-content">
                                                       <div class="card-body">
                                                         Constante
-                                                        <form
-                                                          class="form form-horizontal"
-                                                        >
-                                                          <div
-                                                            class="form-body"
-                                                          >
-                                                            <div
-                                                              class="form-group row"
-                                                            >
-                                                              <div
-                                                                class="col-md-12 mx-auto"
-                                                              >
-                                                                <div
-                                                                  class="input-group"
-                                                                >
-                                                                  <div
-                                                                    class="d-inline-block custom-control custom-radio mr-1"
-                                                                  >
-                                                                    <input
-                                                                      type="radio"
-                                                                      name="customer1"
-                                                                      class="custom-control-input"
-                                                                      id="yes"
-                                                                    />
-                                                                    <label
-                                                                      class="custom-control-label"
-                                                                      for="yes"
-                                                                      >Température</label
-                                                                    >
-                                                                  </div>
-                                                                  <div
-                                                                    class="d-inline-block custom-control custom-radio"
-                                                                  >
-                                                                    <input
-                                                                      type="radio"
-                                                                      name="customer2"
-                                                                      class="custom-control-input"
-                                                                      id="no"
-                                                                    />
-                                                                    <label
-                                                                      class="custom-control-label"
-                                                                      for="no"
-                                                                      >Tension</label
-                                                                    >
-                                                                  </div>
+                                                       
 
-                                                                  <div
-                                                                    class="d-inline-block custom-control custom-radio"
-                                                                  >
-                                                                    <input
-                                                                      type="radio"
-                                                                      name="customer3"
-                                                                      class="custom-control-input"
-                                                                      id="three"
-                                                                    />
-                                                                    <label
-                                                                      class="custom-control-label"
-                                                                      for="three"
-                                                                      >Pouls</label
-                                                                    >
-                                                                  </div>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                          </div>
-                                                        </form>
+                                                        <div class="form-check d-flex">
+                                                          <input v-model="consultation.protocoleSoins.constante.temperature" class="form-control mx-3" placeholder="temperature" step="0.1"  type="number"  />
+                                                          <input v-model="consultation.protocoleSoins.constante.tension" class="form-control mx-3" placeholder="tension" step="0.1" type="number"  />
+                                                          <input v-model="consultation.protocoleSoins.constante.pouls" class="form-control mx-3"  placeholder="pouls" step="0.1" type="number"  />
+                                                        </div>
+                                                        
                                                       </div>
                                                     </div>
                                                   </div>
@@ -1752,13 +1701,14 @@
                                                     type="reset"
                                                     class="btn btn-secondary"
                                                     data-dismiss="modal"
-                                                    value="close"
+                                                    value="fermer"
                                                   />
-                                                  <input
-                                                    type="submit"
+                                                  <button 
+                                                    data-dismiss="modal"
+                                                    aria-label="Close"
+                                                    @click.prevent="saveProtocole"
                                                     class="btn btn-primary"
-                                                    value="Login"
-                                                  />
+                                                    >Enregistrer</button>
                                                 </div>
                                               </form>
                                             </div>
@@ -1933,16 +1883,11 @@
                               <tbody>
                                 <tr>
                                   <th scope="row">1</th>
-                                  <td>Médecine génerale</td>
-                                  <td>18-09-2022</td>
+                                  <td>{{patients[0].infoGeneral.typeConsultation}}</td>
+                                  <td>{{patients[0].infoGeneral.dateArriver}}</td>
                                   <td><i class="ft-eye"></i></td>
                                 </tr>
-                                <tr>
-                                  <th scope="row">2</th>
-                                  <td>Pédiatrie</td>
-                                  <td>22-10-2022</td>
-                                  <td><i class="ft-eye"></i></td>
-                                </tr>
+                                
                               </tbody>
                             </table>
                           </div>
@@ -1952,16 +1897,13 @@
                                 <strong class="text-info">
                                   MOTIF DE CONSULTATION
                                 </strong>
-                                | 19-12-2022 à 14h 50 min
+                                |{{patients[0].infoGeneral.dateArriver}}
                               </h4>
                             </div>
                             <div class="card-content">
                               <div class="card-body">
                                 <p>
-                                  Patient souffrant de Lorem ipsum dolor sit
-                                  amet consectetur, adipisicing elit. Non odio
-                                  beatae aliquid placeat libero quae minima quis
-                                  autem accusantium vo....
+                                  {{consultation.motif}}
                                 </p>
                               </div>
                             </div>
@@ -1971,17 +1913,53 @@
                             <div class="card-header">
                               <h4 class="card-title">
                                 <strong class="text-info"> ANAMNESE </strong> |
-                                19-12-2022 à 14h 50 min
+                                |{{patients[0].infoGeneral.dateArriver}}
                               </h4>
                             </div>
                             <div class="card-content">
                               <div class="card-body">
                                 <p>
-                                  Patient souffrant de Lorem ipsum dolor sit
-                                  amet consectetur, adipisicing elit. Non odio
-                                  beatae aliquid placeat libero quae minima quis
-                                  autem accusantium vo....
+                                  <strong>Debut</strong> :<span
+                                    class="float-right"
+                                    >{{consultation.anamnese.debut}}</span
+                                  >
                                 </p>
+                                <hr />
+                                <p>
+                                  <strong>Signe associé</strong> :<span
+                                    class="float-right"
+                                    >{{consultation.anamnese.signeAssocie}}</span
+                                  >
+                                </p>
+                                <hr />
+                                <p>
+                                  <strong>Signe negatif</strong> :<span
+                                    class="float-right"
+                                    >{{consultation.anamnese.signeNegatif}}</span
+                                  >
+                                </p>
+                                <hr />
+                                <p>
+                                  <strong>Traitement avant admission</strong> :<span
+                                    class="float-right"
+                                    >{{consultation.anamnese.traitementAvantAdmission}}</span
+                                  >
+                                </p>
+                                <hr />
+                                <p>
+                                  <strong>Bilan avant admission</strong> :<span
+                                    class="float-right"
+                                    >{{consultation.anamnese.bilanAvantAdmission}}</span
+                                  >
+                                </p>
+                                <hr />
+                                <p>
+                                  <strong>Evolution</strong> :<span
+                                    class="float-right"
+                                    >{{consultation.anamnese.evolution}}
+                                  </span>
+                                </p>
+                               
                               </div>
                             </div>
                           </div>
@@ -1990,9 +1968,9 @@
                             <div class="card-header">
                               <h4 class="card-title">
                                 <strong class="text-info">
-                                  EXAMENS CLINIQUES
+                                  DONNEES ANTHROPOMETRIQUE
                                 </strong>
-                                | 19-12-2022 à 14h 50 min
+                                | {{patients[0].infoGeneral.dateArriver}}
                               </h4>
                             </div>
                             <div class="card-content">
@@ -2000,35 +1978,35 @@
                                 <p>
                                   <strong>Température</strong> :<span
                                     class="float-right"
-                                    >38,8 °C</span
+                                    > {{consultation.donneesAnthropometrique.temperature}}degré </span
                                   >
                                 </p>
                                 <hr />
                                 <p>
                                   <strong>Poids</strong> :<span
                                     class="float-right"
-                                    >70kg</span
+                                    >{{consultation.donneesAnthropometrique.poids}}kg</span
                                   >
                                 </p>
                                 <hr />
                                 <p>
                                   <strong>Taille</strong> :<span
                                     class="float-right"
-                                    >172cm</span
+                                    >{{consultation.donneesAnthropometrique.taille}}cm</span
                                   >
                                 </p>
                                 <hr />
                                 <p>
                                   <strong>Pouls</strong> :<span
                                     class="float-right"
-                                    >89 BPM</span
+                                    >{{consultation.donneesAnthropometrique.pouls}} BPM</span
                                   >
                                 </p>
                                 <hr />
                                 <p>
                                   <strong>IMC</strong> :<span
                                     class="float-right"
-                                    >2,457</span
+                                    >{{consultation.donneesAnthropometrique.icm}}</span
                                   >
                                 </p>
                                 <hr />
@@ -2042,37 +2020,29 @@
                                 <p>
                                   <strong>Bras gauche</strong> :<span
                                     class="float-right"
-                                    >12/5cmHG</span
+                                    >{{consultation.donneesAnthropometrique.brasGauche}}cmHG</span
                                   >
                                 </p>
                                 <hr />
                                 <p>
                                   <strong>Bras droit</strong> :<span
                                     class="float-right"
-                                    >12/5cmHG</span
+                                    >{{consultation.donneesAnthropometrique.brasDroit}}cmHG</span
                                   >
                                 </p>
                                 <hr />
-                                <p>
-                                  <strong>Abdomen</strong> :<span
+                                <div v-for="(autre,index) in consultation.donneesAnthropometrique.autres " :key="index">
+                                  <p>
+                                  <strong>{{autre.libelle}}</strong> :<span
                                     class="float-right"
-                                    >Souple</span
+                                    >{{autre.data}}</span
                                   >
-                                </p>
-                                <hr />
-                                <p>
-                                  <strong>Coeur</strong> :<span
-                                    class="float-right"
-                                    >RAS</span
-                                  >
-                                </p>
-                                <hr />
-                                <p>
-                                  <strong>Poumon</strong> :<span
-                                    class="float-right"
-                                    >Libre</span
-                                  >
-                                </p>
+                                  </p>
+                                  <hr />
+                                </div>
+                                
+                               
+                                
                               </div>
                             </div>
                           </div>
@@ -2083,7 +2053,7 @@
                                 <strong class="text-info">
                                   HYPOTHESE DIAGNOSTIQUE
                                 </strong>
-                                | 19-12-2022 à 14h 50 min
+                                | {{patients[0].infoGeneral.dateArriver}}
                               </h4>
                             </div>
                             <div class="card-content">
@@ -2104,8 +2074,7 @@
                                           </div>
                                           <div class="media-body p-1">
                                             <p>
-                                              Ici sera récupéré l'Hypothèse
-                                              diagnostique émis par le Dr.
+                                              {{consultation.hypotheseDiagnostics}}
                                             </p>
                                           </div>
                                         </div>
@@ -2121,7 +2090,7 @@
                             <div class="card-header">
                               <h4 class="card-title">
                                 <strong class="text-info">DIAGNOSTIQUE </strong>
-                                | 19-12-2022 à 14h 50 min
+                                | {{patients[0].infoGeneral.dateArriver}}
                               </h4>
                             </div>
                             <div class="card-content">
@@ -2142,12 +2111,7 @@
                                           </div>
                                           <div class="media-body p-1">
                                             <p class="mt-1">
-                                              Patient souffrant du Paludisme et
-                                              d'une anémie microcytaire. Patient
-                                              souffrant du Paludisme et d'une
-                                              anémie microcytaire. Patient
-                                              souffrant du Paludisme et d'une
-                                              anémie microcytaire.
+                                              {{consultation.diagnostics}}
                                             </p>
                                           </div>
                                         </div>
@@ -2165,7 +2129,7 @@
                                 <strong class="text-info">
                                   ANALYSES BIOLOGIQUES</strong
                                 >
-                                | 19-12-2022 à 14h 50 min
+                                | {{patients[0].infoGeneral.dateArriver}}
                               </h4>
                               <button class="btn btn-info btn-sm float-right">
                                 <i class="ft-plus white"></i> Imprimer
@@ -2183,16 +2147,12 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                      <td>NFS</td>
-                                      <td>Anémie microcytaire</td>
+                                    <tr v-for="(data,index) in taggingSelectedType" :key=index>
+                                      <td>{{data.code}}</td>
+                                      <td>{{data.name}}</td>
                                       <td><i class="ft-eye"></i></td>
                                     </tr>
-                                    <tr>
-                                      <td>Goutte épaisse</td>
-                                      <td>GE positive avec un DP de 5000</td>
-                                      <td><i class="ft-eye"></i></td>
-                                    </tr>
+                                    
                                   </tbody>
                                 </table>
                               </div>
@@ -2203,7 +2163,7 @@
                             <div class="card-header">
                               <h4 class="card-title">
                                 <strong class="text-info"> EXAMENS </strong> |
-                                19-12-2022 à 14h 50 min
+                                {{patients[0].infoGeneral.dateArriver}}
                               </h4>
                             </div>
                             <div class="card-content">
@@ -2217,16 +2177,12 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                      <td>RADIOLOGIE</td>
+                                    <tr v-for="(data,index) in taggingSelectedBio " :key="index">
+                                      <td>{{data.name}}</td>
                                       <td>Aucune</td>
                                       <td><i class="ft-eye"></i></td>
                                     </tr>
-                                    <tr>
-                                      <td>ECHOGRAPHIE</td>
-                                      <td>Aucune</td>
-                                      <td><i class="ft-eye"></i></td>
-                                    </tr>
+                                   
                                   </tbody>
                                 </table>
                               </div>
@@ -2240,7 +2196,7 @@
                                   PROTOCOLES DE SOINS
                                   <span class="text-danger">(3 jours)</span>
                                 </strong>
-                                | 19-12-2022 à 14h 50 min
+                                | {{patients[0].infoGeneral.dateArriver}}
                               </h4>
                               <a class="heading-elements-toggle"
                                 ><i class="la la-ellipsis-v font-medium-3"></i
@@ -2282,47 +2238,35 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td>1</td>
-                                    <td>01-02-2022 à 12:30</td>
-                                    <td>injection IM</td>
+                                  <tr v-for="(data,index) in consultation.protocoleSoins.admissions.ambulatoire" :key=index>
+                                    <td> {{index}} </td>
+                                    <td> {{consultation.protocoleSoins.date}} {{consultation.protocoleSoins.heure}} </td>
+                                    <td>{{data.soin}}</td>
                                     <td>
-                                      Arthémether 80mg, Injectable (Qté: 2)
+                                      {{data.description}}
                                     </td>
                                     <th>
                                       <span
                                         class="badge badge-info badge-square"
                                       >
-                                        TA
+                                        {{consultation.protocoleSoins.constante.temperature}}
                                       </span>
                                       <span
                                         class="badge badge-info badge-square"
                                       >
-                                        T°
+                                        {{consultation.protocoleSoins.constante.tension}}
                                       </span>
+
+                                      <span
+                                        class="badge badge-info badge-square"
+                                      >
+                                        {{consultation.protocoleSoins.constante.pouls}}
+                                      </span>
+                                      
                                     </th>
                                   </tr>
 
-                                  <tr>
-                                    <td>2</td>
-                                    <td>01-02-2022 à 12:30</td>
-                                    <td>injection IM</td>
-                                    <td>
-                                      Arthémether 80mg, Injectable (Qté: 2)
-                                    </td>
-                                    <th>
-                                      <span
-                                        class="badge badge-info badge-square"
-                                      >
-                                        P
-                                      </span>
-                                      <span
-                                        class="badge badge-info badge-square"
-                                      >
-                                        IMC
-                                      </span>
-                                    </th>
-                                  </tr>
+                                 
                                 </tbody>
                               </table>
                             </div>
@@ -2332,7 +2276,7 @@
                             <div class="card-header">
                               <h4 class="card-title">
                                 <strong class="text-info"> ORDONNANCIER</strong>
-                                | 19-12-2022 à 14h 50 min
+                                | {{patients[0].infoGeneral.dateArriver}}
                               </h4>
                               <button class="btn btn-info btn-sm float-right">
                                 <i class="ft-plus white"></i> Imprimer
@@ -2443,19 +2387,41 @@
       taille:170,
       poids:78,
       icm:26.99,
-      temperature:'demo',
-      pouls:'demo',
+      temperature:42,
+      pouls:88,
       etatGeneral:'demo',
       brasGauche:'demo',
       brasDroit:'demo',
       autres:[]
     },
-    hypotheseDiagnostics :'demo',
+    hypotheseDiagnostics :'lorem ipsum dolor ipset hypothese',
     examenParaclinique:{
       typeAnalyse:'demo',
       analyseBiologique:'demo',
     },
-    diagnostics:'demo'
+    diagnostics:'demo diagnostic',
+    protocoleSoins:{
+      date:'',
+      heure:'',
+      admissions:{
+        ambulatoire:[
+          {soin:'Pansement',description:'une description'}
+        ],
+        hospitalisation:[
+          {description:''}
+        ],
+        hospitalisation:[
+          {soin:'Pansement', description:''}
+        ]
+
+      },
+      constante :{
+        isVisible:'temperature',
+        temperature:'38',
+        tension:'8.5',
+        pouls:'5.7'
+      }
+    }
   }
 
   )
@@ -2568,6 +2534,12 @@ const addTagBio = function (newTag) {
     const resultat = poids / mettreCarre
     consultation.donneesAnthropometrique.icm = resultat.toFixed(2)
   }
+  const saveProtocole = function() {
+    setTimeout(() => {
+      chargementPersonel.value = false
+      toast('Protocole enregistré', 'success')
+    }, 2000)
+  }
   const addAntecedantPersonnel = function () {
     if(chargementPersonel.value == false) {
       chargementPersonel.value = true
@@ -2655,12 +2627,26 @@ const addTagBio = function (newTag) {
     }
   }
 
+  //champs 
   const addChamp = function() {
     consultation.donneesAnthropometrique.autres.push({libelle:'',data:''})
   }
   const supprimerChamps = function(index) {
     consultation.donneesAnthropometrique.autres.splice(index, 1);
   }
+
+  //soins  modale
+
+  const addSoin = function() {
+    consultation.protocoleSoins.admissions.ambulatoire.push({soin:'',description:''})
+  }
+
+  const supprimerSoin = function(index) {
+    consultation.protocoleSoins.admissions.ambulatoire.splice(index, 1);
+  }
+
+
+
 	
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
