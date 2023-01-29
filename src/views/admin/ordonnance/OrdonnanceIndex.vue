@@ -5,16 +5,8 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">Prescription d'une ordonnance</h3>
-                    <div class="row breadcrumbs-top">
-                        <div class="breadcrumb-wrapper col-12">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="">Liste des ordonnances</a>
-                                </li>
-                                
-                            </ol>
-                        </div>
-                    </div>
+                    <h3 class="content-header-title">Listes des ordonnances</h3>
+                    
                 </div>
                 <div class="content-header-right col-md-6 col-12">
                     <div class="btn-group float-md-right" role="group" aria-label="Button group with nested">
@@ -83,141 +75,72 @@
                 </div>
             </div>
             <div class="content-body">
-                <section class="card">
-                    <div id="invoice-template" class="card-body p-4">
-                        <!-- Invoice Company Details -->
-                        <div id="invoice-company-details" class="row">
-                            <div class="col-sm-6 col-12 text-center text-sm-left">
-                                <div class="media row">
-                                    <div class="col-12 col-sm-3 col-xl-2">
-                                        <img src="/hospital/app-assets/images/logo/logo.png" height="80" width="100" alt="company logo" class="mb-1 mb-sm-0" />
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-12 text-center text-sm-right">
-                                <h2>ORDONNANCE MEDICALE</h2>
-                                
-                            </div>
-                        </div>
-                        <!-- Invoice Company Details -->
-
-                        <!-- Invoice Customer Details -->
-                        <div id="invoice-customer-details" class="row pt-2">
-                            
-                            <div class="col-sm-6 col-12 text-center text-sm-left">
-                                <ul class="px-0 list-unstyled">
-                                    <li class="text-bold-800">Patient: <strong>DASSESI Brigitte</strong></li>
-                                    <li>Sexe: Feminin</li>
-                                    <li>Age: 50 ans</li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-6 col-12 text-center text-sm-right">
-                                <p><span class="text-muted"> Délivrée ce, </span> 06/05/2019 à 08H</p>
-                                
-                            </div>
-                        </div>
-                        <!-- Invoice Customer Details -->
-
-                        <!-- Invoice Items Details -->
-                        <div id="invoice-items-details" class="pt-2">
-                            <div class="row">
-                                <div class="table-responsive col-12">
-                                    <table class="table">
+                <div class="table-responsive">
+                                    <table class="table mb-0">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Prescription</th>
-                                                <th class="text-right">Posologie</th>
-                                                
+                                                <th>Nom & prénom du patient</th>
+                                                <th>Date et heure d'émission</th>
+                                                <th>Auteur</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td>
-                                                    <p>Rimal 80/140mg</p>
+                                                <td>01</td>
+                                                <td>John Doe</td>
+                                                <td>Ce 29/01/2023 à 12h</td>
+                                                <td>Dr Amoussou Florent</td>
+                                                <td> 
+                                                    <router-link to="/admin/ordonnance/index" class="btn btn-primary round btn-sm waves-effect waves-light">
+                                                            <i class="la la-eye font-small-2"></i> voir
+                                                    </router-link> 
                                                     
-                                                </td>
-                                                <td class="text-right">
-                                                  <p class="text-muted">Simply dummy text of the printing and typesetting industry.
-                                                    </p>
-                                                </td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>
-                                                    <p>Paracétamol 500mg</p>
-                                                </td>
-                                                <td class="text-right">
-                                                  <p class="text-muted">Pellentesque maximus feugiat lorem at cursus.</p>
-                                                </td>
-                                                
-                                            </tr>
+                                                    <router-link to="/admin/ordonnance/index" class="btn btn-primary round btn-sm waves-effect waves-light mx-1">
+                                                        
+                                                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                                            
+                                                    </router-link> 
 
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>
-                                                    <p>Paracétamol 500mg</p>
+                                                    <router-link to="" class="btn btn-danger round btn-sm waves-effect waves-light">
+                                                        
+                                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
+                                                        
+                                                     </router-link> 
+                                                   
                                                 </td>
-                                                <td class="text-right">
-                                                  <p class="text-muted">Pellentesque maximus feugiat lorem at cursus.</p>
-                                                </td>
-                                                
                                             </tr>
+                                            
+                                            <tr>
+                                                <td>02</td>
+                                                <td>Bernard Dupond</td>
+                                                <td>Ce 29/01/2023 à 12h</td>
+                                                <td>Dr Amoussou Florent</td>
+                                                <td> 
+                                                    <router-link to="/admin/ordonnance/index" class="btn btn-primary round btn-sm waves-effect waves-light">
+                                                            <i class="la la-eye font-small-2"></i> voir
+                                                    </router-link> 
+                                                    
+                                                    <router-link to="/admin/ordonnance/index" class="btn btn-primary round btn-sm waves-effect waves-light mx-1">
+                                                        
+                                                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                                            
+                                                    </router-link> 
 
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>
-                                                    <p>Paracétamol 500mg</p>
+                                                    <router-link to="" class="btn btn-danger round btn-sm  waves-effect waves-light">
+                                                        
+                                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
+                                                        
+                                                     </router-link> 
+                                                   
                                                 </td>
-                                                <td class="text-right">
-                                                  <p class="text-muted">Pellentesque maximus feugiat lorem at cursus.</p>
-                                                </td>
-                                                
                                             </tr>
+                                            
                                            
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-7 col-12 text-center text-sm-left">
-                                    
-                                </div>
-                                <div class="col-sm-5 col-12">
-                                   
-                                    <div class="text-center">
-                                      <img src="/app-assets/images/pages/signature-scan.png" alt="signature" class="height-100" />
-                                        <p class="mb-0 mt-1">Dr AYIMANDE Florentin</p> <br>
-                                        <p class="text-muted">Médecin généraliste</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Invoice Footer -->
-                        <div id="invoice-footer">
-                            <div class="row">
-                                <div class="col-sm-7 col-12 text-center text-sm-left">
-                                    <h6>NB</h6>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                                      Corporis maxime at tempore minima est saepe quisquam nisi ratione error, 
-                                      odio consectetur nemo, adipisci velit. Dolorum distinctio nesciunt dolores aliquid qui..</p>
-                                </div>
-                                <div class="col-sm-5 col-12 text-center">
-                                    <button type="button" class="btn btn-info btn-print btn-lg my-1"><i class="la la-paper-plane-o mr-50"></i>
-                                        Imprimer
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Invoice Footer -->
-
-                    </div>
-                </section>
-
             </div>
         </div>
     </div>

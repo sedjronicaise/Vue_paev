@@ -290,9 +290,9 @@
                                                                     <thead class="thead-dark">
                                                                         <tr>
                                                                             <th>#</th>
+                                                                            <th class="text-left">ALIMENTS </th>
                                                                             <th class="text-left">Heure </th>
                                                                             <th class="text-left">Lieu  </th>
-                                                                            <th class="text-left">ALIMENTS </th>
                                                                            
                                                                         </tr>
                                                                     </thead>
@@ -330,6 +330,75 @@
 
                                                                         <tr>
                                                                             <th scope="row">SOUPER  </th>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            
+                                                        </div>
+
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <h4 class="card-title" id="from-actions-top-bottom-center text-uppercase">
+                                                                    <strong>Menu Habituel</strong>
+                                                                </h4>
+                                                            </div>
+
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead class="thead-dark">
+                                                                        <tr>
+                                                                            <th class="text-left">#</th>
+                                                                            <th class="text-left">ALIMENTS </th>
+                                                                            <th class="text-left">Volume/Poids</th>
+                                                                            <th class="text-left">Lieu </th>
+                                                                            <th class="text-left">Heure  </th>
+                                                                           
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th scope="row">PETIT DEJEUNER</th>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">COLLATION </th>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">DEJEUNER</th>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">COLLATION </th>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">DINER  </th>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                            <td> </td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <th scope="row">SOUPER  </th>
+                                                                            <td> </td>
                                                                             <td> </td>
                                                                             <td> </td>
                                                                             <td> </td>

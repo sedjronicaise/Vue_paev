@@ -9,6 +9,7 @@ import DossierMedical from './patients/DossierMedical.vue'
 import Stats from './patients/Stats.vue'
 
 import OrdonnanceIndex from './ordonnance/OrdonnanceIndex.vue'
+import OrdonnanceCreate from './ordonnance/OrdonnanceCreate.vue'
 import Nutrition from './nutrition/Nutrition.vue'
 import DossierNutrition from './nutrition/DossierNutrition.vue'
 
@@ -20,5 +21,5 @@ import PraticienEdit from './praticiens/PraticienEdit.vue'
 
 export {
     AdminLayout, Dashboard, PatientIndex, PatientEdit, PatientAdd,
-    PraticienIndex, PraticienEdit, DossierMedical, Stats, OrdonnanceIndex, Nutrition, DossierNutrition
+    PraticienIndex, PraticienEdit, DossierMedical, Stats, OrdonnanceIndex, Nutrition, DossierNutrition, OrdonnanceCreate
 }
