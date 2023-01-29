@@ -23,10 +23,6 @@
                       </router-link>
 
 
-                      <button type="button" class="btn btn-outline-blue blue block btn-xm" data-toggle="modal" data-target="#bounce">
-                          Launch Modal
-                      </button>
-
                       <!-- Modal -->
                       <div class="modal animated bounce text-left" id="bounce" tabindex="-1" role="dialog" aria-labelledby="myModalLabel36" aria-hidden="true">
                           <div class="modal-dialog" role="document">
@@ -47,7 +43,7 @@
                                   </div>
                                   <div class="modal-footer">
                                       <button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Annuler</button>
-                                      <button type="button" class="btn btn-outline-danger">Supprimer</button>
+                                      <button type="button" @click.prevent="deletePatient(dataIndex)" data-dismiss="modal" class="btn btn-outline-danger">Supprimer</button>
                                   </div>
                               </div>
                           </div>
@@ -98,9 +94,10 @@
                                 </span>
                                 
                               </router-link>
-                              <button @click="deletePatient(index)"
+                              <button 
+                                data-toggle="modal" data-target="#bounce"
                                 title="supprimer patient"
-                                :to="{name:'dossierMedical',params:{id:patient.id}}"
+                                @click="getIndex(index)"
                                 class="btn btn-primary  round btn-sm waves-effect waves-light"
                               >
                                 <span>
@@ -136,8 +133,12 @@
 
 <script setup>
 	import {ref,reactive} from 'vue'
+  import { createToast } from "mosha-vue-toastify";
+  // import the styling for the toast
+  import "mosha-vue-toastify/dist/style.css";
 	import {Patients} from "../../../api/patient"
 	const patients = ref([])
+  const dataIndex = ref(null)
 	const getData = JSON.parse(localStorage.getItem('patients'))
 	if(getData !=null || getData != undefined) {
 		const datas = getData
@@ -147,7 +148,16 @@
 	}
   const deletePatient = (index) => {
     patients.value.splice(index, 1);
+    toast('Supression éffectué avec succèss', 'success')
   }
+  
+  const getIndex = function(index) {
+    dataIndex.value = index
+  }
+
+  const toast = (message,type) => {
+  createToast(message,{type:type})
+}
 	
 </script>
 
