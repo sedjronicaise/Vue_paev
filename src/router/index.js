@@ -29,8 +29,21 @@ const routes = [
         { path: 'patient/stats', component: Admin.Stats },
         { path: 'praticien/index', component: Admin.PraticienIndex },
         { path: 'praticien/edit/:id', component: Admin.PraticienEdit },
+
+        { path: 'ordonnance/ordonnance-bons-examens', component: Admin.OrdonnanceBon },
+
         { path: 'ordonnance/index', component: Admin.OrdonnanceIndex },
-        { path: 'ordonnance/create', component: Admin.OrdonnanceCreate },
+        { path: 'ordonnance/read', component: Admin.OrdonnanceCreate },
+        { path: 'ordonnance/edit', component: Admin.OrdonnanceEdit },
+
+        { path: 'bon/index', component: Admin.BonIndex },
+        { path: 'bon/read', component: Admin.BonCreate },
+        { path: 'bon/edit', component: Admin.BonEdit },
+
+        { path: 'certificat/index', component: Admin.CertificatIndex },
+        { path: 'certificat/edit', component: Admin.CertificatEdit },
+        { path: 'certificat/read', component: Admin.CertificatRead },
+
         { path: 'nutrition', component: Admin.Nutrition },
         { path: 'nutrition/dossier', component: Admin.DossierNutrition },
 

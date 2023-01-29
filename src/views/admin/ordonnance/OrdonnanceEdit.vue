@@ -23,12 +23,75 @@
                     <div class="btn-group float-md-right" role="group" aria-label="Button group with nested">
                         
                       <div class="form-group">
-                        
-                        <router-link to="" class="btn btn-info round  box-shadow-2 px-2 mb-1" >
-                            <i class="la la-paper-plane-o mr-50"></i> Imprimer
-                        </router-link> 
-                       
+                        <button type="button" class="btn btn-info round  box-shadow-2 px-2 mb-1" data-toggle="modal" data-target="#large">
+                            <i class="ft-edit icon-left"></i> Modifier cette ordonnance
+                        </button>
   
+                        <div class="modal fade text-left" id="large" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-success white">
+                                        <h4 class="modal-title white" id=""><i class="la la-paper-plane-o mr-50"></i> Modifier l'ordonnance du patient: Brigite KWAME</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <form>
+                                              <div>
+                                                <div class="row">
+                                                    
+                                                    <div class="col-lg-8 offset-lg-2">
+                                                        <fieldset class="form-group floating-label-form-group">
+                                                            <label for="patient">Rechercher le patient</label>
+                                                            <select name="" id="" class="form-control">
+                                                                <option value="">Brigite</option>
+                                                                <option value="">Jean</option>
+                                                                <option value="">Edguard</option>
+                                                            </select>
+                                                        </fieldset> 
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                 
+                                                 <div class="row">
+                                                    <div class="col-lg-4" >
+                                                        <fieldset class="form-group floating-label-form-group">
+                                                            <label for="title">Médicament & dosage</label>
+                                                            <input type="text" class="form-control" id="title" placeholder="Médicament et dosage">
+                                                        </fieldset>   
+                                                    </div>
+
+                                                    <div class="col-lg-4" >
+                                                        <fieldset class="form-group floating-label-form-group">
+                                                            <label for="title">Quantité</label>
+                                                            <input type="text" class="form-control" id="title" placeholder="Quantité">
+                                                        </fieldset>   
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-4" >
+                                                        <fieldset class="form-group floating-label-form-group">
+                                                            <label for="title1">Posologie et durée du traitement</label>
+                                                            <input  type="text" class="form-control"  placeholder="Posologie et durée du traitement">
+                                                        </fieldset>
+                                                    </div>
+                                                 </div> 
+
+                                                 <span>+ Ajouter une nouvelle prescription</span>
+                                                 
+                                              </div>
+                                              
+                                          </form>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn grey btn-outline-secondary btn-sm" data-dismiss="modal">Fermer</button>
+                                        <button type="button" class="btn btn-outline-success btn-sm">Enregistrer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                       </div>
                     </div>
 
@@ -86,7 +149,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Prescription</th>
-                                                <th class="text-right">Posologie et durée</th>
+                                                <th class="text-right">Posologie</th>
                                                 
                                             </tr>
                                         </thead>
@@ -148,7 +211,7 @@
                                    
                                     <div class="text-center">
                                       <img src="/app-assets/images/pages/signature-scan.png" alt="signature" class="height-100" />
-                                        <p class="mb-0 mt-1">Dr </p> <br>
+                                        <p class="mb-0 mt-1">Dr AYIMANDE Florentin</p> <br>
                                         <p class="text-muted">Médecin généraliste</p>
                                     </div>
                                 </div>

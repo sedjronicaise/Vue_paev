@@ -5,7 +5,7 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">Listes des Ordonnances</h3>
+                    <h3 class="content-header-title">Listes des Bons d'examens</h3>
                     
                 </div>
                 <div class="content-header-right col-md-6 col-12">
@@ -14,14 +14,14 @@
                       <div class="form-group">
                           
                           <button type="button" class="btn btn-info round  box-shadow-2 px-2 mb-1" data-toggle="modal" data-target="#large">
-                            <i class="ft-edit icon-left"></i> Ajouter une ordonnance
+                            <i class="ft-edit icon-left"></i> Ajouter un bon d'examen
                           </button>
   
                           <div class="modal fade text-left" id="large" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
                               <div class="modal-dialog modal-lg" role="document">
                                   <div class="modal-content">
                                       <div class="modal-header bg-success white">
-                                          <h4 class="modal-title white" id=""><i class="la la-edit"></i> Prescrire une ordonnance ou bon d'examens</h4>
+                                          <h4 class="modal-title white" id=""><i class="la la-edit"></i> Prescription de bon d'examens</h4>
                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                               <span aria-hidden="true">&times;</span>
                                           </button>
@@ -44,32 +44,26 @@
                                                     </div>
                                                 </div>
                                                 <hr>
-                                                 
+                                                
                                                  <div class="row">
-                                                    <div class="col-lg-4" >
+                                                    <div class="col-lg-6">
                                                         <fieldset class="form-group floating-label-form-group">
-                                                            <label for="title">Médicament & dosage</label>
-                                                            <input type="text" class="form-control" id="title" placeholder="Médicament et dosage">
-                                                        </fieldset>   
+                                                            <label for="title">Indication</label>
+                                                            <input type="text" class="form-control" id="title" placeholder="Objectif du bon">
+                                                        </fieldset> 
+                                                        
                                                     </div>
+                                                    <div class="col-lg-6">
+                                                      
+                                                        <fieldset class="form-group floating-label-form-group">
+                                                            <label for="title">Type d'examen</label>
+                                                            <input type="text" class="form-control" id="title" placeholder="Entrer le type d'examen">
+                                                        </fieldset> 
+                                                    </div>
+                                                </div>
+                                                + Ajouter autres examens
 
-                                                    <div class="col-lg-4" >
-                                                        <fieldset class="form-group floating-label-form-group">
-                                                            <label for="title">Quantité</label>
-                                                            <input type="text" class="form-control" id="title" placeholder="Quantité">
-                                                        </fieldset>   
-                                                    </div>
-                                                    
-                                                    <div class="col-lg-4" >
-                                                        <fieldset class="form-group floating-label-form-group">
-                                                            <label for="title1">Posologie et durée du traitement</label>
-                                                            <input  type="text" class="form-control"  placeholder="Posologie et durée du traitement">
-                                                        </fieldset>
-                                                    </div>
-                                                 </div> 
 
-                                                 <span>+ Ajouter une nouvelle prescription</span>
-                                                 
                                               </div>
                                               
                                           </form>
@@ -112,11 +106,11 @@
                                                 <td>Ce 29/01/2023 à 12h</td>
                                                 <td>Dr Amoussou Florent</td>
                                                 <td> 
-                                                    <router-link to="/admin/ordonnance/read" class="btn btn-primary round btn-sm waves-effect waves-light">
+                                                    <router-link to="/admin/bon/read" class="btn btn-primary round btn-sm waves-effect waves-light">
                                                             <i class="la la-eye font-small-2"></i> voir
                                                     </router-link> 
                                                     
-                                                    <router-link to="/admin/ordonnance/edit" class="btn btn-primary round btn-sm waves-effect waves-light mx-1">
+                                                    <router-link to="/admin/bon/edit" class="btn btn-primary round btn-sm waves-effect waves-light mx-1">
                                                         
                                                             <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                                                             

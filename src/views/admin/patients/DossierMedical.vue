@@ -1115,8 +1115,7 @@
                                             class="curseur"
                                               @click.prevent="addChamp"
                                               ><i class="la la-plus "></i>
-                                              Ajouter un organe à
-                                              examiner</label
+                                              Autre donnée</label
                                             >
                                           </div>
                                           
@@ -1237,7 +1236,7 @@
                                         class="card-title text-center"
                                         id="from-actions-top-bottom-center"
                                       >
-                                        <strong>5-1 EXAMENS PHYSIQUES</strong>
+                                        <strong>5-1 EXAMENS RADIOLOGIQUES</strong>
                                       </h4>
 
                                       <div class="form-actions top text-right">
@@ -1358,7 +1357,7 @@
                                         class="card-title"
                                         id="from-actions-top-bottom-center"
                                       >
-                                        <strong>7- DIAGNOSTICS</strong>
+                                        <strong>7- DIAGNOSTIC RETENU</strong>
                                       </h4>
                                       <div class="form-body">
                                         <div class="row">

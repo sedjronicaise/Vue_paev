@@ -32,7 +32,7 @@
                           <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                   <div class="modal-header">
-                                    <h4 class="modal-title " id="myModalLabel36">
+                                    <h4 class="modal-title text-danger" id="myModalLabel36">
                                         <span class="alert-icon text-danger"><i class="la la-warning"></i></span>
                                         Confirmation de la suppression
                                       </h4>

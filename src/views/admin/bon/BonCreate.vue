@@ -10,8 +10,8 @@
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <router-link to="/admin/ordonnance/index" >
-                                             Retour à la liste des ordonnances
+                                    <router-link to="/admin/bon/index" >
+                                             Retour à la liste des bons d'examens
                                     </router-link> 
                                 </li>
                                 
