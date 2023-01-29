@@ -2,28 +2,28 @@
 	<div>
 		 <!-- Modal delete  -->
 		<div class="modal animated bounce text-left" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel36" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        	<div class="modal-header">
-        		<h4 class="modal-title " id="myModalLabel36">
-              <span class="alert-icon text-danger"><i class="la la-warning"></i></span>
-              Confirmation de la suppression
-            </h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <h5 class="text-danger text-center">Attention! Cette action est irresvocable, êtes vous sur de vouloir continuer ?</h5>     
-            <p>.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Annuler</button>
-            <button type="button" @click.prevent="deletePraticien(dataIndex)" data-dismiss="modal" class="btn btn-outline-danger">Supprimer</button>
-          </div>
-        </div>
-      </div>
-    </div>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title " id="myModalLabel36">
+					<span class="alert-icon text-danger"><i class="la la-warning"></i></span>
+					Confirmation de la suppression
+					</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<h5 class="text-danger text-center">Attention! Cette action est irresvocable, êtes vous sur de vouloir continuer ?</h5>     
+					<p>.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Annuler</button>
+					<button type="button" @click.prevent="deletePraticien(dataIndex)" data-dismiss="modal" class="btn btn-outline-danger">Supprimer</button>
+				</div>
+				</div>
+			</div>
+		</div>
 		<!-- Modal add -->
 		<div class="modal animated bounce text-left" id="bounce" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel36" aria-hidden="true">
@@ -401,16 +401,8 @@
 			<div class="content-wrapper">
 				<div class="content-header row">
 					<div class="content-header-left col-md-6 col-12 mb-2">
-						<h3 class="content-header-title">Doctors List</h3>
-						<div class="row breadcrumbs-top">
-							<div class="breadcrumb-wrapper col-12">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-									<li class="breadcrumb-item"><a href="#">Doctors</a></li>
-									<li class="breadcrumb-item active">All Doctors</li>
-								</ol>
-							</div>
-						</div>
+						<h3 class="content-header-title">Listes des praticiens</h3>
+						
 					</div>
 					
 					<div class="content-header-right col-md-6 col-12">
@@ -426,55 +418,55 @@
 				<div class="content-body">
 					<div id="doctors-list">
 						<div class="row match-height">
-							<div 
-							v-for="(praticien,index) in praticiens" 
-							class="col-xl-3 col-lg-4 col-md-6">
+							
+							<div v-for="(praticien,index) in praticiens" class="col-lg-4">
 								<div class="card">
-									<img src="/app-assets/images/portrait/small/avatar-s-1.png" alt=""
+									<img src="https://previews.123rf.com/images/afe207/afe2071602/afe207160200158/52329668-photo-de-profil-d-avatar-masculin-ombre-l%C3%A9g%C3%A8re-de-silhouette.jpg" alt=""
 										class="card-img-top img-fluid rounded-circle w-25 mx-auto mt-1" />
 									<div class="card-body">
-										<h6 class="card-title font-large-1 mb-0 text-center">
-											{{praticien.nom}} {{ praticien.prenoms }} ~ {{ praticien.numeroOrdre }}
-										</h6>
-										<p class="card-text card font-medium-1 text-center mb-0">
-											{{praticien.specialite}}
+										<div class="text-center">
+											<strong>
+												{{praticien.nom}} {{ praticien.prenoms }}  
+												{{ praticien.numeroOrdre }}
+											</strong>
+										</div>
+										<p class="text-center mt-1">
+											<span class="badge badge-info">{{praticien.specialite}}</span> 
 										</p>
-										<p class="card-text card font-medium-1 text-center mb-0">
+										<!-- <p class="card-text card font-medium-1 text-center mb-0">
 										 Adresse:	{{praticien.adresse}}
-										</p>
+										</p> -->
 										
 										<p class="card-text card font-medium-1 text-center mb-0">
-											coordonnées :	{{praticien.email}} ~ {{ praticien.telephone }}
+											{{praticien.email}} ~ {{ praticien.telephone }}
 										</p>
 										<hr/>
 										<div class="card-text card  ">
-											<p v-for="(garde,index) in praticien.garde">
+											<p v-for="(garde, index) in praticien.garde">
 												<span class="fw">{{ garde.jours }}</span> ~ de <span class="fs">{{ garde.debut }} à {{ garde.fin }}</span>
 											</p>
 										</div>
 										
 									</div>
 									<div class="card-footer mx-auto">
-                    <button
-											data-toggle="modal" data-target="#bounce"
-											@click.prevent="modifier(praticien)"
-                      title="modifer un praticien"
-                    	class="btn btn-primary  round btn-sm waves-effect waves-light"
-                    >
-                      <span>
-                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                      </span>        
-                    </button>
-                    <button 
-                      data-toggle="modal" data-target="#delete"
-                      title="supprimer un praticien"
-                      @click="getIndex(index)"
-                      class="btn btn-danger  round btn-sm waves-effect waves-light"
-                    >
-                    <span>
-                      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
-                    </span>    
-                  	</button>
+										<button data-toggle="modal" data-target="#bounce" @click.prevent="modifier(praticien)"
+											title="modifer un praticien"
+											class="btn btn-primary  round btn-sm waves-effect waves-light"
+										>
+										<span>
+											<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+										</span>        
+										</button>
+										<button 
+										data-toggle="modal" data-target="#delete"
+										title="supprimer un praticien"
+										@click="getIndex(index)"
+										class="btn btn-danger mx-1 round btn-sm waves-effect waves-light"
+										>
+										<span>
+										<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
+										</span>    
+										</button>
 									</div>
 								</div>
 							</div>
