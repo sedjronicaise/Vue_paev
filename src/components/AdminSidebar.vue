@@ -140,15 +140,18 @@
                   
 
                   
-                  <li class=" nav-item"><a href="#"><i class="la la-edit"></i><span class="menu-title" data-i18n="Invoice">Certificats médicales</span></a>
-                      <ul class="menu-content">
+                  <li class=" nav-item">
+                    <a href="#"><i class="la la-edit"></i>
+                        <span class="menu-title" data-i18n="Invoice">Certificats médicales</span>
+                    </a>
+                      <!-- <ul class="menu-content">
                         <li><a class="menu-item" href=""><i class="material-icons"></i><span data-i18n="Invoice Summary">Certificat de repos</span></a>
                           </li>
                           <li><a class="menu-item" href=""><i class="material-icons"></i><span data-i18n="Invoice Template">Certificat de travail</span></a>
                           </li>
                           <li><a class="menu-item" href=""><i class="material-icons"></i><span data-i18n="Invoice List">Certificat de bonne santé</span></a>
                           </li>
-                      </ul>
+                      </ul> -->
                   </li>
                   
                   <li class=" navigation-header"><span data-i18n="Apps"><em>Volet Nutritionnel</em></span><i class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right" data-original-title="Apps"></i>

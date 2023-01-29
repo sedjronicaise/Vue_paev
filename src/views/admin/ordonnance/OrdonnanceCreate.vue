@@ -5,12 +5,14 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">Prescription d'une ordonnance</h3>
+                    <h3 class="content-header-title">Aperçu de l'ordonnance</h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a href="">Liste des ordonnances</a>
+                                    <router-link to="/admin/ordonnance/index" >
+                                             Retour à la liste des ordonnances
+                                    </router-link> 
                                 </li>
                                 
                             </ol>
@@ -23,7 +25,7 @@
                       <div class="form-group">
                           
                           <button type="button" class="btn btn-info round  box-shadow-2 px-2 mb-1" data-toggle="modal" data-target="#success">
-                            <i class="ft-edit icon-left"></i> Créer une ordonnance
+                            <i class="ft-edit icon-left"></i> Modifier
                           </button>
   
                           <div class="modal fade text-left" id="success" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -36,10 +38,7 @@
                                           </button>
                                       </div>
                                       <div class="modal-body">
-                                          <div class="alert alert-success" role="alert">
-                                              <span class="text-bold-600">Bien!</span> Enregistrement effectué avec succès.
-                                          </div>
-                                          <h5><i class="la la-arrow-right"></i> Check First Paragraph</h5>
+                                          
                                           <form>
                                               <div>
                                                   <fieldset class="form-group floating-label-form-group">
@@ -87,7 +86,7 @@
                 <section class="card">
                     <div id="invoice-template" class="card-body p-4">
                         <!-- Invoice Company Details -->
-                        <div id="invoice-company-details" class="row">
+                        <div id="invoice-company-details" class="row">    
                             <div class="col-sm-6 col-12 text-center text-sm-left">
                                 <div class="media row">
                                     <div class="col-12 col-sm-3 col-xl-2">
@@ -124,6 +123,7 @@
                         <div id="invoice-items-details" class="pt-2">
                             <div class="row">
                                 <div class="table-responsive col-12">
+                                    
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -196,24 +196,18 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Invoice Footer -->
-                        <div id="invoice-footer">
-                            <div class="row">
-                                <div class="col-sm-7 col-12 text-center text-sm-left">
-                                    <h6>NB</h6>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                                      Corporis maxime at tempore minima est saepe quisquam nisi ratione error, 
-                                      odio consectetur nemo, adipisci velit. Dolorum distinctio nesciunt dolores aliquid qui..</p>
-                                </div>
-                                <div class="col-sm-5 col-12 text-center">
-                                    <button type="button" class="btn btn-info btn-print btn-lg my-1"><i class="la la-paper-plane-o mr-50"></i>
+                            <div>
+                                <div class="col-lg-8 ">
+                                    <button type="button" class="btn btn-info btn-print btn-sm my-1"><i class="la la-paper-plane-o mr-50"></i>
                                         Imprimer
                                     </button>
                                 </div>
-                            </div>
+                            </div> 
+                
                         </div>
+
+                        <!-- Invoice Footer -->
+                        
                         <!-- Invoice Footer -->
 
                     </div>
