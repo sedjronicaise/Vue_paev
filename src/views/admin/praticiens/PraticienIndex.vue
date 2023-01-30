@@ -386,7 +386,7 @@
               </div>
 
 							<div class="d-flex justify-content-end my-2 ">
-								<button type="submit" @click.prevent="storePraticien"  data-dismiss="modal"
+								<button type="submit" @click.prevent="updatePraticien"  data-dismiss="modal"
 									class="btn btn-primary"> {{ submitText }} </button>
 							</div>
             </div>
@@ -407,7 +407,10 @@
 					
 					<div class="content-header-right col-md-6 col-12">
 						<div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-							<button data-toggle="modal" data-target="#bounce"
+							<button
+								data-toggle="modal" 
+								data-target="#bounce"
+								@click="addPraticien"
 								class="btn btn-info round  box-shadow-2 px-2 mb-1" id="btnGroupDrop1"
 								type="button" aria-haspopup="true" aria-expanded="false">
 								Ajouter un praticien
@@ -529,7 +532,12 @@
 	const addJours = function() {
 		formData.garde.push({jours:'',date:''})
 	}
-	
+	const addPraticien = function() {
+		close()
+		isUpdate.value = false
+		title.value = "Ajouter un praticien"
+		submitText.value = "Ajouter"
+	}
 	const storePraticien = function() {
 		isUpdate.value = false
 		toast('Nouveau enregistrment', 'success')
@@ -555,6 +563,11 @@
 	const deletePraticien = (index) => {
     praticiens.value.splice(index, 1);
     toast('Supression éffectué avec succèss', 'success')
+  }
+
+	const updatePraticien = (index) => {
+    
+    toast('Mise à jours  éffectué avec succèss', 'success')
   }
   
   const getIndex = function(index) {

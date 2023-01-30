@@ -33,7 +33,7 @@ const routes = [
         { path: 'ordonnance/ordonnance-bons-examens', component: Admin.OrdonnanceBon },
 
         { path: 'ordonnance/index', component: Admin.OrdonnanceIndex },
-        { path: 'ordonnance/read', component: Admin.OrdonnanceCreate },
+        { path: 'ordonnance/:id/read',name:"voirOrdonance" ,component: Admin.OrdonnanceCreate },
         { path: 'ordonnance/edit', component: Admin.OrdonnanceEdit },
 
         { path: 'bon/index', component: Admin.BonIndex },

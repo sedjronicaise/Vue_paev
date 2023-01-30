@@ -2661,7 +2661,7 @@ const addTagBio = function (newTag) {
 }
 .supprimer {
   color:red;
-  text-size:16px;
+  font-size:16px;
   font-weight:bold
 }
 </style>
