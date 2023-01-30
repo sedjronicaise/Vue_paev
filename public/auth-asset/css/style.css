@@ -38,7 +38,7 @@
 /*  01. GENERAL              */
 /*****************************/
 
-html {
+/* html {
     font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -52,7 +52,7 @@ body {
 	line-height: 1.6;
 	color: #677788;
 	text-align: left;
-}
+} */
 
 h2 {
 	color: #1e2022;
