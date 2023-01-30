@@ -17,7 +17,7 @@
           >
             <div class="nm-mb-2 nm-mb-md-2 text-center">
               <h2>Bienvenue au</h2>
-              <button @click="toast">Toast it!</button>
+              
 
               <img
                 src="/hospital/app-assets/images/logo/logo.png"
