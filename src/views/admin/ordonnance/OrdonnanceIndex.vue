@@ -1,5 +1,61 @@
 <template>
   <div>
+    <!-- Modal -->
+    <div
+      class="modal animated bounce text-left"
+      id="delete"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel36"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title text-danger" id="myModalLabel36">
+              <span class="alert-icon text-danger"
+                ><i class="la la-warning"></i
+              ></span>
+              Confirmation de la suppression
+            </h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h5 class="text-danger text-center">
+              Attention! Cette action est irresvocable, êtes vous sur de vouloir
+              continuer ?
+            </h5>
+
+            <p>.</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn grey btn-outline-primary"
+              data-dismiss="modal"
+            >
+              Annuler
+            </button>
+            <button
+              type="button"
+              @click.prevent="supprimer(indexElement)"
+              data-dismiss="modal"
+              class="btn btn-outline-danger"
+            >
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- modal ajout  -->
     <div
       class="modal fade text-left"
@@ -129,9 +185,9 @@
       </div>
     </div>
     <!-- modal ajout  -->
-		
-		 <!-- modal update  -->
-		 <div
+
+    <!-- modal update  -->
+    <div
       class="modal fade text-left"
       id="update"
       tabindex="-1"
@@ -183,7 +239,10 @@
                   <hr />
                   <div v-for="(autre, index) in saveUpdate.autre" :key="index">
                     <div class="d-flex justify-content-end">
-                      <button @click="deleteItemUpdate(index)" class="bt btn-danger">
+                      <button
+                        @click="deleteItemUpdate(index)"
+                        class="bt btn-danger"
+                      >
                         X
                       </button>
                     </div>
@@ -300,7 +359,6 @@
                 </tr>
               </thead>
 
-
               <tbody>
                 <tr v-for="(data, index) in ordonances" :key="index">
                   <td>{{ index + 1 }}</td>
@@ -309,7 +367,7 @@
                   <td>Dr Amoussou Florent</td>
                   <td>
                     <router-link
-                      :to="{name:'voirOrdonance',params:{id:data.id}}"
+                      :to="{ name: 'voirOrdonance', params: { id: data.id } }"
                       class="btn btn-primary round btn-sm waves-effect waves-light"
                     >
                       <i class="la la-eye font-small-2"></i> voir
@@ -318,7 +376,7 @@
                     <button
                       title="modifier"
                       data-toggle="modal"
-                      @click="modifier(data,index)"
+                      @click="modifier(data, index)"
                       data-target="#update"
                       class="btn btn-primary round btn-sm waves-effect waves-light mx-1"
                     >
@@ -343,7 +401,9 @@
                     </button>
 
                     <button
-                      @click="supprimer(index)"
+											data-toggle="modal"
+                  		data-target="#delete"
+											@click="openDelete(index)"
                       class="btn btn-danger round btn-sm waves-effect waves-light"
                     >
                       <svg
@@ -369,7 +429,7 @@
         </div>
       </div>
     </div>
-		 <!--fin  modal update  -->
+    <!--fin  modal update  -->
   </div>
 </template>
 
@@ -382,12 +442,12 @@ import "mosha-vue-toastify/dist/style.css";
 import { Patients } from "../../../api/patient";
 import { Ordonances } from "../../../api/ordonance";
 
-const title = ref("Ajouter une ordonance ")
-const submitText = ref("AJouter")
-const isUpdate = ref(false)
-const saveUpdate = reactive({})
-const ordonances = ref([])
-const indexElement = ref(0)
+const title = ref("Ajouter une ordonance ");
+const submitText = ref("AJouter");
+const isUpdate = ref(false);
+const saveUpdate = reactive({});
+const ordonances = ref([]);
+const indexElement = ref(0);
 
 //getData
 
@@ -403,7 +463,12 @@ const options = computed(() => {
   const datas = [];
   if (Patients != null) {
     Patients.forEach((patient) => {
-      datas.push({ fullName: patient.infoGeneral.fullName, id: patient.id,sexe:patient.infoGeneral.sexe, age: patient.infoGeneral.dateNaissance});
+      datas.push({
+        fullName: patient.infoGeneral.fullName,
+        id: patient.id,
+        sexe: patient.infoGeneral.sexe,
+        age: patient.infoGeneral.dateNaissance,
+      });
     });
     return datas;
   }
@@ -427,8 +492,8 @@ const addOrdonance = function () {
   submitText.value = "Ajouter";
 };
 const storeOrdonance = function () {
-	const id = (Math.floor(Math.random() * 1000000000))
-	formData.id = id
+  const id = Math.floor(Math.random() * 1000000000);
+  formData.id = id;
   let datas = Object.assign({}, formData);
   ordonances.value.push(datas);
   //close()
@@ -451,8 +516,7 @@ const addForm = function () {
     quantite: "",
     posologie: "",
   });
-}
-
+};
 
 const addFormUpdate = function () {
   saveUpdate.autre.push({
@@ -460,39 +524,42 @@ const addFormUpdate = function () {
     quantite: "",
     posologie: "",
   });
+};
+
+const openDelete = function(index) {
+	indexElement.value = index;
 }
 
-const modifier = function (data,index) {
-	
-	indexElement.value = index
-  isUpdate.value = true
-  title.value = "Modifier une ordonance"
-  submitText.value = "Modifier"
-	saveUpdate.id = data.id
-  saveUpdate.patient = data.patient
-  saveUpdate.autre = data.autre
-	saveUpdate.created_at = data.created_at
-}
+const modifier = function (data, index) {
+  indexElement.value = index;
+  isUpdate.value = true;
+  title.value = "Modifier une ordonance";
+  submitText.value = "Modifier";
+  saveUpdate.id = data.id;
+  saveUpdate.patient = data.patient;
+  saveUpdate.autre = data.autre;
+  saveUpdate.created_at = data.created_at;
+};
 
 const deleteItem = function (index) {
   formData.autre.splice(index, 1);
-}
+};
 const deleteItemUpdate = function (index) {
   saveUpdate.autre.splice(index, 1);
-}
+};
 const supprimer = function (index) {
   ordonances.value.splice(index, 1);
   toast("Suppression reussie ", "success");
-}
+};
 
-const updateOrdonance = function() {
-	ordonances.value[indexElement.value] = saveUpdate
-	toast("Mise à jours effectué avec success ", "success");
-}
+const updateOrdonance = function () {
+  ordonances.value[indexElement.value] = saveUpdate;
+  toast("Mise à jours effectué avec success ", "success");
+};
 
 const toast = (message, type) => {
   createToast(message, { type: type });
-}
+};
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
 <style></style>
