@@ -37,12 +37,12 @@ const routes = [
         { path: 'ordonnance/edit', component: Admin.OrdonnanceEdit },
 
         { path: 'bon/index', component: Admin.BonIndex },
-        { path: 'bon/read', component: Admin.BonCreate },
+        { path: 'bon/:id/read',name:'voirBon', component: Admin.BonCreate },
         { path: 'bon/edit', component: Admin.BonEdit },
 
         { path: 'certificat/index', component: Admin.CertificatIndex },
         { path: 'certificat/edit', component: Admin.CertificatEdit },
-        { path: 'certificat/read', component: Admin.CertificatRead },
+        { path: 'certificat/:id/read',name:"voirCertificat", component: Admin.CertificatRead },
 
         { path: 'nutrition', component: Admin.Nutrition },
         { path: 'nutrition/dossier', component: Admin.DossierNutrition },

@@ -158,11 +158,7 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'CertificatEdit'
-}
-</script>
+
 
 <style>
 

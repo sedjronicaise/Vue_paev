@@ -318,7 +318,7 @@ label {
 		left: 0px;
 		width: 100%;
 		height: 100%;
-		/* background-image: url('../auth-asset/images/overlay.png'); */
+		background-image: url('../../assets/overlay.png');
 		background-repeat: no-repeat;
 		/* opacity: 30%; */
 	}

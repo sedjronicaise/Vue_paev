@@ -991,6 +991,8 @@
                                               <input
                                                 type="text"
                                                 id="userinput1"
+                                                disabled
+                                                readonly
                                                 class="form-control round border-primary"
                                                 placeholder=""
                                                 v-model="consultation.donneesAnthropometrique.icm"
@@ -1685,10 +1687,19 @@
                                                         Constante
                                                        
 
-                                                        <div class="form-check d-flex">
-                                                          <input v-model="consultation.protocoleSoins.constante.temperature" class="form-control mx-3" placeholder="temperature" step="0.1"  type="number"  />
-                                                          <input v-model="consultation.protocoleSoins.constante.tension" class="form-control mx-3" placeholder="tension" step="0.1" type="number"  />
-                                                          <input v-model="consultation.protocoleSoins.constante.pouls" class="form-control mx-3"  placeholder="pouls" step="0.1" type="number"  />
+                                                        <div class="form-check  my-2">
+                                                          <div class="form-group col-md-6 my-2">
+                                                            <label>Temperature</label>
+                                                            <input v-model="consultation.protocoleSoins.constante.temperature" class="form-control mx-3" placeholder="temperature" step="0.1"  type="number"  />
+                                                          </div>  
+                                                          <div class="form-group col-md-6 my-2">
+                                                            <label>Tension</label>
+                                                            <input v-model="consultation.protocoleSoins.constante.tension" class="form-control mx-3" placeholder="tension" step="0.1" type="number"  />
+                                                          </div>
+                                                          <div class="form-group col-md-6 my-2">
+                                                            <label>Pouls</label>
+                                                            <input v-model="consultation.protocoleSoins.constante.pouls" class="form-control mx-3"  placeholder="pouls" step="0.1" type="number"  />
+                                                            </div>
                                                         </div>
                                                         
                                                       </div>
