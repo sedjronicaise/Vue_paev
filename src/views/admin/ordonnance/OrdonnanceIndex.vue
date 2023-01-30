@@ -75,7 +75,7 @@
                         <fieldset class="form-group floating-label-form-group">
                           <label for="title">Quantité</label>
                           <input
-                            type="number"
+                            type="text"
                             class="form-control"
                             id="title"
                             v-model="autre.quantite"
@@ -183,7 +183,7 @@
                   <hr />
                   <div v-for="(autre, index) in saveUpdate.autre" :key="index">
                     <div class="d-flex justify-content-end">
-                      <button @click="deleteItem(index)" class="bt btn-danger">
+                      <button @click="deleteItemUpdate(index)" class="bt btn-danger">
                         X
                       </button>
                     </div>
@@ -205,7 +205,7 @@
                         <fieldset class="form-group floating-label-form-group">
                           <label for="title">Quantité</label>
                           <input
-                            type="number"
+                            type="text"
                             class="form-control"
                             id="title"
                             v-model="autre.quantite"
@@ -476,6 +476,9 @@ const modifier = function (data,index) {
 
 const deleteItem = function (index) {
   formData.autre.splice(index, 1);
+}
+const deleteItemUpdate = function (index) {
+  saveUpdate.autre.splice(index, 1);
 }
 const supprimer = function (index) {
   ordonances.value.splice(index, 1);
