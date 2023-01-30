@@ -232,7 +232,7 @@
                   <hr />
                 </div>
 
-                <button @click.prevent="addForm" class="btn btn-primary">
+                <button @click.prevent="addFormUpdate" class="btn btn-primary">
                   Ajouter une nouvelle prescription
                 </button>
               </div>
@@ -451,7 +451,16 @@ const addForm = function () {
     quantite: "",
     posologie: "",
   });
-};
+}
+
+
+const addFormUpdate = function () {
+  saveUpdate.autre.push({
+    medicamentDosage: "",
+    quantite: "",
+    posologie: "",
+  });
+}
 
 const modifier = function (data,index) {
 	
