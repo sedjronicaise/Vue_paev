@@ -213,7 +213,7 @@ const invisible = ()=> {
   const v$ = useVuelidate(rules, state)
 </script>
 
-<style>
+<style scope="scoped">
 
       
 h2 {
