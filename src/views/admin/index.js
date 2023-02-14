@@ -31,10 +31,14 @@ import DossierNutrition from './nutrition/DossierNutrition.vue'
 import PraticienIndex from './praticiens/PraticienIndex.vue'
 import PraticienEdit from './praticiens/PraticienEdit.vue'
 
+import Utilisateur from './utilisateur/Utilisateur.vue'
+
+import Messagerie from './messagerie/Messagerie.vue'
+
 
 export {
     AdminLayout, Dashboard, PatientIndex, PatientEdit, PatientAdd,
     PraticienIndex, PraticienEdit, DossierMedical, Stats, OrdonnanceIndex, 
     Nutrition, DossierNutrition, OrdonnanceCreate, OrdonnanceEdit, 
-    OrdonnanceBon, BonIndex, BonCreate, BonEdit, CertificatRead, CertificatEdit, CertificatIndex
+    OrdonnanceBon, BonIndex, BonCreate, BonEdit, CertificatRead, CertificatEdit, CertificatIndex, Messagerie, Utilisateur 
 }

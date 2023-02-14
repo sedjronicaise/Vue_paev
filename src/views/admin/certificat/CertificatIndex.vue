@@ -107,7 +107,7 @@
                     <div class="col-lg-6">
                       <fieldset class="form-group floating-label-form-group">
                         <label for="patient"
-                          >Entrer le nature de certifcat</label
+                          >Entrer la nature de certifcat</label
                         >
                         <input
                           type="text"

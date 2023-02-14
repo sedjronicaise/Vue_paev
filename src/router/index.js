@@ -21,11 +21,12 @@ const routes = [
     name: 'admin',
     component: Admin.AdminLayout,
     children: [
+
         { path: 'dashboard', name: 'dashboard', component: Admin.Dashboard },
         { path: 'patient/index', component: Admin.PatientIndex },
         { path: 'patient/edit/:id', component: Admin.PatientEdit, name:'patientEdit' },
         { path: 'patient/add', component: Admin.PatientAdd },
-        { path: 'patient/dossier/:id',name:"dossierMedical", component: Admin.DossierMedical },
+        { path: 'patient/dossier/:id', name:"dossierMedical", component: Admin.DossierMedical },
         { path: 'patient/stats', component: Admin.Stats },
         { path: 'praticien/index', component: Admin.PraticienIndex },
         { path: 'praticien/edit/:id', component: Admin.PraticienEdit },
@@ -33,19 +34,23 @@ const routes = [
         { path: 'ordonnance/ordonnance-bons-examens', component: Admin.OrdonnanceBon },
 
         { path: 'ordonnance/index', component: Admin.OrdonnanceIndex },
-        { path: 'ordonnance/:id/read',name:"voirOrdonance" ,component: Admin.OrdonnanceCreate },
+        { path: 'ordonnance/:id/read', name:"voirOrdonance" ,component: Admin.OrdonnanceCreate },
         { path: 'ordonnance/edit', component: Admin.OrdonnanceEdit },
 
         { path: 'bon/index', component: Admin.BonIndex },
-        { path: 'bon/:id/read',name:'voirBon', component: Admin.BonCreate },
+        { path: 'bon/:id/read', name:'voirBon', component: Admin.BonCreate },
         { path: 'bon/edit', component: Admin.BonEdit },
 
         { path: 'certificat/index', component: Admin.CertificatIndex },
         { path: 'certificat/edit', component: Admin.CertificatEdit },
-        { path: 'certificat/:id/read',name:"voirCertificat", component: Admin.CertificatRead },
+        { path: 'certificat/:id/read', name:"voirCertificat", component: Admin.CertificatRead },
 
         { path: 'nutrition', component: Admin.Nutrition },
         { path: 'nutrition/dossier', component: Admin.DossierNutrition },
+
+        { path: 'utilisateur', component: Admin.Utilisateur },
+
+        { path: 'messagerie', component: Admin.Messagerie },
 
 
         {

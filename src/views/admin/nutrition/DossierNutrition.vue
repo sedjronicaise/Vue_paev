@@ -14,7 +14,7 @@
                         <button class="btn btn-info round dropdown-toggle dropdown-menu-right box-shadow-2 px-2 mb-1" id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ft-edit  icon-left"></i> Modifier</button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                             <a class="dropdown-item" href="#">Profile de AMOUSSOU Wilfried </a>
-                            <a class="dropdown-item" href="#">Plan alimentaire</a>
+                            <a class="dropdown-item" href="#">Menu habituel</a>
                             <a class="dropdown-item" href="#">Rappel des 24H</a>
                             <a class="dropdown-item" href="#">Fiche stresseur</a>
                         </div>
@@ -119,7 +119,7 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" id="linkIconOpt11-tab1" data-toggle="tab" href="#linkIconOpt11" aria-controls="linkIconOpt11">
                                                     <i class="ft-external-link"></i>
-                                                    <strong class="text-info"> Plan alimentaire  </strong></a>
+                                                    <strong class="text-info"> Menu habituel  </strong></a>
                                             </li>
 
                                             
@@ -127,7 +127,7 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" id="linkIcon12-tab1" data-toggle="tab" href="#linkIcon12" aria-controls="linkIcon12" aria-expanded="false">
                                                     <i class="ft-link"></i>
-                                                    <strong class="text-info"> Rappels des 24H </strong></a>
+                                                    <strong class="text-info"> Composante Nutritionnel </strong></a>
                                             </li>
 
                                             <li class="nav-item">
@@ -194,7 +194,7 @@
                                                     
                                                 </div>
                                             </div>
-                                            <!-- Plan alimentaire -->
+                                            <!-- Menu habituel -->
                                             <div class="tab-pane" id="linkIconOpt11" role="tabpanel" aria-labelledby="linkIconOpt11-tab1" aria-expanded="false">
                                                 <div class="row">
                                                     <div class="col-12">
@@ -206,67 +206,152 @@
                                                                 </div>
                                                             </form>
 
+
+
                                                             <form class="form">                                                         
+                                                               
+                                                               
                                                                 <div class="form-body">
-                                                                    <h4 class="card-title" style="text-align: center;">Allergies, Totem et mode de vie</h4>
+
+
                                                                     <div class="row">
-                                                                        <div class="col-12">
+                                                                        <div class="col-lg-8 col-md-8 offset-md-2 offset-lg-2 ">
                                                                             <div class="form-group">
-                                                                                <label for="timesheetinput7">Allergies liées aux médicaments</label>
-                                                                                <div class="position-relative has-icon-left">
-                                                                                    <textarea id="timesheetinput7" rows="2" class="form-control round border-primary" name="allergiesmedicaments" placeholder=""></textarea>
-                                                                                    <div class="form-control-position">
-                                                                                        <i class="ft-file"></i>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
+                                                                                
+                                                                                <button type="button" class="btn btn-outline-success block btn-lg" data-toggle="modal" data-target="#xlarge">
+                                                                                    Menu habituel
+                                                                                </button>
 
-                                                                        <div class="col-12">
-                                                                            <div class="form-group">
-                                                                                <label for="timesheetinput7">Allergies liées aux aliments</label>
-                                                                                <div class="position-relative has-icon-left">
-                                                                                    <textarea id="timesheetinput7" rows="2" class="form-control round border-primary" name="allergiestotems" placeholder=""></textarea>
-                                                                                    <div class="form-control-position">
-                                                                                        <i class="ft-file"></i>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
+                                                                                <!-- Modal -->
+                                                                                <div class="modal fade text-left" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true">
+                                                                                    <div class="modal-dialog modal-xl" role="document">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h4 class="modal-title" id="myModalLabel16">Formulaire du menu habituel</h4>
+                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                            <div class="modal-body">
+                                                                                               <form action="">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-lg-2">
+                                                                                                            <label for="type_ratio">Type ratio</label>
+                                                                                                            <select name="" id="" class="form-control">
+                                                                                                                <option value="">Petit dejeuner</option>
+                                                                                                                <option value="">Dejeuner</option>
+                                                                                                                <option value="">Collation</option>
+                                                                                                                <option value="">Souper</option>
+                                                                                                                <option value="">Diner</option>
+                                                                                                            </select>
+                                                                                                        </div>
+                                                                                                        <div class="col-lg-3">
+                                                                                                            <label for="Aliment">Aliment</label>
+                                                                                                            <input type="text" class="form-control" placeholder="Aliment">
+                                                                                                        </div>
+                                                                                                        <div class="col-lg-2">
+                                                                                                            <label for="lieu">Lieu</label>
+                                                                                                            <input type="text" class="form-control">
+                                                                                                        </div>
+                                                                                                        <div class="col-lg-1">
+                                                                                                            <label for="heure">L'heure</label>
+                                                                                                            <input type="time" class="form-control">
+                                                                                                        </div>
+                                                                                                        <div class="col-lg-1">
+                                                                                                            <label for="heure">Vol./poids</label>
+                                                                                                            <input type="text" class="form-control">
+                                                                                                        </div>
 
-                                                                        <div class="col-6">
-                                                                            <div class="form-group">
-                                                                                <label for="timesheetinput7">Totem</label>
-                                                                                <div class="position-relative has-icon-left">
-                                                                                    <textarea id="timesheetinput7" rows="2" class="form-control round border-primary" name="allergiesaliments" placeholder=""></textarea>
-                                                                                    <div class="form-control-position">
-                                                                                        <i class="ft-file"></i>
+                                                                                                        <div class="col-lg-3 ">
+                                                                                                            <label for="Description">Description</label>
+                                                                                                            <textarea name="description" id=""   class="form-control" rows="3"></textarea>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <button class="btn btn-primary">+ Ajouter nouveau</button>
+                                                                                                    </div>
+                                                                                               </form>
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Fermer</button>
+                                                                                                <button type="button" class="btn btn-outline-primary">Enregister</button>
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                    </div>
 
-                                                                        <div class="col-6">
-                                                                            <div class="form-group">
-                                                                                <label for="timesheetinput7">Mode de vie</label>
-                                                                                <div class="position-relative has-icon-left">
-                                                                                    <textarea id="timesheetinput7" rows="2" class="form-control round border-primary" name="modedevie" placeholder=""></textarea>
-                                                                                    <div class="form-control-position">
-                                                                                        <i class="ft-file"></i>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        
+                                                                    <div class="row">   
+                                                                        <table class="table table-bordered table-responsive-lg">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th scope="col">Type de ratio</th>
+                                                                                    <th scope="col">Lieu</th>
+                                                                                    <th scope="col">Heure</th>
+                                                                                    <th scope="col">Description</th>
+                                                                                    <th scope="col">Vol./Poids</th>
+                                                                                    
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <th scope="row">Petit déjeuner</th>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <th scope="row">Collation</th>
+                                                                                    
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <th scope="row">Déjeuner</th>
+                                                                                   
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <th scope="row">Collation</th>
+                                                                                   
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                </tr>
+
+                                                                                <tr>
+                                                                                    <th scope="row">Dîner</th>
+                                                                                   
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                </tr>
+
+                                                                                <tr>
+                                                                                    <th scope="row">Souper</th>
+                                                                                   
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
                                                                     </div>                                                                       
                                                                 </div>
 
-                                                                <div class="form-actions text-right">
-                                                                    
-                                                                    <button type="submit" class="btn btn-primary">
-                                                                        <i class="la la-check-square-o"></i> Enregistrer
-                                                                    </button>
-                                                                </div>
+                                                              
                                                             </form>
 
                                                             </div>
@@ -281,70 +366,65 @@
                                                         <div class="card">
                                                             <div class="card-header">
                                                                 <h4 class="card-title" id="from-actions-top-bottom-center text-uppercase">
-                                                                    <strong>Rappel des 24H</strong>
+                                                                    <strong>Caractéristiques nutritionnelles</strong>
                                                                 </h4>
                                                             </div>
 
-                                                            <div class="table-responsive">
-                                                                <table class="table">
-                                                                    <thead class="thead-dark">
-                                                                        <tr>
-                                                                            <th>#</th>
-                                                                            <th class="text-left">ALIMENTS </th>
-                                                                            <th class="text-left">Heure </th>
-                                                                            <th class="text-left">Lieu  </th>
-                                                                           
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <th scope="row">PETIT DEJEUNER</th>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope="row">COLLATION </th>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope="row">DEJEUNER</th>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope="row">COLLATION </th>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope="row">DINER  </th>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                        </tr>
+                                                            <div class="row">
+                                                                <div class="col-lg-8 col-md-8 offset-md-2 offset-lg-2 ">
+                                                                    <button type="button" class="btn btn-outline-primary block btn-lg" data-toggle="modal" data-target="#large">
+                                                                         Composantes nutritionnelles
+                                                                    </button>
+                                                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            
+                                                                                <!-- Modal -->
+                                                                            <div class="modal fade text-left" id="large" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+                                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h4 class="modal-title" id="myModalLabel17">Formulaire composantes nutritionnelles</h4>
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            
+                                                                                                <div class="row">
+                                                                                            
+                                                                                                    <div class="col-lg-4">
+                                                                                                        <label for="Composante">Composantes</label>
+                                                                                                        <input type="text" class="form-control">
+                                                                                                    </div>
+                                                                                                    <div class="col-lg-4">
+                                                                                                        <label for="resultat">Résultat</label>
+                                                                                                        <input type="resultat" class="form-control">
+                                                                                                    </div>
+                                                                                                    
 
-                                                                        <tr>
-                                                                            <th scope="row">SOUPER  </th>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            
-                                                        </div>
+                                                                                                    <div class="col-lg-4 ">
+                                                                                                        <label for="Observation">Observation</label>
+                                                                                                        <textarea name="Observation" id=""   class="form-control" rows="3"></textarea>
+                                                                                                    </div>
+                                                                                                </div>
 
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                                <h4 class="card-title" id="from-actions-top-bottom-center text-uppercase">
-                                                                    <strong>Menu Habituel</strong>
-                                                                </h4>
+                                                                                                <div>
+                                                                                                    <button class="btn btn-primary">+ Ajouter nouveau</button>
+                                                                                                </div>
+
+
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Annuler</button>
+                                                                                            <button type="button" class="btn btn-outline-primary">Enregistrer</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                   
+                                                                </div>
                                                             </div>
 
                                                             <div class="table-responsive">
@@ -352,62 +432,35 @@
                                                                     <thead class="thead-dark">
                                                                         <tr>
                                                                             <th class="text-left">#</th>
-                                                                            <th class="text-left">ALIMENTS </th>
-                                                                            <th class="text-left">Volume/Poids</th>
-                                                                            <th class="text-left">Lieu </th>
-                                                                            <th class="text-left">Heure  </th>
+                                                                            <th class="text-left">Composantes </th>
+                                                                            <th class="text-left">Resultats</th>
+                                                                            <th class="text-left">Observation </th>
+                                                                            
                                                                            
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
-                                                                            <th scope="row">PETIT DEJEUNER</th>
+                                                                            <th scope="row">1</th>
                                                                             <td> </td>
                                                                             <td> </td>
                                                                             <td> </td>
-                                                                            <td> </td>
+                                                                            
                                                                         </tr>
                                                                         <tr>
-                                                                            <th scope="row">COLLATION </th>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope="row">DEJEUNER</th>
-                                                                            <td> </td>
+                                                                            <th scope="row">2 </th>
+                                                                            
                                                                             <td> </td>
                                                                             <td> </td>
                                                                             <td> </td>
                                                                         </tr>
-                                                                        <tr>
-                                                                            <th scope="row">COLLATION </th>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope="row">DINER  </th>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                        </tr>
-
-                                                                        <tr>
-                                                                            <th scope="row">SOUPER  </th>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                            <td> </td>
-                                                                        </tr>
+                                                                       
                                                                     </tbody>
                                                                 </table>
                                                             </div>
                                                             
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>

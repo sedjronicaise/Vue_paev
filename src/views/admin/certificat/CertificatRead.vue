@@ -70,11 +70,15 @@
                     <li>Age: {{certificats[0].patient.age}} ans</li>
                   </ul>
                 </div>
+                  
+                <p></p>
+
                 <div class="col-sm-6 col-12 text-center text-sm-right">
                   <p>
                     <span class="text-muted"> Délivrée ce, </span> {{certificats[0].created_at}}
                   </p>
                 </div>
+
               </div>
               <!-- Invoice Customer Details -->
 
