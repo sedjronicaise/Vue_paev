@@ -86,22 +86,57 @@
                 <div>
                   <div>
                     <div class="row">
+                        <div class="col-lg-6">
+                            <fieldset class="form-group floating-label-form-group">
+                            <label for="patient">Fonction ou profession de l'utilisateur</label>
+                                <select name="role_list" id="" class="form-control">
+                                    <option value="">Médecin géneraliste</option>
+                                    <option value="">Specialiste</option>
+                                    <option value="">Nutritioniste</option>
+                                    <option value="">Sage Femme</option>
+                                    <option value="">Aide soignant</option>
+                                    <option value="">Infirmier/ère</option>
+                                    <option value="">Receptionniste</option>
+                                </select>
+                            </fieldset>
+                        </div>
                       <div class="col-lg-6">
                         <fieldset class="form-group floating-label-form-group">
-                          <label for="patient">Droits et permissions</label>
-  
-                          <VueMultiselect
-                            v-model="formData.patient"
-                            label="fullName"
-                            track-by="fullName"
-                            :selectLabel="'Appuyez sur Entrée pour sélectionner'"
-                            :deselectLabel="'Appuyez sur Entrée pour supprimer'"
-                            selectedLabel="Selectionné"
-                            tag-placeholder="Droits et permissions"
-                            placeholder="Selectionnez un droit"
-                            :options="options"
-                          >
-                          </VueMultiselect>
+                          <label for="patient">Attribuer les permissions</label>
+                            <select name="role_list" id="" class="form-control">
+                                <option value=""> ---- Module praticien ----  </option>
+                                <option value="">Ajouter un praticien</option>
+                                <option value="">Modifier un praticien</option>
+                                <option value="">suprimer un praticien </option>
+                                <option value=""> ---- Module Patient ----  </option>
+                                <option value="">Ajouter un patient</option>
+                                <option value="">Modifier un patient</option>
+                                <option value="">suprimer un patient </option>
+                                <option value=""> ---- Module Certificat ----  </option>
+                                <option value="">Créer un certificat</option>
+                                <option value="">Modifier un certificat</option>
+                                <option value="">suprimer un certificat</option>
+                                <option value=""> ---- Module ordonnance & bon ----  </option>
+                                <option value="">Créer un ordonnance & bon</option>
+                                <option value="">Modifier un ordonnance & bon</option>
+                                <option value="">suprimer un ordonnance & bon</option>
+                                <option value=""> ---- Module dossier médicale ----  </option>
+                                <option value="">Consulter dossier médical</option>
+                                <option value="">Modifier dossier médical</option>
+                                <option value="">supprimer dossier médical</option>
+
+                                <option value=""> ---- Module dossier nutritionnel ----  </option>
+                                <option value="">Consulter dossier nutritionnel</option>
+                                <option value="">Modifier dossier nutritionnel</option>
+                                <option value="">supprimer dossier nutritionnel</option>
+
+                                <option value="">Accès Messagerie</option>
+                                
+                                <option value="">Création des utilisateurs</option>
+                                <option value="">Ajouter un utilisateur</option>
+                                <option value="">Modifier un utilisateur</option>
+                                <option value="">supprimer un utilisateur</option>
+                            </select>
                         </fieldset>
                       </div>
                       <div class="col-lg-6">
@@ -118,7 +153,7 @@
                         </fieldset>
                       </div>
 
-                      <div class="col-lg-6">
+                      <!-- <div class="col-lg-6">
                         <fieldset class="form-group floating-label-form-group">
                           <label for="patient"
                             >Rôle</label
@@ -130,9 +165,38 @@
                             placeholder="Nom et prénom de l'utilisateur"
                           />
                         </fieldset>
+                      </div> -->
+
+
+                      <div class="col-lg-6">
+                        <fieldset class="form-group floating-label-form-group">
+                          <label for="patient"
+                            >Telephone </label
+                          >
+                          <input
+                            type="text"
+                            v-model="formData.natureCertificat"
+                            class="form-control"
+                            placeholder="Telephone"
+                          />
+                        </fieldset>
                       </div>
 
                       <div class="col-lg-6">
+                        <fieldset class="form-group floating-label-form-group">
+                          <label for="patient"
+                            >Email </label
+                          >
+                          <input
+                            type="email"
+                            v-model="formData.natureCertificat"
+                            class="form-control"
+                            placeholder="Email"
+                          />
+                        </fieldset>
+                      </div>
+
+                      <!-- <div class="col-lg-6">
                         <fieldset class="form-group floating-label-form-group">
                           <label for="patient"
                             >Statut du compte</label
@@ -143,7 +207,7 @@
                           </select>
                          
                         </fieldset>
-                      </div>
+                      </div> -->
 
                       <div class="col-lg-6">
                         <fieldset class="form-group floating-label-form-group">
