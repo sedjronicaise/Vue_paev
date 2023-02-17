@@ -136,9 +136,9 @@ import {
   sameAs,
 } from "@vuelidate/validators";
 import { createToast } from "mosha-vue-toastify";
+import UsersService from "@/services/modules/utilisateur.service.js";
 // import the styling for the toast
 import "mosha-vue-toastify/dist/style.css";
-import {Users} from "../../api/users"
 
 
 const router = useRouter();
@@ -161,36 +161,26 @@ const toast = (message,type) => {
 }
 
 const login = () => {
-  
   v$.value.$validate(); // checks all inputs
   if (!v$.value.$error) {
     if(chargement.value == false) {
       chargement.value = true
-
-      Users.forEach(user => {
-      if(user.email == state.email && user.password == state.password) {
-        setTimeout(() => {
-          chargement.value = false
-        }, 3000)
-        toast('vous est connecté', 'success')
-        
-					const infosUsers = {
-						//token:response.data.access_token,
-						//expirationToken:response.data.expired_at,
-						users:user
-					}
-          localStorage.setItem('gestClinique',JSON.stringify(infosUsers))
-        router.push("/admin/dashboard");
-      }else {
-        setTimeout(() => {
-          chargement.value = false
-        }, 3000)
-        errors.value = "Identifiant incorrect"
-      }
-    })
-
+			UsersService.login(state).then((data) => {
+        const response = data.data
+            chargement.value = false
+            const usersInfo = {
+            token:response.data.token,
+            users:response.data.user,
+            }
+            localStorage.setItem('paevcliniqueInfo',JSON.stringify(usersInfo))
+            toast('vous est connecté', 'success')
+            router.push("/admin/dashboard");
+          }).catch((e) => {
+            chargement.value = false  
+						toast('Identifiant incorrect', 'danger')
+        })
     }
-         
+   
   }
 }
 

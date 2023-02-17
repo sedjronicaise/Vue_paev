@@ -11,7 +11,7 @@ const UsersService = {
   },
 
   login(params) {
-    return ApiService.post("utilisateurs/store", params);
+    return ApiService.post("login", params);
   },
 
   update(slug, params) {

@@ -1,14 +1,14 @@
 import axios from "axios"
 import { API_BASE_URL } from "@/services/configs/environment";
-import store from "@/store";
-const storeToken = store.getters.getToken
+
+
 
 /**
  * Axios basic configuration
  * Some general configuration can be added like timeout, headers, params etc. More details can be found on https://github.com/axios/axios
  * */
 const config = {
-  baseURL: API_BASE_URL + "/",
+  baseURL: API_BASE_URL + "/api/",
   timeout: 60 * 1000, // Timeout
   //withCredentials: true, // Check cross-site Access-Control,
   headers: {
@@ -45,19 +45,13 @@ const httpClient = axios.create(config);
 
 /** Adding the request interceptors */
 httpClient.interceptors.request.use(config =>{
-    if(storeToken != '' && storeToken != undefined) {
-      config.headers.Authorization = `Bearer ${getToken}`
+  const getToken = JSON.parse(localStorage.getItem("paevcliniqueInfo"));
+  if(getToken !=undefined || getToken !=null) {
+    let token = getToken.token
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
     }
-    else {
-      const getToken = JSON.parse(localStorage.getItem("eventsInfo"));
-      if(getToken !=undefined || getToken !=null) {
-        let token = getToken.token
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`
-        }
-      }
-    }
-    
+  }
     return config;
   }
 );

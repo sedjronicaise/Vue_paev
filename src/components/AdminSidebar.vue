@@ -206,11 +206,11 @@
 
   const users = reactive({})
   onMounted(() => {
-    const usersInfo = JSON.parse(localStorage.getItem('gestClinique'))
+    const usersInfo = JSON.parse(localStorage.getItem('paevcliniqueInfo'))
     if(usersInfo != null || usersInfo != undefined ) {
       users.name = usersInfo.users.name
-      users.username = usersInfo.users.username
-      users.role = usersInfo.users.role
+
+      users.role = usersInfo.users.profession
     }
     
   })
@@ -218,7 +218,7 @@
     createToast(message,{type:type})
   }
   const logout = function() {
-    localStorage.removeItem('gestClinique')
+    localStorage.removeItem('paevcliniqueInfo')
     toast('vous est déconnecté  ', 'success')
     router.push('/login')
   }
