@@ -38,6 +38,7 @@
             </div>
           </div>
         </div>
+       
 
         <div class="content-body">
           <!-- Add Patient Form Wizard -->
@@ -226,8 +227,8 @@
                                     class="form-control"
                                     id="dob"
                                     name="dateofbirth"
-                                    type="date"
-                                    v-model="formData.infoGeneral.dateNaissance"
+                                    type="number"
+                                    v-model="formData.infoGeneral.age"
                                   />
                                 </div>
                               </div>
@@ -343,7 +344,7 @@
                             </div>
                           </fieldset>
                           <!-- Step 3 => Symptoms -->
-                          <h6>
+                          <!-- <h6>
                             <i class="step-icon font-medium-3 ft-thermometer">
                             </i>
                             Symptômes
@@ -429,7 +430,7 @@
                                 </div>
                               </div>
                             </div>
-                          </fieldset>
+                          </fieldset> -->
                           <!-- Step 4 => Insaurance Details -->
                           <h6>
                             <i class="step-icon font-medium-3 ft-file-text">
@@ -573,6 +574,8 @@ import { useRouter, useRoute } from "vue-router";
 import { createToast } from "mosha-vue-toastify";
 // import the styling for the toast
 import "mosha-vue-toastify/dist/style.css";
+import PatientService from "@/services/modules/patient.service.js";
+
 
 const router = useRouter();
 const route = useRoute();
@@ -588,9 +591,9 @@ const formData = reactive({
     sexe: "Masculin",
     typeConsultation: "Medecine generale",
     profession: "",
-    nbreEnfant: "0",
+    nbreEnfant: 0,
     telephone: "",
-    dateNaissance: "",
+    age: 20,
   },
   personneContacter: {
     nom: "",
@@ -634,44 +637,48 @@ const checkSymptome = reactive(
 	}
 )
 
-const addPatient =  () => {
-		if(chargement.value == false) {
-			chargement.value = true
-			const id = (Math.floor(Math.random() * 1000000000))
-			formData.id = id
-			//année courante
-			const dateCurrent = new Date()
-    	const yearCurrent = dateCurrent.getFullYear()
-			// année enregistré
-			const dateIncoming = new Date(formData.infoGeneral.dateNaissance)
-			const yearIncoming = dateIncoming.getFullYear()
-			// age 
-			const age = yearCurrent - yearIncoming
-			formData.infoGeneral.dateNaissance = age
-			const patients = JSON.parse(localStorage.getItem('patients'))
-			if(patients != null || patients != undefined ) {
-				patients.push(formData)
-				setTimeout(() => {
-          chargement.value = false
-        }, 7000)
 
-				localStorage.setItem('patients',JSON.stringify(patients))
-				toast('Nouveau enregistrment', 'success')
-				router.go(-1)
-			}else {
-				const datas = []
-				setTimeout(() => {
-          chargement.value = false
-        }, 7000)
-				datas.push(formData)
-				localStorage.setItem('patients',JSON.stringify(datas))
-				toast('Nouveau enregistrment', 'success')
-				router.go(-1)
-			}
-			
-		}
-	
+
+const addPatient = () => {
+  if(chargement.value == false) {
+    chargement.value = true
+    const data = {
+    "firstname": formData.infoGeneral.fullName,
+    "lastname": "..",
+    "address": formData.infoGeneral.adresse,
+    "consultation_type": formData.infoGeneral.typeConsultation,
+    "sex": formData.infoGeneral.sexe,
+    "phone": formData.infoGeneral.telephone,
+    "marital_status": formData.infoGeneral.situationMatrimoniale,
+    "children_count": formData.infoGeneral.nbreEnfant,
+    "age": formData.infoGeneral.age,
+    "profession": formData.infoGeneral.profession,
+    "date_arrive": formData.infoGeneral.dateArriver,
+    "contacts": [
+        {
+            "firstname": formData.personneContacter.nom,
+            "lastName": formData.personneContacter.prenoms,
+            "relation": formData.personneContacter.relationAvecPatient,
+            "address": formData.personneContacter.adresse,
+            "phone": formData.personneContacter.telephone,
+        }
+    ],
+    
+
+    }
+		PatientService.create(data).then((data) => {
+      const response = data.data
+        chargement.value = false
+   
+        toast('vous avez créer un patient', 'success')
+        router.go(-1)
+      }).catch((e) => {
+        chargement.value = false  
+				toast(e, 'danger')
+    })
+  }
 }
+
 
 
 </script>

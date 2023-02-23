@@ -19,7 +19,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Annuler</button>
-					<button type="button" @click.prevent="deletePraticien(dataIndex)" data-dismiss="modal" class="btn btn-outline-danger">Supprimer</button>
+					<button type="button" @click.prevent="deletePraticien" data-dismiss="modal" class="btn btn-outline-danger">Supprimer</button>
 				</div>
 				</div>
 			</div>
@@ -37,35 +37,24 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form v-if="!isUpdate" key="ajouter" class="modal-body">
+					<form v-if="!isUpdate" key="ajouter" @submit.prevent="storePraticien" class="modal-body">
 						<div class="form-body">
             	<div class="row my-2">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
-                  	<label for="contact"> Nom </label>
+                  	<label for="contact"> Nom et Prenoms </label>
                     <input
                       class="form-control"
                       id="nom"
+											required
                       name="nom"
-											placeholder="Votre nom"
-                      v-model="formData.nom"
+											placeholder="Votre nom complet"
+                      v-model="formData.name"
                       type="text"
                       />
                 	</div>
               	</div>
-              	<div class="col-md-6">
-                  <div class="form-group">
-                  	<label for="prenoms"> Prenoms </label>
-                  	<input
-                      class="form-control"
-                      id="prenoms"
-                      name="prenoms"
-											placeholder="Votre prenoms"
-                      v-model="formData.prenoms"
-                      type="text"
-                      />
-                    </div>
-                </div>
+              	
               </div>
 
 							<div class="row my-2">
@@ -75,6 +64,7 @@
                     <input
                       class="form-control"
                       id="email"
+											required
                       name="email"
 											placeholer="Votre email"
 											placeholder="ex: demo@gmail.com	"
@@ -89,9 +79,10 @@
                   	<input
                       class="form-control"
                       id="telephone"
+											required
                       name="telephone"
 											placeholder="90000000"
-                      v-model="formData.telephone"
+                      v-model="formData.phone"
                       type="number"
                       />
                     </div>
@@ -100,39 +91,7 @@
 
 							<div class="row my-2">
                 <div class="col-md-6">
-                  <div class="form-group">
-                  	<label for="nbreOdre"> Numero d'odre  </label>
-                    <input
-                      class="form-control"
-                      id="nbreOrdre"
-                      name="nbreOdre"
-                      v-model="formData.numeroOrdre"
-                      type="text"
-                      />
-                	</div>
-              	</div>
-              	<div class="col-md-6">
-                  <div class="form-group">
-                  	<label for="adresse"> Adresse  </label>
-                    <input
-                      class="form-control"
-                      id="adresse"
-                      name="adresse"
-                      v-model="formData.adresse"
-											placeholder="lot 480 kpankpan cotonou "
-                      type="text"
-                      />
-                	</div>
-                </div>
-              </div>
-
-							<div class="d-flex justify-content-end my-2 ">
-								<button @click="addJours" class="btn btn-primary ">AJOUTER UNE GARDE </button>
-							</div>
-							<div class="row my-2">
-								
-                <div class="col-md-4">
-                  <div class="form-group">
+									<div class="form-group">
                   	<label for="specialite"> Spécialité  </label>
                     <select
 											required
@@ -147,11 +106,59 @@
                     </select>
                 	</div>
               	</div>
+              	<div class="col-md-6">
+                  <div class="form-group">
+                  	<label for="adresse"> Adresse  </label>
+                    <input
+                      class="form-control"
+                      id="adresse"
+                      name="adresse"
+                      v-model="formData.address"
+											placeholder="lot 480 kpankpan cotonou "
+                      type="text"
+                      />
+                	</div>
+                </div>
+              </div>
+
+							<div class="row my-2">
+                <div class="col-md-6">
+									<div class="form-group">
+                  	<label for="specialite"> Ville   </label>
+										<input
+                      class="form-control"
+                      id="adresse"
+                      name="adresse"
+                      v-model="formData.city"
+											placeholder=""
+                      type="text"
+                      />
+                	</div>
+              	</div>
+              	<div class="col-md-6">
+                  <div class="form-group">
+                  	<label for="adresse"> Pays </label>
+                    <input
+                      class="form-control"
+                      id="adresse"
+                      name="adresse"
+                      v-model="formData.country"
+											placeholder="l"
+                      type="text"
+                      />
+                	</div>
+                </div>
+              </div>
+
+							<div class="d-flex justify-content-end my-2 ">
+								<span class="curseur" @click="addJours">AJOUTER UNE GARDE </span>
+							</div>
+							<div class="row my-2">
 								
-              	<div class="col-md-8">
+              	<div class="col-md-12">
 								
 									<div 
-										v-for="(garde,index) in formData.garde" 
+										v-for="(garde,index) in formData.gardes" 
 										:key="index" 
 										class="row"
 										>
@@ -161,7 +168,7 @@
 												<select
 													required
 											
-													v-model="garde.jours" 
+													v-model="garde.day" 
 													class="custom-select"
 													id="state"
 												>
@@ -175,7 +182,7 @@
 												</select>
 											</div>
               			</div>
-										<div class="col-md-8">
+										<div class="col-md-7">
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
@@ -184,7 +191,7 @@
 															class="form-control"
 															id="date"
 															name="date"
-															v-model="garde.debut"
+															v-model="garde.start"
 															type="time"
 															/>
                 					</div>
@@ -196,22 +203,40 @@
 															class="form-control"
 															id="date"
 															name="date"
-															v-model="garde.fin"
+															v-model="garde.end"
 															type="time"
 															/>
                 					</div>
 												</div>
 											</div>
 										</div>
+										<div class="col-md-1 mb-2">
+                      <span @click="supprimerGrade(index)" class="btn btn-danger"> x </span>
+                    </div>
 									</div>
 
                 </div>
               </div>
 
-							<div class="d-flex justify-content-end my-2 ">
-								<button type="submit" @click.prevent="storePraticien"  data-dismiss="modal"
-									class="btn btn-primary"> {{ submitText }} </button>
-							</div>
+							<button class="btn btn-primary w-100 flex" type="submit">
+														<span class="fs-5 fs-semibold" v-if="!chargement">
+															{{ submitText }}
+														</span>
+														<span v-else class="d-flex align-items-center">
+															<span class="mx-2 fs-semibold text-light">
+																chargement ...
+															</span>
+															<div
+																style="width: 1.5rem; height: 1.5rem"
+																class="spinner-border text-light"
+																role="status"
+															>
+																<span class="sr-only">Loading...</span>
+															</div>
+														</span>
+              </button>
+
+							
             </div>
 					</form>
 					<form v-else key="modifier" class="modal-body">
@@ -277,15 +302,19 @@
 
 							<div class="row my-2">
                 <div class="col-md-6">
-                  <div class="form-group">
-                  	<label for="nbreOdre"> Numero d'odre  </label>
-                    <input
-                      class="form-control"
-                      id="nbreOrdre"
-                      name="nbreOdre"
-                      v-model="saveUpdate.numeroOrdre"
-                      type="text"
-                      />
+									<div class="form-group">
+                  	<label for="specialite"> Spécialité  </label>
+                    <select
+											required
+                      v-model="saveUpdate.specialite" 
+											class="custom-select"
+                      id="state"
+                    >
+                  		<option value="medecine generale">Médecine Génerale</option>
+                      <option value="nutritioniste">Nutritioniste</option>
+                      <option value="Gynécologue">Gynécologue</option>
+                      <option value="Dermatologue">Dermatologue</option>
+                    </select>
                 	</div>
               	</div>
               	<div class="col-md-6">
@@ -308,27 +337,12 @@
 							</div>
 							<div class="row my-2">
 								
-                <div class="col-md-4">
-                  <div class="form-group">
-                  	<label for="specialite"> Spécialité  </label>
-                    <select
-											required
-                      v-model="saveUpdate.specialite" 
-											class="custom-select"
-                      id="state"
-                    >
-                  		<option value="medecine generale">Médecine Génerale</option>
-                      <option value="nutritioniste">Nutritioniste</option>
-                      <option value="Gynécologue">Gynécologue</option>
-                      <option value="Dermatologue">Dermatologue</option>
-                    </select>
-                	</div>
-              	</div>
+                
 								
-              	<div class="col-md-8">
+              	<div class="col-md-12">
 								
 									<div 
-										v-for="(garde,index) in saveUpdate.garde" 
+										v-for="(garde,index) in formData.gardes" 
 										:key="index" 
 										class="row"
 										>
@@ -338,7 +352,7 @@
 												<select
 													required
 											
-													v-model="garde.jours" 
+													v-model="garde.day" 
 													class="custom-select"
 													id="state"
 												>
@@ -352,7 +366,7 @@
 												</select>
 											</div>
               			</div>
-										<div class="col-md-8">
+										<div class="col-md-7">
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
@@ -361,7 +375,7 @@
 															class="form-control"
 															id="date"
 															name="date"
-															v-model="garde.debut"
+															v-model="garde.start"
 															type="time"
 															/>
                 					</div>
@@ -373,13 +387,16 @@
 															class="form-control"
 															id="date"
 															name="date"
-															v-model="garde.fin"
+															v-model="garde.end"
 															type="time"
 															/>
                 					</div>
 												</div>
 											</div>
 										</div>
+										<div class="col-md-1 mb-2">
+                      <button @click.prevent="supprimerGrade(index)" class="btn btn-danger"> x </button>
+                    </div>
 									</div>
 
                 </div>
@@ -421,7 +438,9 @@
 				<div class="content-body">
 					<div id="doctors-list">
 						<div class="row match-height">
-							
+							<pre>
+								{{ praticiens }}
+							</pre>
 							<div v-for="(praticien,index) in praticiens" class="col-lg-4">
 								<div class="card">
 									<img src="https://previews.123rf.com/images/afe207/afe2071602/afe207160200158/52329668-photo-de-profil-d-avatar-masculin-ombre-l%C3%A9g%C3%A8re-de-silhouette.jpg" alt=""
@@ -429,8 +448,8 @@
 									<div class="card-body">
 										<div class="text-center">
 											<strong>
-												{{praticien.nom}} {{ praticien.prenoms }}  
-												{{ praticien.numeroOrdre }}
+												{{praticien.name}} 
+												<!-- {{ praticien.numeroOrdre }} -->
 											</strong>
 										</div>
 										<p class="text-center mt-1">
@@ -441,7 +460,7 @@
 										</p> -->
 										
 										<p class="card-text card font-medium-1 text-center mb-0">
-											{{praticien.email}} ~ {{ praticien.telephone }}
+											{{praticien.email}} ~ {{ praticien.phone }}
 										</p>
 										<hr/>
 										<div class="card-text card  ">
@@ -463,7 +482,7 @@
 										<button 
 										data-toggle="modal" data-target="#delete"
 										title="supprimer un praticien"
-										@click="getIndex(index)"
+										@click="supprimer(index,praticien)"
 										class="btn btn-danger mx-1 round btn-sm waves-effect waves-light"
 										>
 										<span>
@@ -483,54 +502,77 @@
 </template>
 
 <script setup>
-	import {ref,reactive} from 'vue'
+	import {ref,reactive,onMounted,computed} from 'vue'
+	import Search from "@/components/Search"
 	import { createToast } from "mosha-vue-toastify";
 	// import the styling for the toast
 	import "mosha-vue-toastify/dist/style.css";
-	import {Praticiens} from "../../../api/praticien"
+	import PraticienService from "@/services/modules/praticien.service.js";
 	const praticiens = ref([])
-	const dataIndex = ref(null)
+	const deleteData = ref(null)
 	const saveUpdate = reactive({})
-	//getData
-	const getData = JSON.parse(localStorage.getItem('praticiens'))
-	if(getData !=null || getData != undefined) {
-		const datas = getData
-		praticiens.value = [...Praticiens,...datas]
-	}else {
-		praticiens.value = Praticiens
-	}
+	const chargement = ref(false)
+	
 	const title = ref('"Ajouter un praticien"')
+	const search = ref('')
 	const submitText = ref('AJouter')
 	const isUpdate = ref(false)
 
+	//getData
+  const getSearch = function(data) {
+    search.value = data
+  }
+  const getData = () => {
+  PraticienService.get().then((data) => {
+    const datas = data.data.data
+    praticiens.value = datas.data 
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
+
+  onMounted(() => {
+    getData()
+  })
+
 	const formData = reactive({
-		nom:'',
-		prenoms:'',
-		specialite:'',
-		telephone:'',
-		email:'',
-		adresse:'',
-		numeroOrdre:'',
-		garde:[
-			{jours:'',debut:'',fin:''}
-		]
-		
-	})
+    "email": "",
+    "name": "",
+    "phone": "",
+    "address": "",
+    "city": "",
+    "country": "",
+    "gardes": [
+        {
+            "day": "Lundi",
+            "start": "14:00",
+            "end": "22:59"
+        },
+        {
+            "day": "Mercredi",
+            "start": "14:00",
+            "end": "22:59"
+        },
+        {
+            "day": "Vendredi",
+            "start": "14:00",
+            "end": "22:59"
+        }
+    ]
+})
 
 	const close = function() {
-		formData.nom = ''
-		formData.prenoms = ''
-		formData.specialite = ''
-		formData.telephone = ''
+		formData.name = ''
+		formData.phone = ''
 		formData.email = ''
-		formData.adresse = ''
-		formData.numeroOrdre = ''
-		formData.garde = [{jours:'',debut:'',fin:''}]
-
+		formData.address = ''
+		formData.city = ''
+		formData.country = ''
+		formData.gardes = []
 	}
 
 	const addJours = function() {
-		formData.garde.push({jours:'',date:''})
+		formData.gardes.push({day:'',start:'',end:''})
 	}
 	const addPraticien = function() {
 		close()
@@ -538,13 +580,24 @@
 		title.value = "Ajouter un praticien"
 		submitText.value = "Ajouter"
 	}
-	const storePraticien = function() {
-		isUpdate.value = false
-		toast('Nouveau enregistrment', 'success')
-		praticiens.value.push(formData)
-		
-	}
 
+	const storePraticien = () => {
+  if(chargement.value == false) {
+    chargement.value = true
+    
+		PraticienService.create(formData).then((data) => {
+      const response = data.data
+        chargement.value = false
+				getData()
+				close()
+        toast('vous avez créer un praticien', 'success')
+       
+      }).catch((e) => {
+        chargement.value = false  
+				toast(e, 'danger')
+    })
+  }
+}
 	const modifier  = function(data) {
 		console.log(data)
 		title.value = "Modifier un praticien"
@@ -560,10 +613,32 @@
 		saveUpdate.garde = data.garde
 	}
 
-	const deletePraticien = (index) => {
-    praticiens.value.splice(index, 1);
-    toast('Supression éffectué avec succèss', 'success')
-  }
+
+		const supprimer = function (index, data) {
+		deleteData.id = data.id;
+		deleteData.nom = data.nom;
+		deleteData.index = index;
+	};
+	const deletePraticien = function () {
+		praticiens.value.splice(praticiens.value.indexOf(deleteData.index), 1);
+		PraticienService.destroy(deleteData.id)
+			.then((data) => {
+				toast("Suppression effectué avec succèss", "success");
+				getData();
+			})
+			.catch((error) => {
+				if (error.response) {
+					// Requête effectuée mais le serveur a répondu par une erreur.
+					const erreurs = error.response.data.message;
+					toast(erreurs, "danger");
+				} else if (error.request) {
+					// Demande effectuée mais aucune réponse n'est reçue du serveur.
+					//console.log(error.request);
+				} else {
+					// Une erreur s'est produite lors de la configuration de la demande
+				}
+			});
+	};
 
 	const updatePraticien = (index) => {
     
@@ -574,7 +649,9 @@
     dataIndex.value = index
   }
 
-
+	const supprimerGrade = function(index) {
+    formData.gardes.splice(index, 1);
+  }
 	const toast = (message,type) => {
   createToast(message,{type:type})
 }
@@ -591,5 +668,8 @@
 }
 .fs {
 	font-size:12px;
+}
+.curseur {
+  cursor:pointer
 }
 </style>

@@ -3,11 +3,11 @@ import ApiService from '@/services/configs/api.service'
 
 const UsersService = {
   get(slug) {
-    return ApiService.get("utilisateurs/index", slug);
+    return ApiService.get("users", slug);
   },
  
   create(params) {
-    return ApiService.post("utilisateurs/store", params);
+    return ApiService.post("users", params);
   },
 
   login(params) {
@@ -19,7 +19,7 @@ const UsersService = {
   },
 
   destroy(slug) {
-    return ApiService.delete(`utilisateurs/${slug}`);
+    return ApiService.delete(`users/${slug}`);
   },
  
 

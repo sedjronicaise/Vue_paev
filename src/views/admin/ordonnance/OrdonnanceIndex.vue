@@ -86,20 +86,38 @@
               <div>
                 <div>
                   <div class="row">
-                    <div class="col-lg-8 offset-lg-2">
+                    <div class="col-md-6">
                       <fieldset class="form-group floating-label-form-group">
-                        <label for="patient">Rechercher le patient</label>
+                        <label for="patient">Selectionnez le medecin</label>
 
                         <VueMultiselect
                           v-model="formData.patient"
-                          label="fullName"
-                          track-by="fullName"
+                          label="name"
+                          track-by="id"
+                          :selectLabel="'Appuyez sur Entrée pour sélectionner'"
+                          :deselectLabel="'Appuyez sur Entrée pour supprimer'"
+                          selectedLabel="Selectionné"
+                          tag-placeholder="Selectionnez un medecin"
+                          placeholder="Selectionnez un medecin"
+                          :options="docteurs"
+                        >
+                        </VueMultiselect>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                      <fieldset class="form-group floating-label-form-group">
+                        <label for="patient">Selectionnez le patient </label>
+
+                        <VueMultiselect
+                          v-model="formData.patient"
+                          label="firstname"
+                          track-by="id"
                           :selectLabel="'Appuyez sur Entrée pour sélectionner'"
                           :deselectLabel="'Appuyez sur Entrée pour supprimer'"
                           selectedLabel="Selectionné"
                           tag-placeholder="Selectionnez un patient"
                           placeholder="Selectionnez un patient"
-                          :options="options"
+                          :options="patients"
                         >
                         </VueMultiselect>
                       </fieldset>
@@ -216,20 +234,38 @@
               <div>
                 <div>
                   <div class="row">
-                    <div class="col-lg-8 offset-lg-2">
+                    <div class="col-md-6">
                       <fieldset class="form-group floating-label-form-group">
-                        <label for="patient">Rechercher le patient</label>
+                        <label for="patient">Selectionnez le medecin</label>
 
                         <VueMultiselect
-                          v-model="saveUpdate.patient"
-                          label="fullName"
-                          track-by="fullName"
+                          v-model="formData.patient"
+                          label="name"
+                          track-by="id"
+                          :selectLabel="'Appuyez sur Entrée pour sélectionner'"
+                          :deselectLabel="'Appuyez sur Entrée pour supprimer'"
+                          selectedLabel="Selectionné"
+                          tag-placeholder="Selectionnez un medecin"
+                          placeholder="Selectionnez un medecin"
+                          :options="docteurs"
+                        >
+                        </VueMultiselect>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                      <fieldset class="form-group floating-label-form-group">
+                        <label for="patient">Selectionnez le patient </label>
+
+                        <VueMultiselect
+                          v-model="formData.patient"
+                          label="firstname"
+                          track-by="id"
                           :selectLabel="'Appuyez sur Entrée pour sélectionner'"
                           :deselectLabel="'Appuyez sur Entrée pour supprimer'"
                           selectedLabel="Selectionné"
                           tag-placeholder="Selectionnez un patient"
                           placeholder="Selectionnez un patient"
-                          :options="options"
+                          :options="patients"
                         >
                         </VueMultiselect>
                       </fieldset>
@@ -434,45 +470,61 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed,onMounted } from "vue";
 import VueMultiselect from "vue-multiselect";
 import { createToast } from "mosha-vue-toastify";
 // import the styling for the toast
 import "mosha-vue-toastify/dist/style.css";
-import { Patients } from "../../../api/patient";
-import { Ordonances } from "../../../api/ordonance";
+import PraticienService from "@/services/modules/praticien.service.js";
+import OrdonanceService from "@/services/modules/ordonance.service.js";
+import PatientService from "@/services/modules/patient.service.js";
 
 const title = ref("Ajouter une ordonance ");
 const submitText = ref("AJouter");
 const isUpdate = ref(false);
 const saveUpdate = reactive({});
 const ordonances = ref([]);
+const patients = ref([]);
+const docteurs = ref([]);
 const indexElement = ref(0);
 
 //getData
 
-const getData = JSON.parse(localStorage.getItem("ordonances"));
-if (getData != null || getData != undefined) {
-  const datas = getData;
-  ordonances.value = [...Ordonances, ...datas];
-} else {
-  ordonances.value = Ordonances;
-}
-
-const options = computed(() => {
-  const datas = [];
-  if (Patients != null) {
-    Patients.forEach((patient) => {
-      datas.push({
-        fullName: patient.infoGeneral.fullName,
-        id: patient.id,
-        sexe: patient.infoGeneral.sexe,
-        age: patient.infoGeneral.dateNaissance,
-      });
-    });
-    return datas;
+const getData = () => {
+  OrdonanceService.get().then((data) => {
+    const datas = data.data.data
+    ordonances.value = datas.data 
+  }).catch((e) => {
+      console.log(e)
+    })
   }
-});
+  const getDocteurs = () => {
+    PraticienService.get().then((data) => {
+    const datas = data.data.data
+    docteurs.value = datas.data 
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
+  const getPatients = () => {
+    PatientService.get().then((data) => {
+    const datas = data.data.data
+    patients.value = datas.data 
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
+
+  onMounted(() => {
+    getData()
+    getPatients()
+    getDocteurs()
+  })
+
+
+
+
+
 
 const formData = reactive({
   patient: {},

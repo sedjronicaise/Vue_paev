@@ -1,5 +1,31 @@
 <template>
   <div>
+      <!-- Modal -->
+      <div class="modal animated bounce text-left" id="bounce" tabindex="-1" role="dialog" aria-labelledby="myModalLabel36" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title text-danger" id="myModalLabel36">
+                                        <span class="alert-icon text-danger"><i class="la la-warning"></i></span>
+                                        Confirmation de la suppression
+                                      </h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <h5 class="text-danger text-center">Attention! Cette action est irresvocable, êtes vous sur de vouloir continuer ?</h5>
+                                      
+                                      <p>.</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Annuler</button>
+                                      <button type="button" @click.prevent="deletePatient" data-dismiss="modal" class="btn btn-outline-danger">Supprimer</button>
+                                  </div>
+                              </div>
+                          </div>
+      </div>
+
     <div class="app-content content">
       <div class="content-overlay"></div>
       <div class="content-wrapper">
@@ -22,36 +48,11 @@
                         <i class="la la-plus font-small-2"></i>Nouveau patient
                       </router-link>
 
-
-                      <!-- Modal -->
-                      <div class="modal animated bounce text-left" id="bounce" tabindex="-1" role="dialog" aria-labelledby="myModalLabel36" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                              <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title text-danger" id="myModalLabel36">
-                                        <span class="alert-icon text-danger"><i class="la la-warning"></i></span>
-                                        Confirmation de la suppression
-                                      </h4>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                      </button>
-                                  </div>
-                                  <div class="modal-body">
-                                      <h5 class="text-danger text-center">Attention! Cette action est irresvocable, êtes vous sur de vouloir continuer ?</h5>
-                                      
-                                      <p>.</p>
-                                  </div>
-                                  <div class="modal-footer">
-                                      <button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Annuler</button>
-                                      <button type="button" @click.prevent="deletePatient(dataIndex)" data-dismiss="modal" class="btn btn-outline-danger">Supprimer</button>
-                                  </div>
-                              </div>
-                          </div>
+                    </div>
+                    <div class="mt-2 d-flex justify-content-end ">
+                      <div> 
+                        <Search @search="getSearch" />
                       </div>
-
-
-
-
                     </div>
                   </div>
                   <div class="card-body collapse show">
@@ -70,12 +71,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="(patient,index) in patients">
+                          <tr v-for="(patient,index) in resultQuery">
                             <td>{{ index }}</td>
-                            <td>{{ patient.infoGeneral.fullName }} </td>
-                            <td>{{ patient.infoGeneral.typeConsultation }}</td>
-                            <td>{{ patient.infoGeneral.dateNaissance }} ans  </td>
-                            <td>{{ patient.infoGeneral.telephone }}</td>
+                            <td>{{ patient.firstname }}  </td>
+                            <td>{{ patient.consultation_type }}</td>
+                            <td>{{ patient.age}} ans  </td>
+                            <td>{{ patient.phone }}</td>
                             <td>
                               <router-link
                               title="consulter dossier medical"
@@ -97,7 +98,7 @@
                               <button 
                                 data-toggle="modal" data-target="#bounce"
                                 title="supprimer patient"
-                                @click="getIndex(index)"
+                                @click="supprimer(index,data)"
                                 class="btn btn-danger  round btn-sm waves-effect waves-light"
                               >
                                 <span>
@@ -132,28 +133,74 @@
 </template>
 
 <script setup>
-	import {ref,reactive} from 'vue'
+	import {ref,reactive,onMounted,computed} from 'vue'
   import { createToast } from "mosha-vue-toastify";
+  import Search from "@/components/Search"
+  import PatientService from "@/services/modules/patient.service.js";
   // import the styling for the toast
   import "mosha-vue-toastify/dist/style.css";
-	import {Patients} from "../../../api/patient"
-	const patients = ref([])
-  const dataIndex = ref(null)
-	const getData = JSON.parse(localStorage.getItem('patients'))
-	if(getData !=null || getData != undefined) {
-		const datas = getData
-		patients.value = [...Patients,...datas]
-	}else {
-		patients.value = Patients
-	}
+
+  const search = ref('')
+  const saveUpdate = reactive({})
+  const deleteData = reactive({})
+  const patients = ref([])
+
+	const resultQuery = computed(()=> {
+    if(search.value){
+      return patients.value.filter((item)=>{
+        return search.value.toLowerCase().split(' ').every(v => item.firstname.toLowerCase().includes(v)) ||
+        search.value.toLowerCase().split(' ').every(v => item.age.toLowerCase().includes(v)) ||
+        search.value.toLowerCase().split(' ').every(v => item.consultation_type.toLowerCase().includes(v)) ||
+        search.value.toLowerCase().split(' ').every(v => item.created_at.toLowerCase().includes(v)) 
+      })
+
+      }else{
+        return patients.value;
+      }
+  }) 
+  //getData
+  const getSearch = function(data) {
+    search.value = data
+  }
+  const getData = () => {
+  PatientService.get().then((data) => {
+    const datas = data.data.data
+    patients.value = datas.data 
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
+
+  onMounted(() => {
+    getData()
+  })
+  
+  const supprimer = function(index,data) {
+    deleteData.id = data.id
+    deleteData.nom = data.firstname + ' ' + data.lastname
+    deleteData.index = index
+  }
   const deletePatient = (index) => {
-    patients.value.splice(index, 1);
-    toast('Supression éffectué avec succèss', 'success')
+    patients.value.splice(users.value.indexOf(deleteData.index), 1);
+      PatientService.destroy(deleteData.id).then((data) => {
+        toast('Suppression effectué avec succèss', 'success')
+        getData()
+      }).catch((error) => {
+        
+        if (error.response) {
+          // Requête effectuée mais le serveur a répondu par une erreur.
+          const erreurs = error.response.data.message
+          toast(erreurs, 'danger')
+        } else if (error.request) {
+        // Demande effectuée mais aucune réponse n'est reçue du serveur.
+        //console.log(error.request);
+        } else {
+          // Une erreur s'est produite lors de la configuration de la demande
+        }
+      })
   }
   
-  const getIndex = function(index) {
-    dataIndex.value = index
-  }
+
 
   const toast = (message,type) => {
   createToast(message,{type:type})
