@@ -1,24 +1,22 @@
 <template>
-  <div>
-    <main id="page-content" class="d-flex nm-aic nm-vh-md-100">
+  <div class="bg-img">
+    <main id="page-content">
       <!-- // Non-form side -->
-      <div
+      <!-- <div
         id="non-form-side"
         class="col-lg-6 col-xl-8 d-none d-lg-flex nm-aic nm-vh-100"
       >
         <div class="overlay"></div>
-      </div>
+      </div> -->
       <!-- Non-form Side // -->
 
-      <div class="container">
+      <div class="container" >
         <div class="row">
           <div
-            class="col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1 nm-st nm-st-md"
+            class="bg-form col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3"
           >
-            <div class="nm-mb-2 nm-mb-md-2 text-center">
+            <div class="text-center mt-1">
               <h2>Bienvenue au</h2>
-              
-
               <img
                 src="/hospital/app-assets/images/logo/logo.png"
                 width="250"
@@ -26,7 +24,7 @@
                 alt="Logo"
               />
 
-              <p class="mt-3">
+              <p class="mt-2">
                 <strong>
                   Veuillez vous identifier pour accéder à votre compte!
                 </strong>
@@ -36,10 +34,9 @@
               </p>
             </div>
 
-
-            <form id="formAuthentication" class="mb-3" @submit.prevent="login">
+            <form id="formAuthentication" class=" mb-2" @submit.prevent="login">
                 <div class="mb-3">
-                  <label for="email" class="form-label">Votre email</label>
+                  <label for="email" class="form-label"> <strong>Email</strong> </label>
                   <input
                     type="text"
                     class="form-control"
@@ -56,11 +53,11 @@
                     </div>
                   </div>
                 </div>
-                <div class="mb-3 form-password-toggle">
+                <div class="mb-2 form-password-toggle">
                   <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Votre mot de passe</label>
+                    <label class="form-label" for="password"> <strong>Mot de passe</strong> </label>
                     <a href="">
-                      <small>Mots de passe oublié?</small>
+                      <small>Mot de passe oublié?</small>
                     </a>
                   </div>
                   <div class=" ">
@@ -74,8 +71,8 @@
                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                         aria-describedby="password"
                       />
-                      <span @click="invisible" v-if="show" class="text-primary cursor-pointer position-absolute top-0 end-0 "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1.8em" width="1.6em" xmlns="http://www.w3.org/2000/svg"><defs><clipPath><path fill="none" d="M124-288l388-672 388 672H124z" clip-rule="evenodd"></path></clipPath></defs><path d="M508 624a112 112 0 0 0 112-112c0-3.28-.15-6.53-.43-9.74L498.26 623.57c3.21.28 6.45.43 9.74.43zm370.72-458.44L836 122.88a8 8 0 0 0-11.31 0L715.37 232.23Q624.91 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 0 0 0 51.5q56.7 119.43 136.55 191.45L112.56 835a8 8 0 0 0 0 11.31L155.25 889a8 8 0 0 0 11.31 0l712.16-712.12a8 8 0 0 0 0-11.32zM332 512a176 176 0 0 1 258.88-155.28l-48.62 48.62a112.08 112.08 0 0 0-140.92 140.92l-48.62 48.62A175.09 175.09 0 0 1 332 512z"></path><path d="M942.2 486.2Q889.4 375 816.51 304.85L672.37 449A176.08 176.08 0 0 1 445 676.37L322.74 798.63Q407.82 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 0 0 0-51.5z"></path></svg></span>
-                      <span @click="invisible" v-if="!show" class="text-primary cursor-pointer position-absolute top-0 end-0"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1.8em" width="1.6em" xmlns="http://www.w3.org/2000/svg"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path></svg></span>
+                      <span @click="invisible" v-if="show" class="text-primary cursor-pointer position-absolute "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1.8em" width="1.6em" xmlns="http://www.w3.org/2000/svg"><defs><clipPath><path fill="none" d="M124-288l388-672 388 672H124z" clip-rule="evenodd"></path></clipPath></defs><path d="M508 624a112 112 0 0 0 112-112c0-3.28-.15-6.53-.43-9.74L498.26 623.57c3.21.28 6.45.43 9.74.43zm370.72-458.44L836 122.88a8 8 0 0 0-11.31 0L715.37 232.23Q624.91 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 0 0 0 51.5q56.7 119.43 136.55 191.45L112.56 835a8 8 0 0 0 0 11.31L155.25 889a8 8 0 0 0 11.31 0l712.16-712.12a8 8 0 0 0 0-11.32zM332 512a176 176 0 0 1 258.88-155.28l-48.62 48.62a112.08 112.08 0 0 0-140.92 140.92l-48.62 48.62A175.09 175.09 0 0 1 332 512z"></path><path d="M942.2 486.2Q889.4 375 816.51 304.85L672.37 449A176.08 176.08 0 0 1 445 676.37L322.74 798.63Q407.82 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 0 0 0-51.5z"></path></svg></span>
+                      <span @click="invisible" v-if="!show" class="text-primary cursor-pointer position-absolute"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1.8em" width="1.6em" xmlns="http://www.w3.org/2000/svg"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path></svg></span>
                     </div>
                     <div class="text-danger fw-semibold fs-6 py-2"  v-if="v$.password.$error" >
                       <div v-for="error in v$.password.$errors" :key="error.$uid">
@@ -86,7 +83,7 @@
 
                   </div>
                 </div>
-                <div class="mb-3">
+                <div class="mb-2">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="remember-me" />
                     <label class="form-check-label" for="remember-me"> Se souvenir de moi </label>
@@ -114,12 +111,12 @@
         </div>
       </div>
 
-      <footer class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-4">
+      <!-- <footer class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-4">
         <p>
           <span class="nm-fs-1 nm-tm">Pas de compte ?</span>
           <a class="nm-fs-1 nm-fw-bd" href="">Créer un compte</a>
         </p>
-      </footer>
+      </footer> -->
     </main>
   </div>
 </template>
@@ -199,7 +196,23 @@ const invisible = ()=> {
 </script>
 
 <style scope="scoped">
-
+.bg-form{
+	background: #ffffff;
+	border: 2px solid black;
+  	
+  	color: #222;
+  	font-size: 16px;
+	border-radius: 5px;
+}
+/* .bg-img:after{
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+} */
       
 h2 {
 	color: #1e2022;
@@ -226,7 +239,8 @@ a:hover {
 label {
     display: block;
     color: #1e2022;
-    font-size: 0.875rem;
+    font-size: 0.975rem;
+
 	margin-bottom: .5rem;
 }
 
@@ -308,9 +322,8 @@ label {
 		/* opacity: 30%; */
 	}
 
-	/*****************************/
-	/*  03.02 FORM SIDE          */
-	/*****************************/
+	
+
 
 	#form-side {
 		background-color: #ffffff;
@@ -425,9 +438,6 @@ label {
 		height: 50px;
 	}
 
-	/*****************************/
-	/*  04.02 FORM INPUTS        */
-	/*****************************/
 
 	.form-control {
 		background-color: #ffffff;
