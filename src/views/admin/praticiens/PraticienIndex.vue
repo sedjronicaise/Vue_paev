@@ -43,15 +43,19 @@
                 <div class="col-md-12">
                   <div class="form-group">
                   	<label for="contact"> Nom et Prenoms </label>
-                    <input
-                      class="form-control"
-                      id="nom"
-											required
-                      name="nom"
-											placeholder="Votre nom complet"
-                      v-model="formData.name"
-                      type="text"
-                      />
+                    <VueMultiselect
+                          v-model="formData.name"
+                          label="name"
+                          track-by="id"
+                          :selectLabel="'Appuyez sur Entrée pour sélectionner'"
+                          :deselectLabel="'Appuyez sur Entrée pour supprimer'"
+                          selectedLabel="Selectionné"
+                          tag-placeholder="Selectionnez un utilisateur"
+                          placeholder="Selectionnez un utilisateur"
+                          :options="users"
+                        >
+                        </VueMultiselect>
+											
                 	</div>
               	</div>
               	
@@ -162,6 +166,9 @@
 										:key="index" 
 										class="row"
 										>
+										<pre>
+											{{ formData.gardes }}
+										</pre>
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="jours"> Jours de la semaine   </label>
@@ -245,14 +252,18 @@
                 <div class="col-md-6">
                   <div class="form-group">
                   	<label for="contact"> Nom </label>
-                    <input
-                      class="form-control"
-                      id="nom"
-                      name="nom"
-											placeholder="Votre nom"
-                      v-model="saveUpdate.nom"
-                      type="text"
-                      />
+                    <VueMultiselect
+                          v-model="saveUpdate.name"
+                          label="name"
+                          track-by="id"
+                          :selectLabel="'Appuyez sur Entrée pour sélectionner'"
+                          :deselectLabel="'Appuyez sur Entrée pour supprimer'"
+                          selectedLabel="Selectionné"
+                          tag-placeholder="Selectionnez un utilisateur"
+                          placeholder="Selectionnez un utilisateur"
+                          :options="users"
+                        >
+                        </VueMultiselect>
                 	</div>
               	</div>
               	<div class="col-md-6">
@@ -433,13 +444,19 @@
 								Ajouter un praticien
 							</button>
 						</div>
+						
 					</div>
 				</div>
 				<div class="content-body">
+					<div class="mt-2 mb-4 d-flex justify-content-end ">
+            <div> 
+              <Search @search="getSearch" />
+            </div>
+          </div>
 					<div id="doctors-list">
 						<div class="row match-height">
 							<pre>
-								{{ praticiens }}
+								{{ formData }}
 							</pre>
 							<div v-for="(praticien,index) in praticiens" class="col-lg-4">
 								<div class="card">
@@ -504,6 +521,8 @@
 <script setup>
 	import {ref,reactive,onMounted,computed} from 'vue'
 	import Search from "@/components/Search"
+	import UsersService from "@/services/modules/utilisateur.service.js";
+	import VueMultiselect from "vue-multiselect";
 	import { createToast } from "mosha-vue-toastify";
 	// import the styling for the toast
 	import "mosha-vue-toastify/dist/style.css";
@@ -512,6 +531,7 @@
 	const deleteData = ref(null)
 	const saveUpdate = reactive({})
 	const chargement = ref(false)
+	const users = ref([])
 	
 	const title = ref('"Ajouter un praticien"')
 	const search = ref('')
@@ -523,9 +543,17 @@
     search.value = data
   }
   const getData = () => {
-  PraticienService.get().then((data) => {
+  	PraticienService.get().then((data) => {
+			const datas = data.data.data
+			praticiens.value = datas.data 
+  	}).catch((e) => {
+      console.log(e)
+    })
+  }
+	const getUsers = () => {
+    UsersService.get().then((data) => {
     const datas = data.data.data
-    praticiens.value = datas.data 
+    users.value = datas.data 
   }).catch((e) => {
       console.log(e)
     })
@@ -533,6 +561,7 @@
 
   onMounted(() => {
     getData()
+		getUsers()
   })
 
 	const formData = reactive({
@@ -542,23 +571,8 @@
     "address": "",
     "city": "",
     "country": "",
-    "gardes": [
-        {
-            "day": "Lundi",
-            "start": "14:00",
-            "end": "22:59"
-        },
-        {
-            "day": "Mercredi",
-            "start": "14:00",
-            "end": "22:59"
-        },
-        {
-            "day": "Vendredi",
-            "start": "14:00",
-            "end": "22:59"
-        }
-    ]
+		"user_id":null,
+    "gardes": []
 })
 
 	const close = function() {
@@ -584,18 +598,22 @@
 	const storePraticien = () => {
   if(chargement.value == false) {
     chargement.value = true
-    
+		formData.name = formData.name.name
+		formData.user_id = formData.name.id
 		PraticienService.create(formData).then((data) => {
       const response = data.data
-        chargement.value = false
+			if(response.status === 'error') {
+				chargement.value = false  
+				toast(response.message, 'danger')
+			}
+			else {
+				chargement.value = false
 				getData()
 				close()
         toast('vous avez créer un praticien', 'success')
-       
-      }).catch((e) => {
-        chargement.value = false  
-				toast(e, 'danger')
-    })
+			}
+        
+      })
   }
 }
 	const modifier  = function(data) {
@@ -614,7 +632,7 @@
 	}
 
 
-		const supprimer = function (index, data) {
+	const supprimer = function (index, data) {
 		deleteData.id = data.id;
 		deleteData.nom = data.nom;
 		deleteData.index = index;

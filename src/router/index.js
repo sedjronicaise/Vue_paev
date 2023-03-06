@@ -21,7 +21,6 @@ const routes = [
     name: 'admin',
     component: Admin.AdminLayout,
     children: [
-
         { path: 'dashboard', name: 'dashboard', component: Admin.Dashboard },
         { path: 'patient/index', component: Admin.PatientIndex },
         { path: 'patient/edit/:id', component: Admin.PatientEdit, name:'patientEdit' },

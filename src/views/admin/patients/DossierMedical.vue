@@ -995,7 +995,7 @@
                                                 readonly
                                                 class="form-control round border-primary"
                                                 placeholder=""
-                                                v-model="consultation.donneesAnthropometrique.icm"
+                                                v-model="consultation.donneesAnthropometrique.imc"
                                                 name="imc"
                                               />
                                               <div class="input-group-append">
@@ -2016,7 +2016,7 @@
                                 <p>
                                   <strong>IMC</strong> :<span
                                     class="float-right"
-                                    >{{consultation.donneesAnthropometrique.icm}}</span
+                                    >{{consultation.donneesAnthropometrique.imc}}</span
                                   >
                                 </p>
                                 <hr />
@@ -2350,12 +2350,14 @@
 </template>
 
 <script setup>
-	import {ref,reactive} from 'vue'
+	import {ref,reactive,onMounted} from 'vue'
 	import {Patients} from "../../../api/patient"
 	import { useRouter, useRoute } from "vue-router"
   import { createToast } from "mosha-vue-toastify";
   import VueMultiselect from 'vue-multiselect'
   import "mosha-vue-toastify/dist/style.css";
+  import AnthropoService from "@/services/modules/anthropo.service.js";
+  import HistoriquePatientService from "@/services/modules/historique.patient.service.js";
 
 	const router = useRouter()
 	const route = useRoute()
@@ -2394,15 +2396,19 @@
       
     },
     donneesAnthropometrique: {
+      taille: 170,
+      poids: 78,
+      imc: 26.99,
+      temperature: 25,
+      pouls: 36,
+      patient_id: 3,
       taille:170,
       poids:78,
-      icm:26.99,
-      temperature:42,
-      pouls:88,
+      imc:26.99,
       etatGeneral:'demo',
       brasGauche:'demo',
       brasDroit:'demo',
-      autres:[]
+      //autres:[]
     },
     hypotheseDiagnostics :'lorem ipsum dolor ipset hypothese',
     examenParaclinique:{
@@ -2435,6 +2441,30 @@
   }
 
   )
+
+  const anthropoData = ref([])
+  const historiquesPatiens = ref([])
+
+  const getDataAntho = () => {
+    AnthropoService.get().then((data) => {
+      const datas = data.data.data
+      anthropoData.value = datas.data 
+    }).catch((e) => {
+        console.log(e)
+    })
+  }
+	const getHistorique = () => {
+    HistoriquePatientService.get().then((data) => {
+      const datas = data.data.data
+      historiquesPatiens.value = datas.data 
+    }).catch((e) => {
+        console.log(e)
+    })
+  }
+	onMounted(() => {
+    getDataAntho()
+    getHistorique()
+  })
   //multiselected option
   const  taggingSelectedType = ref(null)
   const  taggingOptionsType = ref(
@@ -2491,14 +2521,14 @@
 
 
 // tag selected 
-const addTagType = function (newTag) {
-  const tag = {
-    name: newTag,
-    code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+  const addTagType = function (newTag) {
+    const tag = {
+      name: newTag,
+      code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+    }
+    taggingOptionsType.push(tag)
+    taggingSelectedType.push(tag)
   }
-  taggingOptionsType.push(tag)
-  taggingSelectedType.push(tag)
-}
 const addTagBio = function (newTag) {
   const tag = {
     name: newTag,
@@ -2542,7 +2572,7 @@ const addTagBio = function (newTag) {
     const poids = consultation.donneesAnthropometrique.poids
     
     const resultat = poids / mettreCarre
-    consultation.donneesAnthropometrique.icm = resultat.toFixed(2)
+    consultation.donneesAnthropometrique.imc = resultat.toFixed(2)
   }
   const saveProtocole = function() {
     setTimeout(() => {
@@ -2596,16 +2626,30 @@ const addTagBio = function (newTag) {
      
     }
   }
-  const addConsultationAntro = function() {
+
+  const addConsultationAntro = function () {
     if(chargementAntro.value == false) {
       chargementAntro.value = true
-      setTimeout(() => {
-        chargementAntro.value = false
-        toast('Nouveau enregistrment', 'success')
-      }, 7000)
-     
+      formData.etat_general = formData.etatGeneral
+      formData.bras_droit = formData.brasDroit
+      formData.bras_gauche = formData.brasGauche
+      PraticienService.create(formData).then((data) => {
+        const response = data.data
+        if(response.status === 'error') {
+          chargementAntro.value = false  
+          toast(response.message, 'danger')
+        }
+        else {
+          chargementAntro.value = false
+          getData()
+          close()
+          toast('operation effectué avec success', 'success')
+        }
+          
+        })
     }
-  }
+  };
+ 
   const addConsultationAnamnese = function() {
     if(chargementAnamnese.value == false) {
       chargementAnamnese.value = true

@@ -45,7 +45,7 @@
             </button>
             <button
               type="button"
-              @click.prevent="supprimer(indexElement)"
+              @click.prevent="deleteBon"
               data-dismiss="modal"
               class="btn btn-outline-danger"
             >
@@ -82,24 +82,42 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form  @submit.prevent="storeBon">
               <div>
                 <div>
                   <div class="row">
-                    <div class="col-lg-8 offset-lg-2">
+                    <div class="col-md-6">
                       <fieldset class="form-group floating-label-form-group">
-                        <label for="patient">Rechercher le patient</label>
+                        <label for="patient">Selectionnez le medecin</label>
 
                         <VueMultiselect
-                          v-model="formData.patient"
-                          label="fullName"
-                          track-by="fullName"
+                          v-model="formData.doctor_id"
+                          label="name"
+                          track-by="id"
+                          :selectLabel="'Appuyez sur Entrée pour sélectionner'"
+                          :deselectLabel="'Appuyez sur Entrée pour supprimer'"
+                          selectedLabel="Selectionné"
+                          tag-placeholder="Selectionnez un medecin"
+                          placeholder="Selectionnez un medecin"
+                          :options="docteurs"
+                        >
+                        </VueMultiselect>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                      <fieldset class="form-group floating-label-form-group">
+                        <label for="patient">Selectionnez le patient </label>
+
+                        <VueMultiselect
+                          v-model="formData.patient_id"
+                          label="firstname"
+                          track-by="id"
                           :selectLabel="'Appuyez sur Entrée pour sélectionner'"
                           :deselectLabel="'Appuyez sur Entrée pour supprimer'"
                           selectedLabel="Selectionné"
                           tag-placeholder="Selectionnez un patient"
                           placeholder="Selectionnez un patient"
-                          :options="options"
+                          :options="patients"
                         >
                         </VueMultiselect>
                       </fieldset>
@@ -107,7 +125,7 @@
                   </div>
 
                   <hr />
-                  <div v-for="(autre, index) in formData.autre" :key="index">
+                  <div v-for="(autre, index) in formData.lignes" :key="index">
                     <div class="d-flex justify-content-end">
                       <button @click="deleteItem(index)" class="bt btn-danger">
                         X
@@ -134,7 +152,7 @@
                             type="text"
                             class="form-control"
                             id="title"
-                            v-model="autre.typeExamen"
+                            v-model="autre.name"
                             placeholder="type examen"
                           />
                         </fieldset>
@@ -146,29 +164,29 @@
                   <hr />
                 </div>
 
-                <button @click.prevent="addForm" class="btn btn-primary">
+                <button type="button" @click.prevent="addForm" class="btn btn-primary">
                   Ajouter une nouvelle prescription
                 </button>
               </div>
             </form>
           </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn grey btn-outline-secondary btn-sm"
-              data-dismiss="modal"
-            >
-              Fermer
-            </button>
-            <button
-              type="button"
-              data-dismiss="modal"
-              @click.prevent="storeBonExamen"
-              class="btn btn-outline-success btn-sm"
-            >
-              {{ submitText }}
-            </button>
-          </div>
+          <button class="btn btn-primary w-100 flex" type="submit">
+					  <span class="fs-5 fs-semibold" v-if="!chargement">
+							{{ submitText }}
+						</span>
+						<span v-else class="d-flex align-items-center">
+							<span class="mx-2 fs-semibold text-light">
+							chargement ...
+						</span>
+						<div
+							style="width: 1.5rem; height: 1.5rem"
+							class="spinner-border text-light"
+							role="status"
+					  >
+						  <span class="sr-only">Loading...</span>
+						</div>
+						</span>
+          </button>
         </div>
       </div>
     </div>
@@ -204,20 +222,38 @@
               <div>
                 <div>
                   <div class="row">
-                    <div class="col-lg-8 offset-lg-2">
+                    <div class="col-md-6">
                       <fieldset class="form-group floating-label-form-group">
-                        <label for="patient">Rechercher le patient</label>
+                        <label for="patient">Selectionnez le medecin</label>
 
                         <VueMultiselect
-                          v-model="saveUpdate.patient"
-                          label="fullName"
-                          track-by="fullName"
+                          v-model="saveUpdate.doctor_id"
+                          label="name"
+                          track-by="id"
+                          :selectLabel="'Appuyez sur Entrée pour sélectionner'"
+                          :deselectLabel="'Appuyez sur Entrée pour supprimer'"
+                          selectedLabel="Selectionné"
+                          tag-placeholder="Selectionnez un medecin"
+                          placeholder="Selectionnez un medecin"
+                          :options="docteurs"
+                        >
+                        </VueMultiselect>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                      <fieldset class="form-group floating-label-form-group">
+                        <label for="patient">Selectionnez le patient </label>
+
+                        <VueMultiselect
+                          v-model="saveUpdate.patient_id"
+                          label="firstname"
+                          track-by="id"
                           :selectLabel="'Appuyez sur Entrée pour sélectionner'"
                           :deselectLabel="'Appuyez sur Entrée pour supprimer'"
                           selectedLabel="Selectionné"
                           tag-placeholder="Selectionnez un patient"
                           placeholder="Selectionnez un patient"
-                          :options="options"
+                          :options="patients"
                         >
                         </VueMultiselect>
                       </fieldset>
@@ -225,7 +261,7 @@
                   </div>
 
                   <hr />
-                  <div v-for="(autre, index) in saveUpdate.autre" :key="index">
+                  <div v-for="(autre, index) in saveUpdate.lignes" :key="index">
                     <div class="d-flex justify-content-end">
                       <button
                         @click="deleteItemUpdate(index)"
@@ -255,7 +291,7 @@
                             type="text"
                             class="form-control"
                             id="title"
-                            v-model="autre.typeExamen"
+                            v-model="autre.name"
                             placeholder="type examen"
                           />
                         </fieldset>
@@ -373,7 +409,7 @@
                     <button
 											data-toggle="modal"
                   		data-target="#delete"
-											@click="openDelete(index)"
+											@click="supprimer(index,data)"
                       class="btn btn-danger round btn-sm waves-effect waves-light"
                     >
                       <svg
@@ -393,10 +429,6 @@
                     </button>
                   </td>
 								</tr>
-
-							
-
-
 							</tbody>
 						</table>
 					</div>
@@ -407,91 +439,136 @@
 </template>
 
 <script setup>
-	import { ref, reactive, computed } from "vue";
+	import { ref, reactive, computed,onMounted } from "vue";
 	import VueMultiselect from "vue-multiselect";
 	import { createToast } from "mosha-vue-toastify";
 	// import the styling for the toast
 	import "mosha-vue-toastify/dist/style.css";
-	import { Patients } from "../../../api/patient";
-	import { BonExamens } from "../../../api/bonExamen";
+
+  import PraticienService from "@/services/modules/praticien.service.js";
+  import BonService from "@/services/modules/bon.examen.service.js";
+  import PatientService from "@/services/modules/patient.service.js";
+
 
 	const title = ref("Ajouter un bon ordonance ");
 	const submitText = ref("AJouter");
 	const isUpdate = ref(false);
 	const saveUpdate = reactive({});
 	const bonExamens = ref([]);
-	const indexElement = ref(0);
+  const patients = ref([]);
+  const docteurs = ref([]);
+	const deleteData = ref({});
+  const chargement = ref(false)
 
 	//getData
+	const getData = () => {
+  BonService.get().then((data) => {
+    const datas = data.data.data
+    bonExamens.value = datas.data 
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
+  const getDocteurs = () => {
+    PraticienService.get().then((data) => {
+    const datas = data.data.data
+    docteurs.value = datas.data 
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
+  const getPatients = () => {
+    PatientService.get().then((data) => {
+    const datas = data.data.data
+    patients.value = datas.data 
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
 
-	const getData = JSON.parse(localStorage.getItem("bonExamens"));
-	if (getData != null || getData != undefined) {
-		const datas = getData;
-		bonExamens.value = [...BonExamens, ...datas];
-	} else {
-		bonExamens.value = BonExamens;
-	}
+  onMounted(() => {
+    getData()
+    getPatients()
+    getDocteurs()
+  })
 
-	const options = computed(() => {
-		const datas = [];
-		if (Patients != null) {
-			Patients.forEach((patient) => {
-				datas.push({
-					fullName: patient.infoGeneral.fullName,
-					id: patient.id,
-					sexe: patient.infoGeneral.sexe,
-					age: patient.infoGeneral.dateNaissance,
-				});
-			});
-			return datas;
-		}
-	});
 
 	const formData = reactive({
-		patient: {},
-		autre: [
-			{
-				indication: "",
-				typeExamen: "",
-			},
-		],
-		created_at: new Date(),
-	});
+    lignes: [],
+    patient_id: null,
+    doctor_id: null
+  });
 
 	const addBonExamen = function () {
 		isUpdate.value = false;
 		title.value = "Ajouter un bon examen";
 		submitText.value = "Ajouter";
 	};
-	const storeBonExamen = function () {
-		const id = Math.floor(Math.random() * 1000000000);
-		formData.id = id;
-		let datas = Object.assign({}, formData);
-		bonExamens.value.push(datas);
-		//close()
-		toast("Enregistrement reussie ", "success");
-	};
+	const storeBon = function () {
+  if(chargement.value == false) {
+    chargement.value = true
+		formData.patient_id = formData.patient_id.id
+		formData.doctor_id = formData.doctor_id.id
+		BonService.create(formData).then((data) => {
+      const response = data.data
+			if(response.status === 'error') {
+				chargement.value = false  
+				toast(response.message, 'danger')
+			}
+			else {
+				chargement.value = false
+				getData()
+				close()
+        toast("vous avez créer une bon d'examen", 'success')
+			}
+        
+      })
+  }
+};
 	const close = function () {
-		formData.patient = "";
-		formData.autre = [
-			{
-				indication: "",
-				typeExamen: "",
-			},
-		];
+		formData.lignes = [];
+		formData.patient_id = null
+    formData.doctor_id = null
 	};
 
+  const supprimer = function (index, data) {
+		deleteData.id = data.id;
+		deleteData.nom = data.nom;
+		deleteData.index = index;
+	};
+	const deleteBon = function () {
+		ordonances.value.splice(ordonances.value.indexOf(deleteData.index), 1);
+		OrdonanceService.destroy(deleteData.id)
+			.then((data) => {
+				toast("Suppression effectué avec succèss", "success");
+				getData();
+			})
+			.catch((error) => {
+				if (error.response) {
+					// Requête effectuée mais le serveur a répondu par une erreur.
+					const erreurs = error.response.data.message;
+					toast(erreurs, "danger");
+				} else if (error.request) {
+					// Demande effectuée mais aucune réponse n'est reçue du serveur.
+					//console.log(error.request);
+				} else {
+					// Une erreur s'est produite lors de la configuration de la demande
+				}
+			});
+	};
+
+
 	const addForm = function () {
-		formData.autre.push({
+		formData.lignes.push({
 			indication: "",
-			typeExamen: "",
+			name: "",
 		});
 	};
 
 	const addFormUpdate = function () {
-		saveUpdate.autre.push({
+		saveUpdate.linges.push({
 			indication: "",
-			typeExamen: "",
+			name: "",
 		});
 	};
 
@@ -516,10 +593,7 @@
 	const deleteItemUpdate = function (index) {
 		saveUpdate.autre.splice(index, 1);
 	};
-	const supprimer = function (index) {
-		bonExamens.value.splice(index, 1);
-		toast("Suppression reussie ", "success");
-	};
+	
 
 	const updateOrdonance = function () {
 		bonExamens.value[indexElement.value] = saveUpdate;

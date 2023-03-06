@@ -45,7 +45,7 @@
             </button>
             <button
               type="button"
-              @click.prevent="supprimer(indexElement)"
+              @click.prevent="deleteOrdonance"
               data-dismiss="modal"
               class="btn btn-outline-danger"
             >
@@ -82,7 +82,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form  @submit.prevent="storeOrdonance">
               <div>
                 <div>
                   <div class="row">
@@ -91,7 +91,7 @@
                         <label for="patient">Selectionnez le medecin</label>
 
                         <VueMultiselect
-                          v-model="formData.patient"
+                          v-model="formData.doctor_id"
                           label="name"
                           track-by="id"
                           :selectLabel="'Appuyez sur Entrée pour sélectionner'"
@@ -109,7 +109,7 @@
                         <label for="patient">Selectionnez le patient </label>
 
                         <VueMultiselect
-                          v-model="formData.patient"
+                          v-model="formData.patient_id"
                           label="firstname"
                           track-by="id"
                           :selectLabel="'Appuyez sur Entrée pour sélectionner'"
@@ -125,40 +125,29 @@
                   </div>
 
                   <hr />
-                  <div v-for="(autre, index) in formData.autre" :key="index">
+                  <div v-for="(autre, index) in formData.lignes" :key="index">
                     <div class="d-flex justify-content-end">
                       <button @click="deleteItem(index)" class="bt btn-danger">
                         X
                       </button>
                     </div>
                     <div class="row">
-                      <div class="col-lg-4">
+                      <div class="col-lg-6">
                         <fieldset class="form-group floating-label-form-group">
                           <label for="title">Médicament & dosage</label>
                           <input
                             type="text"
                             class="form-control"
-                            v-model="autre.medicamentDosage"
+                            v-model="autre.name"
                             id="title"
                             placeholder="Médicament et dosage"
                           />
                         </fieldset>
                       </div>
 
-                      <div class="col-lg-4">
-                        <fieldset class="form-group floating-label-form-group">
-                          <label for="title">Quantité</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="title"
-                            v-model="autre.quantite"
-                            placeholder="Quantité"
-                          />
-                        </fieldset>
-                      </div>
+                      
 
-                      <div class="col-lg-4">
+                      <div class="col-lg-6">
                         <fieldset class="form-group floating-label-form-group">
                           <label for="title1"
                             >Posologie et durée du traitement</label
@@ -176,29 +165,30 @@
                   <hr />
                 </div>
 
-                <button @click.prevent="addForm" class="btn btn-primary">
+                <button  type="button" @click.stop="addForm" class="btn btn-primary">
                   Ajouter une nouvelle prescription
                 </button>
               </div>
+              <button class="btn btn-success w-100 my-4 flex" type="submit">
+                <span class="fs-5 fs-semibold" v-if="!chargement">
+                  {{ submitText }}
+                </span>
+                <span v-else class="d-flex align-items-center">
+                  <span class="mx-2 fs-semibold text-light">
+                  chargement ...
+                </span>
+                <div
+                  style="width: 1.5rem; height: 1.5rem"
+                  class="spinner-border text-light"
+                  role="status"
+                >
+                  <span class="sr-only">Loading...</span>
+                </div>
+                </span>
+              </button>
             </form>
           </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn grey btn-outline-secondary btn-sm"
-              data-dismiss="modal"
-            >
-              Fermer
-            </button>
-            <button
-              type="button"
-              data-dismiss="modal"
-              @click.prevent="storeOrdonance"
-              class="btn btn-outline-success btn-sm"
-            >
-              {{ submitText }}
-            </button>
-          </div>
+          
         </div>
       </div>
     </div>
@@ -239,7 +229,7 @@
                         <label for="patient">Selectionnez le medecin</label>
 
                         <VueMultiselect
-                          v-model="formData.patient"
+                          v-model="saveUpdate.doctor_id"
                           label="name"
                           track-by="id"
                           :selectLabel="'Appuyez sur Entrée pour sélectionner'"
@@ -257,7 +247,7 @@
                         <label for="patient">Selectionnez le patient </label>
 
                         <VueMultiselect
-                          v-model="formData.patient"
+                          v-model="saveUpdate.patient_id"
                           label="firstname"
                           track-by="id"
                           :selectLabel="'Appuyez sur Entrée pour sélectionner'"
@@ -271,7 +261,6 @@
                       </fieldset>
                     </div>
                   </div>
-
                   <hr />
                   <div v-for="(autre, index) in saveUpdate.autre" :key="index">
                     <div class="d-flex justify-content-end">
@@ -389,8 +378,8 @@
                 <tr>
                   <th>#</th>
                   <th>Nom & prénom du patient</th>
+                  <th>Docteur</th>
                   <th>Date et heure</th>
-                  <th>Auteur</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -398,9 +387,9 @@
               <tbody>
                 <tr v-for="(data, index) in ordonances" :key="index">
                   <td>{{ index + 1 }}</td>
-                  <td>{{ data.patient.fullName }}</td>
-                  <td>{{ data.created_at.getFullYear() }}</td>
+                  <td>dddd</td>
                   <td>Dr Amoussou Florent</td>
+                  <td>555555</td>
                   <td>
                     <router-link
                       :to="{ name: 'voirOrdonance', params: { id: data.id } }"
@@ -439,7 +428,7 @@
                     <button
 											data-toggle="modal"
                   		data-target="#delete"
-											@click="openDelete(index)"
+											@click="supprimer(index,data)"
                       class="btn btn-danger round btn-sm waves-effect waves-light"
                     >
                       <svg
@@ -486,7 +475,8 @@ const saveUpdate = reactive({});
 const ordonances = ref([]);
 const patients = ref([]);
 const docteurs = ref([]);
-const indexElement = ref(0);
+const deleteData = reactive({});
+const chargement = ref(false)
 
 //getData
 
@@ -521,22 +511,12 @@ const getData = () => {
     getDocteurs()
   })
 
-
-
-
-
-
 const formData = reactive({
-  patient: {},
-  autre: [
-    {
-      medicamentDosage: "",
-      quantite: "",
-      posologie: "",
-    },
-  ],
-  created_at: new Date(),
-});
+  lignes: [],
+  patient_id: null,
+  doctor_id: null
+}
+ );
 
 const addOrdonance = function () {
   isUpdate.value = false;
@@ -544,43 +524,74 @@ const addOrdonance = function () {
   submitText.value = "Ajouter";
 };
 const storeOrdonance = function () {
-  const id = Math.floor(Math.random() * 1000000000);
-  formData.id = id;
-  let datas = Object.assign({}, formData);
-  ordonances.value.push(datas);
-  //close()
-  toast("Enregistrement reussie ", "success");
+  if(chargement.value == false) {
+    chargement.value = true
+		formData.patient_id = formData.patient_id.id
+		formData.doctor_id = formData.doctor_id.id
+		PraticienService.create(formData).then((data) => {
+      const response = data.data
+			if(response.status === 'error') {
+				chargement.value = false  
+				toast(response.message, 'danger')
+			}
+			else {
+				chargement.value = false
+				getData()
+				close()
+        toast('vous avez créer une ordonances', 'success')
+			}
+        
+      })
+  }
 };
 const close = function () {
-  formData.patient = "";
-  formData.autre = [
-    {
-      medicamentDosage: "",
-      quantite: "",
-      posologie: "",
-    },
-  ];
+  formData.patient_id = null;
+  formData.doctor_id = null;
+  formData.lignes = [];
+  
 };
+const supprimer = function (index, data) {
+		deleteData.id = data.id;
+		deleteData.nom = data.nom;
+		deleteData.index = index;
+	};
+	const deleteOrdonance = function () {
+		ordonances.value.splice(ordonances.value.indexOf(deleteData.index), 1);
+		OrdonanceService.destroy(deleteData.id)
+			.then((data) => {
+				toast("Suppression effectué avec succèss", "success");
+				getData();
+			})
+			.catch((error) => {
+				if (error.response) {
+					// Requête effectuée mais le serveur a répondu par une erreur.
+					const erreurs = error.response.data.message;
+					toast(erreurs, "danger");
+				} else if (error.request) {
+					// Demande effectuée mais aucune réponse n'est reçue du serveur.
+					//console.log(error.request);
+				} else {
+					// Une erreur s'est produite lors de la configuration de la demande
+				}
+			});
+	};
+
 
 const addForm = function () {
-  formData.autre.push({
-    medicamentDosage: "",
-    quantite: "",
+  formData.lignes.push({
+    name: "",
     posologie: "",
   });
 };
 
 const addFormUpdate = function () {
-  saveUpdate.autre.push({
-    medicamentDosage: "",
-    quantite: "",
+  saveUpdate.lignes.push({
+    name: "",
     posologie: "",
   });
 };
 
-const openDelete = function(index) {
-	indexElement.value = index;
-}
+
 
 const modifier = function (data, index) {
   indexElement.value = index;
@@ -594,14 +605,10 @@ const modifier = function (data, index) {
 };
 
 const deleteItem = function (index) {
-  formData.autre.splice(index, 1);
+  formData.lignes.splice(index, 1);
 };
 const deleteItemUpdate = function (index) {
-  saveUpdate.autre.splice(index, 1);
-};
-const supprimer = function (index) {
-  ordonances.value.splice(index, 1);
-  toast("Suppression reussie ", "success");
+  saveUpdate.lignes.splice(index, 1);
 };
 
 const updateOrdonance = function () {

@@ -53,34 +53,39 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue";
-import VueMultiselect from "vue-multiselect";
+import { ref, reactive, computed,onMounted } from "vue";
 import { createToast } from "mosha-vue-toastify";
 // import the styling for the toast
 import "mosha-vue-toastify/dist/style.css";
-import { Ordonances } from "../../../api/ordonance";
-import { BonExamens } from "../../../api/bonExamen";
-
+import BonService from "@/services/modules/bon.examen.service.js";
+import OrdonanceService from "@/services/modules/ordonance.service.js";
 const ordonances = ref([]);
 const bonExamens = ref([]);
 
 
 //getData
 
-const getOrdonance = JSON.parse(localStorage.getItem("ordonances"));
-if (getOrdonance != null || getOrdonance != undefined) {
-  const datas = getOrdonance;
-  ordonances.value = [...Ordonances, ...datas];
-} else {
-  ordonances.value = Ordonances;
-}
-const getBonExamen = JSON.parse(localStorage.getItem("bonExamens"));
-	if (getBonExamen != null || getBonExamen != undefined) {
-		const datas = getBonExamen;
-		bonExamens.value = [...BonExamens, ...datas];
-	} else {
-		bonExamens.value = BonExamens;
-	}
+const getBon = () => {
+  BonService.get().then((data) => {
+    const datas = data.data.data
+    bonExamens.value = datas.data 
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
+	const getOrdonance = () => {
+  OrdonanceService.get().then((data) => {
+    const datas = data.data.data
+    ordonances.value = datas.data 
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
+	onMounted(() => {
+    getBon()
+    getOrdonance()
+  })
+
 </script>
 
 <style>
