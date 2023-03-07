@@ -18,7 +18,7 @@
                                         </div> -->
                                     </div>
                                     <div class="card-body collapse show">
-                                        
+                                       
                                         <div class="table-responsive">
                                             <table class="table table-striped table-bordered patients-list">
                                                 <thead>
@@ -34,14 +34,14 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr v-for ="user in users" >
-                                                        <td>{{user.id}}</td>
-                                                        <td>{{user.nom  }} {{user.prenom}}</td>
-                                                        <td>{{user.profession}}</td>
-                                                        <td>{{user.age}}</td>
-                                                        <td>{{user.contact}}</td>                                                                                                                
+																									<tr v-for="(patient,index) in patients" :key="index">
+																											<td>{{ index }}</td>
+																											<td>{{ patient.infoGeneral.fullName }} </td>
+																											<td>{{ patient.infoGeneral.typeConsultation }}</td>
+																											<td>{{ patient.infoGeneral.profession }}  </td>
+																											<td>{{ patient.infoGeneral.telephone }}</td>                                                                                                              
                                                         <td>
-                                                            <router-link to="/admin/nutrition/dossier" class="btn btn-primary round btn-sm waves-effect waves-light">
+                                                            <router-link  :to="{name:'dossierMedicalNutrition',params:{id:patient.id}}" class="btn btn-primary round btn-sm waves-effect waves-light">
                                                                   <i class="la la-plus font-small-2"></i>DOSSIER NUTRITIONNEL
                                                             </router-link>
                                                             
@@ -72,21 +72,12 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'Nutrition',
-
-    data(){
-       return{
-        users: [
-                    { id: 1, nom: 'Martin', prenom: 'Eric', profession: "Agent de l'état",  age: 30, contact: "960404040" },
-                    { id: 2, nom: 'ABOSSOU', prenom: 'Jean ', profession: "Agent de l'état",  age: 30, contact: "960404040" },
-                    { id: 3, nom: 'Akomon', prenom: 'Jennie', profession: "Commerçante",  age: 30, contact: "960404040" },
-                    { id: 4, nom: 'Dansou', prenom: 'Firmin', profession: "Agent de l'état",  age: 30, contact: "960000000" },
-                ]
-       }
-    }
-}
+<script setup >
+import {ref} from 'vue'
+	import {Patients} from "../../../api/patient"
+	const patients = ref([])
+	patients.value = Patients
+	
 </script>
 
 <style>

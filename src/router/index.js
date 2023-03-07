@@ -45,8 +45,7 @@ const routes = [
         { path: 'certificat/:id/read', name:"voirCertificat", component: Admin.CertificatRead },
 
         { path: 'nutrition', component: Admin.Nutrition },
-        { path: 'nutrition/dossier', component: Admin.DossierNutrition },
-
+        { path: 'nutrition/dossier/:id', name:"dossierMedicalNutrition", component: Admin.DossierNutrition },
         { path: 'utilisateur', component: Admin.Utilisateur },
 
         { path: 'messagerie', component: Admin.Messagerie },

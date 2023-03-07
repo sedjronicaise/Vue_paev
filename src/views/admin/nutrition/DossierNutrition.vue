@@ -1,7 +1,69 @@
 <template>
     <div>
-          <div class="app-content content">
-        
+			<div class="modal animated bounce text-left" id="resultat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel36" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title " id="myModalLabel36">
+						Resultat analyse
+					</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div v-if="(totalStresseur >= 18 && totalStresseur < 28) && (totalStress >= 30 && totalStress < 45) " key="cas1">
+							<ul>
+								<li>Vous êtes un sujet tendu et fortement stressé.</li>
+								<li>Les risques principaux sont l’état d’épuisement, les problèmes de santé dont les plus fréquents sont les maladies cardio-vasculaires</li>
+								<li>
+									Plus le score est élevé, plus les risques sont importants. il est urgent d’approfondir votre bilan de stress et d’apprendre à gérer votre stress
+								</li>
+	
+							</ul>
+					</div>
+					<div v-if="(totalStress >= 19 && totalStress < 30) && (totalStresseur >= 14 && totalStresseur < 18) " key="cas2">
+							<ul>
+								<li>Vous êtes plutôt serein, peu stressé.</li>
+								<li>
+									Ce cas de figure est bénéfique sauf si des stresseurs trop 
+									importants apparaissent. votre manque « d’entrainement » 
+									pour affronter une situation stressante risque d’aboutir à un 
+									état de crise émotionnelle et ou un manque d’efficacité
+								</li>
+	
+							</ul>
+					</div>
+					<div v-if="(totalStresseur >= 18 && totalStresseur < 28) && (totalStress >= 19 && totalStress < 30 )" key="cas3">
+							<ul>
+								<li>
+									Ce cas de figure est plutôt bénéfique et montre que malgré de nombreuses 
+									sollicitations, votre niveau de stress reste bas</li>
+								<li>
+									Toute fois attention de pas sous évaluer votre état de stress 
+									car dans ce cas les problèmes seront les mêmes que dans la 
+									situation du cas n°1
+								</li>
+	
+							</ul>
+					</div>
+					<div v-if="(totalStresseur >= 14 && totalStresseur < 18) && (totalStress >= 30 && totalStress < 45) " key="cas4">
+							<ul>
+								<li>
+									Il est important à apprendre à gérer son stress afin d’adapter au mieux la réponse aux stimulations extérieures
+									</li>
+								<li>
+									Si un peu de stresseurs provoquent un stress élevé, votre réponse est inadaptée et votre état de santé n’est po préservé
+								</li>
+								
+	
+							</ul>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+      <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
             <div class="content-header row">
@@ -44,11 +106,11 @@
                                                         </h5><hr>
                                                         <h5 class="media-heading">
                                                             Profession:
-                                                            <span class="float-right content-header-title">Fonctonnaire de l'état</span>
+                                                            <span class="float-right content-header-title">{{patients[0].infoGeneral.profession}}</span>
                                                         </h5> <hr>
                                                         <h5 class="media-heading">
                                                             Sexe
-                                                            <span class="badge badge-info float-right">Masculin</span>
+                                                            <span class="badge badge-info float-right">{{patients[0].infoGeneral.sexe}}</span>
                                                         </h5> 
                                                         
                                                     </div>
@@ -66,17 +128,17 @@
                                                     <div class="media-body">
                                                         <h5 class="media-heading">
                                                             Type de Consultation:
-                                                            <span class="badge badge-info float-right">Medecine Générale</span>
+                                                            <span class="badge badge-info float-right">{{patients[0].infoGeneral.typeConsultation}}</span>
                                                         </h5> 
                                                         <hr>
                                                         <h5 class="media-heading ">
                                                             Télephone
-                                                            <span class="badge badge-info float-right">+229 96030244</span>
+                                                            <span class="badge badge-info float-right">{{patients[0].infoGeneral.telephone}}</span>
                                                         </h5>
                                                         <hr>
                                                         <h5 class="media-heading">
                                                             Date Arrivée :
-                                                            <span class="badge badge-info float-right">16-09-2022 à 12:30</span>
+                                                            <span class="badge badge-info float-right">{{patients[0].infoGeneral.dateArriver}} </span>
                                                         </h5>
                                                         
                                                        
@@ -89,8 +151,6 @@
                                 </div>
                             </div>
                         </div>
-                       
-                      
                     </div>
                     <div class="row match-height">
                         
@@ -165,7 +225,7 @@
                                                                         </h5> <hr>
                                                                         <h5 class="media-heading">
                                                                             Profession
-                                                                            <span class="badge badge-info float-right">Fonctionnaire</span>
+                                                                            <span class="badge badge-info float-right">{{patients[0].infoGeneral.profession}}</span>
                                                                         </h5> <hr>
                                                                         
                                                                     </div>
@@ -466,11 +526,20 @@
                                             </div>
                                             <!-- FICHE STRESSEUR -->
                                             <div role="tabpanel" class="tab-pane active" id="activeIcon12" aria-labelledby="activeIcon12-tab1" aria-expanded="true">
-                                                <h2 class="card-title text-center">
+                                              <div class="d-flex justify-content-end mb-4">
+																								<button data-toggle="modal" data-target="#resultat" class="btn btn-primary d-flex justify-content-between align-items-center ">
+																								<span class="px-2">Voir le resultat</span>
+																									<span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.5em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><circle cx="256" cy="256" r="64"></circle><path d="M394.82 141.18C351.1 111.2 304.31 96 255.76 96c-43.69 0-86.28 13-126.59 38.48C88.52 160.23 48.67 207 16 256c26.42 44 62.56 89.24 100.2 115.18C159.38 400.92 206.33 416 255.76 416c49 0 95.85-15.07 139.3-44.79C433.31 345 469.71 299.82 496 256c-26.38-43.43-62.9-88.56-101.18-114.82zM256 352a96 96 0 1196-96 96.11 96.11 0 01-96 96z"></path></svg></span>
+																								</button>
+																							</div>
+																							<h2 class="card-title text-center">
                                                     <strong class="text-danger">Evaluation des éléments stresseurs</strong> 
                                                 </h2>   
                                                             
                                                 <div class="table-responsive">
+																										<pre>
+																										
+																										</pre>
                                                     <table class="table table-bordered table-striped">
                                                         <thead>
                                                             <tr>
@@ -495,111 +564,78 @@
                                                                 
                                                             </tr>
 
-                                                            <tr>
-                                                                <th scope="row">Ai-je subi, tout au cours de ma vie, des situations <br> traumatiques 
-                                                                    (Décès, perte d’emploi ; déception amoureuse ; etc...)</th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                
+                                                            <tr v-for="(data,index) in elementStresseurs" :key="index">
+                                                                <th scope="row" class="whiteSpace"> {{ data.name }} </th>
+                                                                <td> 
+																																	<input 
+																																	type="radio" 
+																																  :name="`stresseurs ${index}`" 
+																																	id="pasDuTout"
+																																	v-model="data.pasDuTout"
+																																	@change="changeCheck(data,'pasDuTout')"
+																																	:value="data.pasDuTout">  
+																																 </td>
+                                                                <td> 
+																																	<input 
+																																	type="radio" 
+																																  :name="`stresseurs ${index}`" 
+																																	id="faiblement"
+																																	v-model="data.faiblement" 
+																																	@change="changeCheck(data,'faiblement')"
+																																	:value="data.faiblement"
+																																	>   
+																																</td>
+                                                                <td> 
+																																	<input 
+																														
+																																	type="radio" 
+																																  :name="`stresseurs ${index}`" 
+																																	id="unPeu"
+																																	v-model="data.unPeu"
+																																	@change="changeCheck(data,'unPeu')"
+																																	:value="data.unPeu" 
+																																	>   
+																																</td>
+                                                                <td> 
+																																	<input 
+																																	
+																																	type="radio" 
+																																  :name="`stresseurs ${index}`" 
+																																	v-model="data.assez" 
+																																	id="assez"
+																																	@change="changeCheck(data,'assez')"
+																																	:value="data.assez"
+																																	>   
+																																</td>
+                                                                <td> 
+																																	<input
+																																	type="radio" 
+																																  :name="`stresseurs ${index}`" 
+																																	v-model="data.beaucoup" 
+																																	id="beaucoup"
+																																	@change="changeCheck(data,'beaucoup')"
+																																	:value="data.beaucoup"
+																																	>
+																																</td>
+                                                                <td> 
+																																	<input 
+																																	type="radio" 
+																																  :name="`stresseurs ${index}`" 
+																																	id="extremement"
+																																	v-model="data.extremement"
+																																	@change="changeCheck(data,'extremement')"
+																																	:value="data.extremement"
+																																	>   
+																																</td>
                                                             </tr>
 
-                                                            <tr>
-                                                                <th scope="row">Suis-je entrain de vivre une situation traumatique ?</th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">Est-ce que je subis une surcharge de travail <br> fréquente ou permanente ? 
-                                                                    Ou/et suis souvent pris dans l’urgence <br>
-                                                                    ou /et existe-t-il une ambiance très compétitive dans mon emploi ?</th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                
-                                                            </tr>
                                                            
-                                                            <tr>
-                                                                <th scope="row">Mon travail ne me convient pas, il ne correspond pas <br> 
-                                                                    à ce que je souhaiterais faire  <br> ou est source d’insatisfaction ; 
-                                                                    me donne l’impression de perdre mon temps. <br>
-                                                                     Au maximum me déprime.</th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">Ai-je des soucis familiaux importants ? <br> (Couple, enfants, parents etc.) ? 
-                                                                </th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">
-                                                                    suis-je endetté, ai-je un revenu trop faible  <br> par rapport à mon mode de vie, 
-                                                                    est ce que cela me cause du souci ? 
-                                                                </th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>                                                          
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">
-                                                                    Ai-je beaucoup d’activités extra professionnelles, <br>
-                                                                     sont-elles source de fatigue ou de tensions ?<br>   (association, sports etc.)
-                                                                </th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>                                   
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">
-                                                                    Ai-je une maladie ? : Sa gravité <br> ou l’importance de la gêne pour vous ?
-                                                                </th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>                                   
-                                                            </tr>
 
                                                             <tr>
                                                                 <th scope="row" class="text-right ">
                                                                     Total géneral
                                                                 </th>
-                                                                <td colspan="6" class="text-center">  <strong>15</strong> </td>
+                                                                <td colspan="6" class="text-center">  <strong>{{totalStresseur}}</strong> </td>
                                                                                              
                                                             </tr>
 
@@ -607,7 +643,13 @@
                                                                 <th scope="row" class="text-right">
                                                                     Interpretation 
                                                                 </th>
-                                                                <td colspan="6" class="text-center">  <strong>Stress très bas</strong> </td>                              
+                                                                <td colspan="6" class="text-center"> 
+																																	 <strong v-if="totalStresseur >= 8 && totalStresseur < 14" key="entre8_14">Niveau de stresseurs très bas</strong> 
+																																	 <strong v-if="totalStresseur >= 14 && totalStresseur < 18" key="entre14_18">Niveau de stresseurs  bas</strong> 
+																																	 <strong v-if="totalStresseur >= 18 && totalStresseur < 28" key="entre18_28">Niveau de stresseurs élevé</strong> 
+																																	 <strong v-if="totalStresseur >= 28" key="plus28">Niveau de stresseurs très élevé</strong> 
+
+																																</td>                              
                                                             </tr>
                                                             
                                                         </tbody>
@@ -644,150 +686,77 @@
                                                                 
                                                             </tr>
 
-                                                            <tr>
-                                                                <th scope="row">Suis-je émotif, sensible aux remarques, aux critiques d’autrui ?<br>  
+                                                            <tr v-for="(data,index) in niveauDeStress" :key="index">
+                                                                <th class="whiteSpace" scope="row"> {{ data.name }}  
                                                                 </th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
+                                                                <td> 
+																																	<input 
+																																	type="radio" 
+																																  :name="`stress ${index}`" 
+																																	id="pasDuTout"
+																																	v-model="data.pasDuTout"
+																																	@change="changeCheck(data,'pasDuTout')"
+																																	:value="data.pasDuTout">  
+																																 </td>
+                                                                <td> 
+																																	<input 
+																																	type="radio" 
+																																  :name="`stress ${index}`" 
+																																	id="faiblement"
+																																	v-model="data.faiblement" 
+																																	@change="changeCheck(data,'faiblement')"
+																																	:value="data.faiblement"
+																																	>   
+																																</td>
+                                                                <td> 
+																																	<input 
+																														
+																																	type="radio" 
+																																  :name="`stress ${index}`" 
+																																	id="unPeu"
+																																	v-model="data.unPeu"
+																																	@change="changeCheck(data,'unPeu')"
+																																	:value="data.unPeu" 
+																																	>   
+																																</td>
+                                                                <td> 
+																																	<input 
+																																	
+																																	type="radio" 
+																																  :name="`stress ${index}`" 
+																																	v-model="data.assez" 
+																																	id="assez"
+																																	@change="changeCheck(data,'assez')"
+																																	:value="data.assez"
+																																	>   
+																																</td>
+                                                                <td> 
+																																	<input
+																																	type="radio" 
+																																  :name="`stress ${index}`" 
+																																	v-model="data.beaucoup"
+																																	id="beaucoup" 
+																																	@change="changeCheck(data,'beaucoup')"
+																																	:value="data.beaucoup"
+																																	>
+																																</td>
+                                                                <td> 
+																																	<input 
+																																	type="radio" 
+																																  :name="`stress ${index}`" 
+																																	id="extremement"
+																																	v-model="data.extremement"
+																																	@change="changeCheck(data,'extremement')"
+																																	:value="data.extremement"
+																																	>   
+																																</td>
                                                                 
                                                             </tr>
-
-                                                            <tr>
-                                                                <th scope="row">Suis-je colérique ou rapidement irritable ?</th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">Suis-je perfectionniste, ai-je tendance à ne pas être <br>
-                                                                     satisfait de ce que j’ai fait ou de ce que les autres ont fait ?</th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                
-                                                            </tr>
-                                                           
-                                                            <tr>
-                                                                <th scope="row">Ai-je le cœur qui bat vite, de la transpiration <br> des tremblements, 
-                                                                    des secousses musculaires, <br> par exemple au niveau du visage, des paupières ?</th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">
-                                                                    Est-ce que je me sens tendu au niveau des muscles, <br>
-                                                                    ai-je une sensation de crispation au niveau des mâchoires <br> du visage, du corps en général ?
-                                                                </th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">
-                                                                    Ai-je des problèmes de sommeil ? <br> 
-                                                                </th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>                                                          
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">
-                                                                    Suis-je anxieux, est ce que <br> je me fais souvent du souci ?
-                                                                </th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>                                   
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">
-                                                                    Ai-je des manifestations corporelles comme un trouble digestif, <br>
-                                                                     des douleurs, des maux de tête, des allergies, de l’eczéma  <br>
-                    
-                                                                </th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>                                   
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">
-                                                                    Est-ce que je suis fatigué(e)<br>
-                                                                </th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>                                   
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">
-                                                                    Ai-je des problèmes de santé plus importants comme <br> un ulcère d’estomac,
-                                                                     une maladie de peau, un problème de cholestérol, <br>
-                                                                     de l’hypertension artérielle, un trouble cardio vasculaire ?<br>
-                                                                </th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>                                   
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">
-                                                                    Est-ce que je fume ou bois de l’alcool pour 
-                                                                    me stimuler ou me calmer ? <br>
-                                                                    est-ce que j’utilise d’autres produits <br> 
-                                                                    ou des médicaments dans ce but ?<br>
-                                                                </th>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>
-                                                                <td> <input type="radio" value="">   </td>                                   
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row" class="text-right">
+																														<tr>
+                                                                <th scope="row" class="text-right ">
                                                                     Total géneral
                                                                 </th>
-                                                                <td colspan="6" class="text-center">  <strong>15</strong> </td>
+                                                                <td colspan="6" class="text-center">  <strong> {{ totalStress }} </strong> </td>
                                                                                              
                                                             </tr>
 
@@ -795,7 +764,12 @@
                                                                 <th scope="row" class="text-right">
                                                                     Interpretation 
                                                                 </th>
-                                                                <td colspan="6" class="text-center">  <strong>Stress très bas</strong> </td>                              
+                                                                <td colspan="6" class="text-center"> 
+																																	<strong v-if="totalStress >= 11 && totalStress < 19" key="entre11_19">Stress très bas</strong> 
+																																	 <strong v-if="totalStress >= 19 && totalStress < 30" key="entre19_30">Stress  bas</strong> 
+																																	 <strong v-if="totalStress >= 30 && totalStress < 45" key="entre30_45">Stress élevé</strong> 
+																																	 <strong v-if="totalStress >= 45" key="plus45">Stress très élevé</strong> 
+																																</td>                              
                                                             </tr>
                                                             
                                                         </tbody>
@@ -819,16 +793,139 @@
     </div>
 </template>
 
-<script>
-// import ProfilePatient from '@/components/ProfilePatient.vue'
-export default {
-    name: 'DossierNutrition',
-    components : {
-        
-    }
-}
+<script setup>
+	import {ref,reactive,computed} from 'vue'
+	import {Patients} from "../../../api/patient"
+	import { useRouter, useRoute } from "vue-router"
+	const router = useRouter()
+	const route = useRoute()
+	const patients = ref([])
+	const getData = JSON.parse(localStorage.getItem('patients'))
+	if(getData !=null || getData != undefined) {
+		const datas = getData
+		patients.value = [...Patients,...datas]
+	}else {
+		patients.value = Patients
+	}
+	
+	patients.value = patients.value.filter(patient => patient.id ==route.params.id)
+	
+	const elementStresseurs = ref([
+		{ name: "Ai-je subi, tout au cours de ma vie, des situations  traumatiques (Décès, perte d’emploi ; déception amoureuse ; etc...)",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Suis-je entrain de vivre une situation traumatique ?",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Est-ce que je subis une surcharge de travail  fréquente ou permanente ? Ou/et suis souvent pris dans l’urgence  ou /et existe-t-il une ambiance très compétitive dans mon emploi ?",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Mon travail ne me convient pas, il ne correspond pas  à ce que je souhaiterais faire   ou est source d’insatisfaction ; me donne l’impression de perdre mon temps.  Au maximum me déprime.",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Ai-je des soucis familiaux importants ?  (Couple, enfants, parents etc.) ? ",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "suis-je endetté, ai-je un revenu trop faible   par rapport à mon mode de vie, est ce que cela me cause du souci ? ",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Ai-je une maladie ? : Sa gravité  ou l’importance de la gêne pour vous ?",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+	])
+
+	const niveauDeStress = ref([
+		{ name: "Suis-je émotif, sensible aux remarques, aux critiques d’autrui ?",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Suis-je colérique ou rapidement irritable ?",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Suis-je perfectionniste, ai-je tendance à ne pas être satisfait de ce que j’ai fait ou de ce que les autres ont fait ?",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Ai-je le cœur qui bat vite, de la transpiration des tremblements, des secousses musculaires, par exemple au niveau du visage, des paupières ?",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Est-ce que je me sens tendu au niveau des muscles, ai-je une sensation de crispation au niveau des mâchoires du visage, du corps en général ?",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Ai-je des problèmes de sommeil ?",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Suis-je anxieux, est ce que je me fais souvent du souci ?",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Ai-je des manifestations corporelles comme un trouble digestif, des douleurs, des maux de tête, des allergies, de l’eczéma",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Est-ce que je suis fatigué(e)",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Ai-je des problèmes de santé plus importants comme un ulcère d’estomac, une maladie de peau, un problème de cholestérol, de l’hypertension artérielle, un trouble cardio vasculaire ?",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Est-ce que je fume ou bois de l’alcool pour me stimuler ou me calmer ? est-ce que j’utilise d’autres produits ou des médicaments dans ce but ?",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+		{ name: "Ai-je des manifestations corporelles comme un trouble digestif, des douleurs, des maux de tête, des allergies, de l’eczéma",pasDuTout:false,faiblement:false,unPeu:false,assez:false,beaucoup:false,extremement:true},
+	])
+
+	function changeCheck(data,element) {
+		if(element === 'pasDuTout') {
+			data.pasDuTout = true
+			data.faiblement = false
+
+			data.unPeu = false
+			data.assez = false
+			data.beaucoup = false
+			data.extremement = false
+		}
+		else if(element === 'faiblement') {
+			data.pasDuTout = false
+			data.faiblement = true
+			data.unPeu = false
+			data.assez = false
+			data.beaucoup = false
+			data.extremement = false
+		}
+		else if(element === 'unPeu') {
+			data.pasDuTout = false
+			data.faiblement = false
+			data.unPeu = true
+			data.assez = false
+			data.beaucoup = false
+			data.extremement = false
+		}
+		else if(element === 'assez') {
+			data.pasDuTout = false
+			data.faiblement = false
+			data.unPeu = false
+			data.assez = true
+			data.beaucoup = false
+			data.extremement = false
+		}
+		else if(element === 'beaucoup') {
+			data.pasDuTout = false
+			data.faiblement = false
+			data.unPeu = false
+			data.assez = false
+			data.beaucoup = true
+			data.extremement = false
+		}
+		else if(element === 'extremement') {
+			data.pasDuTout = false
+			data.faiblement = false
+			data.unPeu = false
+			data.assez = false
+			data.beaucoup = false
+			data.extremement = true
+		}
+	}
+
+	const totalStresseur = computed(() => {
+		let totalPasDuTout = elementStresseurs.value.filter(e => e.pasDuTout === true)
+		totalPasDuTout = totalPasDuTout.length
+		let totalBeaucoup = elementStresseurs.value.filter(e => e.beaucoup === true)
+		totalBeaucoup = (totalBeaucoup.length) * 5
+		let totalExtremement = elementStresseurs.value.filter(e => e.extremement ===true)
+		totalExtremement = (totalExtremement.length) * 6
+		let totalUnPeu = elementStresseurs.value.filter(e => e.unPeu === true)
+		totalUnPeu = (totalUnPeu.length) * 3
+		let totalAssez = elementStresseurs.value.filter(e => e.assez === true)
+		totalAssez = (totalAssez.length) * 4
+		let totalFaiblement = elementStresseurs.value.filter(e => e.faiblement === true)
+		totalFaiblement = (totalFaiblement.length) * 2
+
+		return totalPasDuTout + totalBeaucoup + totalExtremement + totalUnPeu + totalAssez + totalFaiblement
+	})
+
+	const totalStress = computed(() => {
+		let totalPasDuTout = niveauDeStress.value.filter(e => e.pasDuTout === true)
+		totalPasDuTout = totalPasDuTout.length
+		let totalBeaucoup = niveauDeStress.value.filter(e => e.beaucoup === true)
+		totalBeaucoup = (totalBeaucoup.length) * 5
+		let totalExtremement = niveauDeStress.value.filter(e => e.extremement ===true)
+		totalExtremement = (totalExtremement.length) * 6
+		let totalUnPeu = niveauDeStress.value.filter(e => e.unPeu === true)
+		totalUnPeu = (totalUnPeu.length) * 3
+		let totalAssez = niveauDeStress.value.filter(e => e.assez === true)
+		totalAssez = (totalAssez.length) * 4
+		let totalFaiblement = niveauDeStress.value.filter(e => e.faiblement === true)
+		totalFaiblement = (totalFaiblement.length) * 2
+
+		return totalPasDuTout + totalBeaucoup + totalExtremement + totalUnPeu + totalAssez + totalFaiblement
+	})
+
+
 </script>
 
-<style>
-
+<style scoped>
+.whiteSpace {
+	white-space: normal;
+}
 </style>
