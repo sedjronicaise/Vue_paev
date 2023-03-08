@@ -73,6 +73,30 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal animated bounce text-left" id="bounce" tabindex="-1" role="dialog" aria-labelledby="myModalLabel36" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                                    <h4 class="modal-title text-danger" id="myModalLabel36">
+                                        <span class="alert-icon text-danger"><i class="la la-warning"></i></span>
+                                        Confirmation de la suppression
+                                      </h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+          	</div>
+                                  <div class="modal-body">
+                                      <h5 class="text-danger text-center">Attention! Cette action est irresvocable, êtes vous sur de vouloir continuer ?</h5>
+                                      
+                                      <p>.</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Annuler</button>
+                                      <button type="button" @click.prevent="deleteMenuItems" data-dismiss="modal" class="btn btn-outline-danger">Supprimer</button>
+                                  </div>
+          </div>
+        </div>
+    </div>
 		<div class="app-content content">
 			<div class="content-overlay"></div>
 			<div class="content-wrapper">
@@ -308,7 +332,7 @@
 																				<div class="col-lg-8 col-md-8 offset-md-2 offset-lg-2 ">
 																					<div class="form-group">
 
-																						<button type="button" class="btn btn-outline-success block btn-lg"
+																						<button type="button" @click="openMenuModal" class="btn btn-outline-success block btn-lg"
 																							data-toggle="modal" data-target="#xlarge">
 																							Menu habituel
 																						</button>
@@ -327,7 +351,7 @@
 																										</button>
 																									</div>
 																									<div class="modal-body">
-																										<form >
+																										<form v-if="!isUpdate" >
 																											<div v-for="(data,index) in menuHabituel ">
 																												<div class="row">
 																													<div class="col-lg-4">
@@ -380,12 +404,61 @@
 																												<button type="button" @click="addMenu" class="btn btn-primary">+ Ajouter nouveau</button>
 																											</div>
 																										</form>
+																										<form v-else >
+																											<div >
+																												<div class="row">
+																													<div class="col-lg-4">
+																														<label for="type_ratio">Type ratio</label>
+																														<select name="" v-model="saveUpdate.type" id="" class="form-control">
+																															<option value="Petit dejeuner">Petit dejeuner</option>
+																															<option value="Dejeuner">Dejeuner</option>
+																															<option value="Collation">Collation</option>
+																															<option value="Souper">Souper</option>
+																															<option value="Diner">Diner</option>
+																														</select>
+																													</div>
+																													<div class="col-lg-4">
+																														<label for="Aliment">Aliment</label>
+																														<input v-model="saveUpdate.aliment" type="text" class="form-control" placeholder="Aliment">
+																													</div>
+																													<div class="col-lg-4">
+																														<label for="lieu">Lieu</label>
+																														<input v-model="saveUpdate.lieu" type="text" class="form-control">
+																													</div>
+																												</div>
+
+																												<div class="row">
+																													
+																													<div class="col-lg-4">
+																														<label for="heure">L'heure</label>
+																														<input v-model="saveUpdate.heure" type="time" class="form-control">
+																													</div>
+																													<div class="col-lg-4">
+																													<label for="vol_poids">Vol./poids</label>
+																													<input type="text" v-model="saveUpdate.poids_vol" class="form-control">
+																													</div>
+
+																													<div class="col-lg-4 ">
+																														<label for="Description">Description</label>
+																														<textarea v-model="saveUpdate.description" name="description" id="" class="form-control"
+																															rows="1"></textarea>
+																													</div>
+																												</div>
+
+																											
+																												
+																												
+																											</div>
+																											
+																										</form>
 																									</div>
 																									<div class="modal-footer">
 																										<button type="button" class="btn grey btn-outline-secondary"
 																											data-dismiss="modal">Fermer</button>
-																										<button @click="saveMenu" type="button" data-dismiss="modal"
+																										<button v-if="!isUpdate" @click="saveMenu" type="button" data-dismiss="modal"
 																											class="btn btn-outline-primary">Enregister</button>
+																											<button v-else @click="updateMenu" type="button" data-dismiss="modal"
+																											class="btn btn-outline-primary">Modifier</button>
 																									</div>
 																								</div>
 																							</div>
@@ -395,6 +468,7 @@
 																			</div>
 
 																			<div class="row">
+																				
 																				<table class="table table-bordered table-responsive-lg">
 																					<thead>
 																						<tr>
@@ -404,6 +478,7 @@
 																							<th scope="col">Heure</th>
 																							<th scope="col">Vol./Poids</th>
 																							<th scope="col">Description</th>
+																							<th scope="col">Actions</th>
 																						
 
 																						</tr>
@@ -417,6 +492,33 @@
 																							<td>  {{ data.poids_vol }} </td>
 																							<td>
 																								{{data.description}}
+																							</td>
+																							<td>
+																								<div class="d-flex">
+																									<button
+																									title="modifer un menu"
+																									type="button"
+																									data-toggle="modal" data-target="#xlarge"
+																									@click.prevent="modifierMenu(index,data)"
+																									class="btn btn-primary mx-1 round btn-sm waves-effect waves-light"
+                              									>
+																								<span>
+																									<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+																								</span>
+                                
+																								</button>
+																								<button 
+																									data-toggle="modal" data-target="#bounce"
+																									title="supprimer un menu"
+																									@click.prevent="supprimerMenu(index,data)"
+																									class=" mx-2 btn btn-danger  round btn-sm waves-effect waves-light"
+																								>
+																									<span>
+																										<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
+																									</span>
+																								
+																								</button>
+																								</div>
 																							</td>
 
 																						</tr>
@@ -564,9 +666,7 @@
 													</h2>
 
 													<div class="table-responsive">
-														<pre>
-
-																											</pre>
+														
 														<table class="table table-bordered table-striped">
 															<thead>
 																<tr>
@@ -765,6 +865,9 @@ import { useRouter, useRoute } from "vue-router"
 const router = useRouter()
 const route = useRoute()
 const patients = ref([])
+const deleteData = reactive({})
+const saveUpdate = reactive({})
+const isUpdate = ref(false)
 const getData = JSON.parse(localStorage.getItem('patients'))
 if (getData != null || getData != undefined) {
 	const datas = getData
@@ -923,6 +1026,10 @@ function addComponent() {
 	})
 }
 
+function openMenuModal() {
+	isUpdate.value = false
+}
+
 function addMenu() {
 	menuHabituel.value.push({
 		type:'Dejeuner',
@@ -946,7 +1053,7 @@ function saveComponent() {
 }
 
 function saveMenu() {
-	menus.value = {...menuHabituel.value}
+	menus.value = [...menuHabituel.value]
 	menuHabituel.value = [
 		{
 			type:'Dejeuner',
@@ -966,6 +1073,30 @@ function deleteMenu(index) {
 function deleteComposante(index) {
 	composanteNutritionnelles.value.splice(index, 1);
 }
+
+	const supprimerMenu = function(index,data) {
+    deleteData.index = index
+  }
+
+	const modifierMenu = function(index,data) {
+		saveUpdate.index = index
+		saveUpdate.type = data.type
+		saveUpdate.aliment = data.aliment
+		saveUpdate.lieu = data.lieu
+		saveUpdate.heure = data.heure
+		saveUpdate.poids_vol = data.poids_vol
+		saveUpdate.description = data.description
+		isUpdate.value = true
+
+	}
+	const updateMenu = function() {
+		menus.value[saveUpdate.index] = {type:saveUpdate.type,aliment:saveUpdate.aliment,lieu:saveUpdate.aliment,heure:saveUpdate.heure,poids_vol:saveUpdate.poids_vol,description:saveUpdate.description}
+	}
+  const deleteMenuItems = () => {
+		console.log(deleteData.index)
+		menus.value.splice(deleteData.index, 1);
+  }
+  
 
 </script>
 
