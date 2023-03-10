@@ -226,33 +226,42 @@
               </div>
 
 							<button class="btn btn-primary w-100 flex" type="submit">
-														<span class="fs-5 fs-semibold" v-if="!chargement">
-															{{ submitText }}
-														</span>
-														<span v-else class="d-flex align-items-center">
-															<span class="mx-2 fs-semibold text-light">
-																chargement ...
-															</span>
-															<div
-																style="width: 1.5rem; height: 1.5rem"
-																class="spinner-border text-light"
-																role="status"
-															>
-																<span class="sr-only">Loading...</span>
-															</div>
-														</span>
+									<span class="fs-5 fs-semibold" v-if="!chargement">
+										{{ submitText }}
+									</span>
+										<span v-else class="d-flex justify-content-center  align-items-center">
+												<span class="mx-2 fs-semibold text-light">
+														chargement ...
+													</span>
+													<div
+														style="width: 1.5rem; height: 1.5rem"
+														class="spinner-border text-light"
+														role="status">
+														<span class="sr-only">Loading...</span>
+													</div>
+										</span>
               </button>
 
-							
             </div>
 					</form>
-					<form v-else key="modifier" class="modal-body">
+					<form v-else key="modifier" @submit.prevent="updatePraticien" class="modal-body">
 						<div class="form-body">
             	<div class="row my-2">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
-                  	<label for="contact"> Nom </label>
+                  	<label for="contact"> Nom et Prenoms </label>
+										<input
+                      class="form-control"
+                      id="name"
+											readonly
+                      name="name"
+											v-if="!showSelect"
+											@click="showSelect = true"
+                      v-model="saveUpdate.name"
+                      type="text"
+                      />
                     <VueMultiselect
+													v-else
                           v-model="saveUpdate.name"
                           label="name"
                           track-by="id"
@@ -264,21 +273,10 @@
                           :options="users"
                         >
                         </VueMultiselect>
+											
                 	</div>
               	</div>
-              	<div class="col-md-6">
-                  <div class="form-group">
-                  	<label for="prenoms"> Prenoms </label>
-                  	<input
-                      class="form-control"
-                      id="prenoms"
-                      name="prenoms"
-											placeholder="Votre prenoms"
-                      v-model="saveUpdate.prenoms"
-                      type="text"
-                      />
-                    </div>
-                </div>
+              	
               </div>
 
 							<div class="row my-2">
@@ -288,6 +286,7 @@
                     <input
                       class="form-control"
                       id="email"
+											required
                       name="email"
 											placeholer="Votre email"
 											placeholder="ex: demo@gmail.com	"
@@ -302,9 +301,10 @@
                   	<input
                       class="form-control"
                       id="telephone"
+											required
                       name="telephone"
 											placeholder="90000000"
-                      v-model="saveUpdate.telephone"
+                      v-model="saveUpdate.phone"
                       type="number"
                       />
                     </div>
@@ -335,7 +335,7 @@
                       class="form-control"
                       id="adresse"
                       name="adresse"
-                      v-model="saveUpdate.adresse"
+                      v-model="saveUpdate.address"
 											placeholder="lot 480 kpankpan cotonou "
                       type="text"
                       />
@@ -343,12 +343,39 @@
                 </div>
               </div>
 
+							<div class="row my-2">
+                <div class="col-md-6">
+									<div class="form-group">
+                  	<label for="specialite"> Ville   </label>
+										<input
+                      class="form-control"
+                      id="adresse"
+                      name="adresse"
+                      v-model="saveUpdate.city"
+											placeholder=""
+                      type="text"
+                      />
+                	</div>
+              	</div>
+              	<div class="col-md-6">
+                  <div class="form-group">
+                  	<label for="adresse"> Pays </label>
+                    <input
+                      class="form-control"
+                      id="adresse"
+                      name="adresse"
+                      v-model="saveUpdate.country"
+											placeholder="l"
+                      type="text"
+                      />
+                	</div>
+                </div>
+              </div>
+
 							<div class="d-flex justify-content-end my-2 ">
-								<button @click="addJours" class="btn btn-primary ">AJOUTER UNE GARDE </button>
+								<span class="curseur" @click="addJours">AJOUTER UNE GARDE </span>
 							</div>
 							<div class="row my-2">
-								
-                
 								
               	<div class="col-md-12">
 								
@@ -357,12 +384,14 @@
 										:key="index" 
 										class="row"
 										>
+										<pre>
+											{{ formData.gardes }}
+										</pre>
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="jours"> Jours de la semaine   </label>
 												<select
 													required
-											
 													v-model="garde.day" 
 													class="custom-select"
 													id="state"
@@ -406,17 +435,30 @@
 											</div>
 										</div>
 										<div class="col-md-1 mb-2">
-                      <button @click.prevent="supprimerGrade(index)" class="btn btn-danger"> x </button>
+                      <span @click="supprimerGrade(index)" class="btn btn-danger"> x </span>
                     </div>
 									</div>
 
                 </div>
               </div>
 
-							<div class="d-flex justify-content-end my-2 ">
-								<button type="submit" @click.prevent="updatePraticien"  data-dismiss="modal"
-									class="btn btn-primary"> {{ submitText }} </button>
-							</div>
+							<button class="btn btn-primary w-100 flex" type="submit">
+									<span class="fs-5 fs-semibold" v-if="!chargement">
+										{{ submitText }}
+									</span>
+										<span v-else class="d-flex justify-content-center  align-items-center">
+												<span class="mx-2 fs-semibold text-light">
+														chargement ...
+													</span>
+													<div
+														style="width: 1.5rem; height: 1.5rem"
+														class="spinner-border text-light"
+														role="status">
+														<span class="sr-only">Loading...</span>
+													</div>
+										</span>
+              </button>
+
             </div>
 					</form>
 					
@@ -455,10 +497,8 @@
           </div>
 					<div id="doctors-list">
 						<div class="row match-height">
-							<pre>
-								{{ formData }}
-							</pre>
-							<div v-for="(praticien,index) in praticiens" class="col-lg-4">
+							
+							<div v-for="(praticien,index) in resultQuery" class="col-lg-4">
 								<div class="card">
 									<img src="https://previews.123rf.com/images/afe207/afe2071602/afe207160200158/52329668-photo-de-profil-d-avatar-masculin-ombre-l%C3%A9g%C3%A8re-de-silhouette.jpg" alt=""
 										class="card-img-top img-fluid rounded-circle w-25 mx-auto mt-1" />
@@ -479,16 +519,17 @@
 										<p class="card-text card font-medium-1 text-center mb-0">
 											{{praticien.email}} ~ {{ praticien.phone }}
 										</p>
+
 										<hr/>
+
 										<div class="card-text card  ">
 											<p v-for="(garde, index) in praticien.garde">
 												<span class="fw">{{ garde.jours }}</span> ~ de <span class="fs">{{ garde.debut }} à {{ garde.fin }}</span>
 											</p>
 										</div>
-										
-									</div>
-									<div class="card-footer mx-auto">
-										<button data-toggle="modal" data-target="#bounce" @click.prevent="modifier(praticien)"
+
+										<div class="my-2 d-flex justify-content-center align-items-center">
+											<button data-toggle="modal" data-target="#bounce" @click.prevent="modifier(praticien)"
 											title="modifer un praticien"
 											class="btn btn-primary  round btn-sm waves-effect waves-light"
 										>
@@ -497,16 +538,18 @@
 										</span>        
 										</button>
 										<button 
-										data-toggle="modal" data-target="#delete"
-										title="supprimer un praticien"
-										@click="supprimer(index,praticien)"
-										class="btn btn-danger mx-1 round btn-sm waves-effect waves-light"
+											data-toggle="modal" data-target="#delete"
+											title="supprimer un praticien"
+											@click="supprimer(index,praticien)"
+											class="btn btn-danger mx-1 round btn-sm waves-effect waves-light"
 										>
-										<span>
-										<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
-										</span>    
+											<span>
+												<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
+											</span>    
 										</button>
+										</div>
 									</div>
+									
 								</div>
 							</div>
 							
@@ -532,16 +575,29 @@
 	const saveUpdate = reactive({})
 	const chargement = ref(false)
 	const users = ref([])
-	
+	const showSelect = ref(false)
 	const title = ref('"Ajouter un praticien"')
 	const search = ref('')
 	const submitText = ref('AJouter')
 	const isUpdate = ref(false)
-
+	const updateId = ref(0)
+	
 	//getData
   const getSearch = function(data) {
     search.value = data
   }
+	const resultQuery = computed(()=> {
+    if(search.value){
+      return praticiens.value.filter((item)=>{
+        return search.value.toLowerCase().split(' ').every(v => item.name.toLowerCase().includes(v)) ||
+        search.value.toLowerCase().split(' ').every(v => item.email.toLowerCase().includes(v)) ||
+        search.value.toLowerCase().split(' ').every(v => item.specialite.toLowerCase().includes(v)) 
+      })
+
+      }else{
+        return praticiens.value;
+      }
+  }) 
   const getData = () => {
   	PraticienService.get().then((data) => {
 			const datas = data.data.data
@@ -570,6 +626,7 @@
     "phone": "",
     "address": "",
     "city": "",
+		"specialite":'',
     "country": "",
 		"user_id":null,
     "gardes": []
@@ -618,17 +675,18 @@
 }
 	const modifier  = function(data) {
 		console.log(data)
+		isUpdate.value = true
 		title.value = "Modifier un praticien"
 		submitText.value = "Modifier"
-		isUpdate.value = true
-		saveUpdate.nom = data.nom
-		saveUpdate.prenoms = data.prenoms
-		saveUpdate.specialite = data.specialite
-		saveUpdate.telephone = data.telephone
+		updateId.value = data.id
 		saveUpdate.email = data.email
-		saveUpdate.adresse = data.adresse
-		saveUpdate.numeroOrdre = data.numeroOrdre
-		saveUpdate.garde = data.garde
+    saveUpdate.name = data.name
+    saveUpdate.phone = data.phone
+    saveUpdate.address = data.address
+    saveUpdate.city = data.city
+    saveUpdate.country = data.country
+		saveUpdate.specialite = data.specialite
+
 	}
 
 
@@ -658,9 +716,27 @@
 			});
 	};
 
-	const updatePraticien = (index) => {
-    
-    toast('Mise à jours  éffectué avec succèss', 'success')
+	const updatePraticien = () => {
+		if(chargement.value == false) {
+    chargement.value = true
+		if(showSelect.value) {
+			saveUpdate.name = saveUpdate.name.name
+			saveUpdate.user_id = saveUpdate.name.id
+		}
+		PraticienService.update(updateId.value,saveUpdate).then((data) => {
+      const response = data.data
+			if(response.status === 'error') {
+				chargement.value = false  
+				toast(response.message, 'danger')
+			}
+			else {
+				chargement.value = false
+				getData()
+				close()
+        toast('vous avez mise à jours praticien', 'success')
+			} 
+      })
+  	}
   }
   
   const getIndex = function(index) {
@@ -671,8 +747,8 @@
     formData.gardes.splice(index, 1);
   }
 	const toast = (message,type) => {
-  createToast(message,{type:type})
-}
+  	createToast(message,{type:type})
+	}
 
 
 

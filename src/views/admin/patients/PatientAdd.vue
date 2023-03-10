@@ -432,7 +432,7 @@
                             </div>
                           </fieldset> -->
                           <!-- Step 4 => Insaurance Details -->
-                          <h6>
+                          <!-- <h6>
                             <i class="step-icon font-medium-3 ft-file-text">
                             </i>
                             Détails de l'assurance
@@ -535,12 +535,12 @@
                                 </div>
                               </div>
                             </div>
-                          </fieldset>
+                          </fieldset> -->
 													<button class="btn btn-primary w-100 flex" type="submit">
 														<span class="fs-5 fs-semibold" v-if="!chargement">
 															Ajouter un patient
 														</span>
-														<span v-else class="d-flex align-items-center">
+														<span v-else class="d-flex justify-content-center align-items-center">
 															<span class="mx-2 fs-semibold text-light">
 																chargement ...
 															</span>

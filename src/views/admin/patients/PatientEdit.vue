@@ -38,7 +38,7 @@
             </div>
           </div>
         </div>
-
+       
         <div class="content-body">
           <!-- Add Patient Form Wizard -->
           <section id="add-patient">
@@ -78,7 +78,7 @@
                                     id="fullName"
                                     name="fullName"
 																		required
-                                    v-model="patients[0].infoGeneral.fullName"
+                                    v-model="patients.firstname"
                                     type="text"
                                   />
                                 </div>
@@ -94,7 +94,7 @@
                                     id="dateArrivee"
                                     name="dateArrivee"
 																		required
-                                    v-model="patients[0].infoGeneral.dateArriver"
+                                    v-model="patients.date_arrive"
                                     type="date"
                                   />
                                 </div>
@@ -105,13 +105,11 @@
                                     Situation Matrimoniale
                                   </label>
                                   <select
-                                    v-model="
-                                      patients[0].infoGeneral.situationMatrimoniale
-                                    "
+                                    v-model="patients.marital_status"
                                     class="custom-select"
                                     id="city"
                                   >
-																		<option disabled :value="patients[0].infoGeneral.situationMatrimoniale"> {{ patients[0].infoGeneral.situationMatrimoniale }} </option>
+																		<option disabled :value="patients.marital_status"> {{ patients.marital_status }} </option>
                                     <option value="Mariee">Marié(e)</option>
                                     <option value="célibataire">
                                       célibataire
@@ -131,7 +129,7 @@
                                   <input
                                     class="form-control"
                                     id="address"
-                                    v-model="patients[0].infoGeneral.adresse"
+                                    v-model="patients.address"
                                     type="text"
                                   />
                                 </div>
@@ -140,12 +138,12 @@
                                 <div class="form-group">
                                   <label for="city"> Sexe  <span class="danger"> * </span> </label>
                                   <select
-                                    v-model="patients[0].infoGeneral.sexe"
+                                    v-model="patients.sex"
 																		required
                                     class="custom-select"
                                     id="city"
                                   >
-																	<option disabled :value="patients[0].infoGeneral.sexe"> {{ patients[0].infoGeneral.sexe }} </option>
+																	<option disabled :value="patients.sex"> {{ patients.sex }} </option>
                                     <option value="masculin">Masculin</option>
                                     <option value="feminin">Feminin</option>
                                   </select>
@@ -159,12 +157,12 @@
                                   <select
 																	required
                                     v-model="
-                                      patients[0].infoGeneral.typeConsultation
+                                      patients.consultation_type
                                     "
                                     class="custom-select"
                                     id="state"
                                   >
-																		<option disabled :value="patients[0].infoGeneral.typeConsultation"> {{ patients[0].infoGeneral.typeConsultation }} </option>
+																		<option disabled :value="patients.consultation_type"> {{ patients.consultation_type }} </option>
                                     <option value="medecine generale">Médecine Génerale</option>
                                     <option value="nutrition">
                                       Nutrition
@@ -183,7 +181,7 @@
                                     class="form-control"
                                     id="profession"
                                     name="profession"
-                                    v-model="patients[0].infoGeneral.profession"
+                                    v-model="patients.profession"
                                     type="text"
                                   />
                                 </div>
@@ -195,7 +193,7 @@
                                     class="form-control"
                                     id="contact"
                                     name="contact"
-                                    v-model="patients[0].infoGeneral.nbreEnfant"
+                                    v-model="patients.children_count"
                                     type="number"
                                   />
                                 </div>
@@ -214,14 +212,14 @@
                                     name="contact"
                                     type="number"
 																		required
-                                    v-model="patients[0].infoGeneral.telephone"
+                                    v-model="patients.phone"
                                   />
                                 </div>
                               </div>
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label for="dob">
-                                    Date de naissance:
+                                    Votre age:
                                     <span class="danger"> * </span>
                                   </label>
                                   <input
@@ -229,8 +227,8 @@
                                     class="form-control"
                                     id="dob"
                                     name="dateofbirth"
-                                    type="date"
-                                    v-model="patients[0].infoGeneral.dateNaissance"
+                                    type="number"
+                                    v-model="patients.age"
                                   />
                                 </div>
                               </div>
@@ -251,12 +249,13 @@
                                     <span class="danger"> * </span>
                                   </label>
                                   <input
+                                  v-if="patients.patient_contacts"
                                     class="form-control"
                                     id="fnemergency"
                                     name="fnemergency"
                                     type="text"
 																		required
-                                    v-model="patients[0].personneContacter.nom"
+                                    v-model="patients.patient_contacts[0].firstname"
                                   />
                                 </div>
                               </div>
@@ -268,11 +267,12 @@
                                   </label>
                                   <input
 																		required
+                                    v-if="patients.patient_contacts"
                                     class="form-control"
                                     id="lnemergency"
                                     name="lnemergency"
                                     type="text"
-                                    v-model="patients[0].personneContacter.prenoms"
+                                    v-model="patients.patient_contacts[0].lastname"
                                   />
                                 </div>
                               </div>
@@ -285,13 +285,13 @@
                                     <span class="danger"> * </span>
                                   </label>
                                   <input
+                                    v-if="patients.patient_contacts"
                                     class="form-control"
                                     id="relation"
                                     name="relation"
 																		required
                                     v-model="
-                                      patients[0].personneContacter
-                                        .relationAvecPatient
+                                      patients.patient_contacts[0].relation
                                     "
                                     type="text"
                                   />
@@ -301,10 +301,11 @@
                                 <div class="form-group">
                                   <label for="relativeadd"> Adresse: </label>
                                   <input
+                                    v-if="patients.patient_contacts"
                                     class="form-control"
                                     id="relativeadd"
                                     name="relativeadd"
-                                    v-model="patients[0].personneContacter.adresse"
+                                    v-model="patients.patient_contacts[0].address"
                                     type="text"
                                   />
                                 </div>
@@ -318,13 +319,14 @@
                                     <span class="danger"> * </span>
                                   </label>
                                   <input
+                                  v-if="patients.patient_contacts"
                                     class="form-control"
                                     id="cn"
                                     name="cn"
                                     type="number"
 																		required
                                     v-model="
-                                      patients[0].personneContacter.telephone
+                                      patients.patient_contacts[0].phone
                                     "
                                   />
                                 </div>
@@ -337,16 +339,13 @@
                                     id="alternate"
                                     name="alternate"
                                     type="text"
-                                    v-model="
-                                      patients[0].personneContacter.autreTelephone
-                                    "
                                   />
                                 </div>
                               </div>
                             </div>
                           </fieldset>
                           <!-- Step 3 => Symptoms -->
-                          <h6>
+                          <!-- <h6>
                             <i class="step-icon font-medium-3 ft-thermometer">
                             </i>
                             Symptômes
@@ -433,8 +432,8 @@
                               </div>
                             </div>
                           </fieldset>
-                          <!-- Step 4 => Insaurance Details -->
-                          <h6>
+                           Step 4 => Insaurance Details -->
+                          <!-- <h6>
                             <i class="step-icon font-medium-3 ft-file-text">
                             </i>
                             Détails de l'assurance
@@ -537,12 +536,12 @@
                                 </div>
                               </div>
                             </div>
-                          </fieldset>
+                          </fieldset>  -->
 													<button class="btn btn-primary w-100 flex" type="submit">
 														<span class="fs-5 fs-semibold" v-if="!chargement">
 															Modifier un patient
 														</span>
-														<span v-else class="d-flex align-items-center">
+														<span v-else class="d-flex justify-content-center align-items-center">
 															<span class="mx-2 fs-semibold text-light">
 																chargement ...
 															</span>
@@ -570,9 +569,9 @@
 </template>
 
 <script setup>
-	import { reactive, ref } from "vue";
+	import { reactive, ref,onMounted } from "vue";
 	import { useRouter, useRoute } from "vue-router";
-	import {Patients} from "../../../api/patient"
+  import PatientService from "@/services/modules/patient.service.js";
 	// import the library
 	import { createToast } from "mosha-vue-toastify";
 	// import the styling for the toast
@@ -580,23 +579,23 @@
 
 	const router = useRouter();
 	const route = useRoute();
+  const patients = ref([])
+	const getData = () => {
+  PatientService.get(route.params.id).then((data) => {
+    const datas = data.data.data
+    patients.value = datas
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
 
-	const patients = ref([])
-	const getData = JSON.parse(localStorage.getItem('patients'))
-	if(getData !=null || getData != undefined) {
-		const datas = getData
-		patients.value = [...Patients,...datas]
-	}else {
-		patients.value = Patients
-	}
-
-	patients.value = patients.value.filter(patient => patient.id ==route.params.id)
-	const otherData = patients.value.filter(patient => patient.id !=route.params.id)
+  onMounted(() => {
+    getData()
+  })
+  
 
 //datas
-
 const chargement = ref(false)
-
 //methods
 const toast = (message,type) => {
   createToast(message,{type:type})
@@ -615,18 +614,36 @@ const checkSymptome = reactive(
 	}
 )
 
-const updatePatient =  () => {
-	if(chargement.value == false) {
-		chargement.value = true
-		const datas = [...patients.value,...otherData]
-		setTimeout(() => {
-      chargement.value = false
-    }, 7000)
-		localStorage.setItem('patients',JSON.stringify(datas))
-		toast('Modification reuissie', 'success')
-		router.go(-1)
-	}
-	
+const updatePatient = () => {
+  
+  if(chargement.value == false) {
+    chargement.value = true
+    console.log(patients.value)
+    const data = {
+    "firstname": patients.value.firstname,
+    "lastname": "..",
+    "address": patients.value.adress,
+    "consultation_type": patients.value.consultation_type,
+    "sex": patients.value.sex,
+    "phone": patients.value.phone,
+    "marital_status": patients.value.marital_status,
+    "children_count": patients.value.children_count,
+    "age": patients.value.age,
+    "profession": patients.value.profession,
+    "date_arrive": patients.value.date_arrive,
+    "contacts": patients.value.patient_contacts
+    }
+		PatientService.update(patients.value.id,data).then((data) => {
+      const response = data.data
+        chargement.value = false
+   
+        toast('patient à ete mise à jours', 'success')
+        router.go(-1)
+      }).catch((e) => {
+        chargement.value = false  
+				toast(e, 'danger')
+    })
+  }
 }
 
 

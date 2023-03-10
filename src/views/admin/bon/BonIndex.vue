@@ -164,29 +164,32 @@
                   <hr />
                 </div>
 
-                <button type="button" @click.prevent="addForm" class="btn btn-primary">
+               <div class="d-flex justify-content-end my-3">
+                <button type="button" @click.prevent="addForm" class="btn  btn-primary">
                   Ajouter une nouvelle prescription
                 </button>
+               </div>
               </div>
+              <button class="btn btn-primary w-100 flex" type="submit">
+                <span class="fs-5 fs-semibold" v-if="!chargement">
+                  {{ submitText }}
+                </span>
+                <span v-else class="d-flex justify-content-center align-items-center">
+                  <span class="mx-2 fs-semibold text-light">
+                  chargement ...
+                </span>
+                <div
+                  style="width: 1.5rem; height: 1.5rem"
+                  class="spinner-border text-light"
+                  role="status"
+                >
+                  <span class="sr-only">Loading...</span>
+                </div>
+                </span>
+              </button>
             </form>
           </div>
-          <button class="btn btn-primary w-100 flex" type="submit">
-					  <span class="fs-5 fs-semibold" v-if="!chargement">
-							{{ submitText }}
-						</span>
-						<span v-else class="d-flex align-items-center">
-							<span class="mx-2 fs-semibold text-light">
-							chargement ...
-						</span>
-						<div
-							style="width: 1.5rem; height: 1.5rem"
-							class="spinner-border text-light"
-							role="status"
-					  >
-						  <span class="sr-only">Loading...</span>
-						</div>
-						</span>
-          </button>
+          
         </div>
       </div>
     </div>
@@ -218,15 +221,25 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form  @submit.prevent="updateBon">
               <div>
                 <div>
                   <div class="row">
                     <div class="col-md-6">
                       <fieldset class="form-group floating-label-form-group">
                         <label for="patient">Selectionnez le medecin</label>
-
+                        <input
+                        class="form-control"
+                        id="name"
+                        readonly
+                        name="name"
+                        v-if="!showSelectDoctor"
+                        @click="showSelectDoctor = true"
+                        v-model="saveUpdate.doctor_id"
+                        type="text"
+                        />
                         <VueMultiselect
+                          v-else
                           v-model="saveUpdate.doctor_id"
                           label="name"
                           track-by="id"
@@ -243,8 +256,18 @@
                     <div class="col-md-6">
                       <fieldset class="form-group floating-label-form-group">
                         <label for="patient">Selectionnez le patient </label>
-
+                        <input
+                          class="form-control"
+                          id="name"
+                          readonly
+                          name="name"
+                          v-if="!showSelectPatient"
+                          @click="showSelectPatient = true"
+                          v-model="saveUpdate.patient_id"
+                          type="text"
+                        />
                         <VueMultiselect
+                          v-else
                           v-model="saveUpdate.patient_id"
                           label="firstname"
                           track-by="id"
@@ -263,10 +286,7 @@
                   <hr />
                   <div v-for="(autre, index) in saveUpdate.lignes" :key="index">
                     <div class="d-flex justify-content-end">
-                      <button
-                        @click="deleteItemUpdate(index)"
-                        class="bt btn-danger"
-                      >
+                      <button @click="deleteItem(index)" class="bt btn-danger">
                         X
                       </button>
                     </div>
@@ -303,29 +323,32 @@
                   <hr />
                 </div>
 
-                <button @click.prevent="addFormUpdate" class="btn btn-primary">
+               <div class="d-flex justify-content-end my-3">
+                <button type="button" @click.prevent="addForm" class="btn  btn-primary">
                   Ajouter une nouvelle prescription
                 </button>
+               </div>
               </div>
+              <button class="btn btn-primary w-100 flex" type="submit">
+                <span class="fs-5 fs-semibold" v-if="!chargement">
+                  {{ submitText }}
+                </span>
+                <span v-else class="d-flex justify-content-center align-items-center">
+                  <span class="mx-2 fs-semibold text-light">
+                  chargement ...
+                </span>
+                <div
+                  style="width: 1.5rem; height: 1.5rem"
+                  class="spinner-border text-light"
+                  role="status"
+                >
+                  <span class="sr-only">Loading...</span>
+                </div>
+                </span>
+              </button>
             </form>
           </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn grey btn-outline-secondary btn-sm"
-              data-dismiss="modal"
-            >
-              Fermer
-            </button>
-            <button
-              type="button"
-              data-dismiss="modal"
-              @click.prevent="updateOrdonance"
-              class="btn btn-outline-success btn-sm"
-            >
-              {{ submitText }}
-            </button>
-          </div>
+         
         </div>
       </div>
     </div>
@@ -359,18 +382,20 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>Nom & prénom du patient</th>
-									<th>Date et heure</th>
-									<th>Auteur</th>
+						
+									<th>Patient</th>
+									<th>Docteur</th>
+                  <th>Date et heure</th>
 									<th>Actions</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr v-for="(data,index) in bonExamens">
 									<td> {{ index +1}} </td>
-									<td>{{ data.patient.fullName}}</td>
-									<td>{{ data.created_at.getFullYear()}} </td>
-									<td>Dr Amoussou Florent</td>
+									<td v-if="data.patient"> {{ data.patient.firstname }} </td>
+                  <td v-if="data.doctor"> {{ data.doctor.name }} </td>
+									<td>{{ data.created_at}} </td>
+									
 									<td>
                     <router-link
                       :to="{ name: 'voirBon', params: { id: data.id } }"
@@ -459,6 +484,10 @@
   const docteurs = ref([]);
 	const deleteData = ref({});
   const chargement = ref(false)
+  const  updateId = ref(0)
+  const showSelectPatient = ref(false)
+const showSelectDoctor = ref(false)
+  const oldData = reactive({}) 
 
 	//getData
 	const getData = () => {
@@ -525,6 +554,49 @@
       })
   }
 };
+const updateBon = function () {
+  if(chargement.value == false) {
+    chargement.value = true
+   
+   
+   
+    if(showSelectDoctor.value) {
+		  saveUpdate.doctor_id = saveUpdate.doctor_id.id
+      saveUpdate.patient_id  = oldData.patient_id
+    }
+
+    if(showSelectPatient.value) {
+      saveUpdate.patient_id = saveUpdate.patient_id.id
+      saveUpdate.doctor_id  = oldData.doctor_id
+    }
+   
+    if(showSelectPatient.value && showSelectDoctor.value) {
+      saveUpdate.patient_id = saveUpdate.patient_id.id
+      saveUpdate.doctor_id = saveUpdate.doctor_id.id
+    }
+    if(showSelectPatient.value === false && showSelectDoctor.value == false) {
+      saveUpdate.doctor_id  = oldData.doctor_id
+      saveUpdate.patient_id  = oldData.patient_id
+    }
+
+    
+   
+		BonService.update(updateId.value,saveUpdate).then((data) => {
+      const response = data.data
+			if(response.status === 'error') {
+				chargement.value = false  
+				toast(response.message, 'danger')
+			}
+			else {
+				chargement.value = false
+				getData()
+				close()
+        toast('vous avez effectué une mise à jours', 'success')
+			}
+        
+      })
+  }
+};
 	const close = function () {
 		formData.lignes = [];
 		formData.patient_id = null
@@ -537,8 +609,8 @@
 		deleteData.index = index;
 	};
 	const deleteBon = function () {
-		ordonances.value.splice(ordonances.value.indexOf(deleteData.index), 1);
-		OrdonanceService.destroy(deleteData.id)
+		bonExamens.value.splice(bonExamens.value.indexOf(deleteData.index), 1);
+		BonService.destroy(deleteData.id)
 			.then((data) => {
 				toast("Suppression effectué avec succèss", "success");
 				getData();
@@ -576,16 +648,19 @@
 		indexElement.value = index;
 	}
 
-	const modifier = function (data, index) {
-		indexElement.value = index;
-		isUpdate.value = true;
-		title.value = "Modifier un bon examen";
-		submitText.value = "Modifier";
-		saveUpdate.id = data.id;
-		saveUpdate.patient = data.patient;
-		saveUpdate.autre = data.autre;
-		saveUpdate.created_at = data.created_at;
-	};
+	
+  const modifier = function (data, index) {
+  isUpdate.value = true;
+  updateId.value = data.id
+  oldData.patient_id = data.patient.id
+  oldData.doctor_id = data.doctor.id
+  title.value = "Modifier un bon examen";
+  submitText.value = "Modifier";
+  saveUpdate.lignes= data.lignes
+  saveUpdate.patient_id= data.patient.firstname
+  saveUpdate.doctor_id= data.doctor.name
+};
+
 
 	const deleteItem = function (index) {
 		formData.autre.splice(index, 1);
@@ -595,10 +670,7 @@
 	};
 	
 
-	const updateOrdonance = function () {
-		bonExamens.value[indexElement.value] = saveUpdate;
-		toast("Mise à jours effectué avec success ", "success");
-	};
+
 
 	const toast = (message, type) => {
 		createToast(message, { type: type });

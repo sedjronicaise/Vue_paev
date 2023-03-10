@@ -53,15 +53,15 @@
 								<div class="col-sm-6 col-12 text-center text-sm-left">
 									<ul class="px-0 list-unstyled">
 										<li class="text-bold-800">
-											Patient: <strong>{{ bonExamens[0].patient.fullName }}</strong>
-										</li>
-										<li>Sexe: {{ bonExamens[0].patient.sexe }}</li>
-										<li>Age: {{ bonExamens[0].patient.age }} ans</li>
+                      Patient: <strong v-if="bonExamens.patient">{{bonExamens.patient.firstname}}</strong>
+                    </li>
+                    <li v-if="bonExamens.patient">Sexe: {{bonExamens.patient.sex}}</li>
+                    <li v-if="bonExamens.patient">Age: {{bonExamens.patient.age}} ans</li>
 									</ul>
 								</div>
 								<div class="col-sm-6 col-12 text-center text-sm-right">
 									<p>
-										<span class="text-muted"> Délivrée ce, </span> {{ bonExamens[0].created_at }}
+										<span class="text-muted"> Délivrée ce, </span> {{ bonExamens.created_at }}
 									</p>
 								</div>
 							</div>
@@ -81,10 +81,10 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr v-for="(autre, index) in bonExamens[0].autre" :key="index">
-													<th scope="row">1</th>
+												<tr v-for="(autre, index) in bonExamens.lignes" :key="index">
+													<th scope="row"> {{ index }} </th>
 													<td>
-														<p>{{ autre.typeExamen }}</p>
+														<p>{{ autre.name }}</p>
 													</td>
 													<td>
 														<p>{{ autre.indication }}</p>
@@ -122,23 +122,29 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { BonExamens } from "../../../api/bonExamen";
-const bonExamens = ref([]);
-const router = useRouter();
-const route = useRoute();
-//getData
-const getData = JSON.parse(localStorage.getItem("bonExamens"));
-if (getData != null || getData != undefined) {
-	const datas = getData;
-	bonExamens.value = [...BonExamens, ...datas];
-} else {
-	bonExamens.value = BonExamens;
-}
-bonExamens.value = bonExamens.value.filter(
-	(bon) => bon.id == route.params.id
-);
+	import { ref, reactive, computed,onMounted } from "vue";
+	import { useRouter, useRoute } from "vue-router";
+	import BonService from "@/services/modules/bon.examen.service.js";
+	const bonExamens = ref([]);
+	const router = useRouter();
+	const route = useRoute();
+	//getData
+	//getData
+
+	const getData = () => {
+  BonService.get(route.params.id).then((data) => {
+    const datas = data.data.data
+    bonExamens.value = datas
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
+	
+		onMounted(() => {
+			getData()
+		
+		})
+
 </script>
 
 <style>

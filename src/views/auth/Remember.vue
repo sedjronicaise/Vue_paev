@@ -26,7 +26,7 @@
 
               <p class="mt-2 ">
                 <strong>
-                  Veuillez vous identifier!
+                  Vous avez oublié vos information !
                 </strong>
                 <strong class="text-danger fw-bold fs-4">
                  {{errors}}
@@ -34,10 +34,10 @@
               </p>
             </div>
 
-            <form id="formAuthentication" class=" mb-2" @submit.prevent="login">
+            <form id="formAuthentication" class=" mb-2" >
                 <div class="">
 					<div class="col-md-12 ">
-						<div class="mb-3" >
+						<div v-if="!mailConfirm" class="mb-3" >
 						  <label for="email" class="form-label"> <strong>EMAIL</strong> </label>
 						  <input
 							type="text"
@@ -56,12 +56,12 @@
 							</div>
 						  </div>
 						</div>
-						<div class="mb-2 form-password-toggle">
+
+						<div v-else>
+              <div class="mb-2 form-password-toggle">
 						  <div class="d-flex justify-content-between">
-							<label class="form-label" for="password"> <strong>MOT DE PASSE</strong> </label>
-							<router-link to="/remember-password">
-							  <small style="font-weight: 700; color: #04782f;">Mot de passe oublié?</small>
-							</router-link>
+							<label class="form-label" for="password"> <strong>NOUVEAU MOTS DE PASSE</strong> </label>
+							
 						  </div>
 						  <div class=" ">
 							<div class="input-group input-group-merge position-relative">
@@ -86,11 +86,62 @@
 							</div>
 		
 						  </div>
-						</div>
-						<button class="btn btn-primary w-100 mt-2" type="submit" style="border-color: #03782f !important;
+						  </div>
+
+              <div class="mb-2 form-password-toggle">
+                <div class="d-flex justify-content-between">
+                <label class="form-label" for="password"> <strong>CONFIRMER MOTS DE PASSE</strong> </label>
+                
+                </div>
+                <div class=" ">
+                <div class="input-group input-group-merge position-relative">
+                  <input
+                  :type="statePassword"
+                  id="password"
+                  class="form-control"
+                  name="password"
+                  v-model.trim='state.password'
+                  placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                  aria-describedby="password"
+                  style="border: 1px solid #020202;"
+                  />
+                  <!-- <span @click="invisible" v-if="show" class="text-primary cursor-pointer position-absolute "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1.8em" width="1.6em" xmlns="http://www.w3.org/2000/svg"><defs><clipPath><path fill="none" d="M124-288l388-672 388 672H124z" clip-rule="evenodd"></path></clipPath></defs><path d="M508 624a112 112 0 0 0 112-112c0-3.28-.15-6.53-.43-9.74L498.26 623.57c3.21.28 6.45.43 9.74.43zm370.72-458.44L836 122.88a8 8 0 0 0-11.31 0L715.37 232.23Q624.91 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 0 0 0 51.5q56.7 119.43 136.55 191.45L112.56 835a8 8 0 0 0 0 11.31L155.25 889a8 8 0 0 0 11.31 0l712.16-712.12a8 8 0 0 0 0-11.32zM332 512a176 176 0 0 1 258.88-155.28l-48.62 48.62a112.08 112.08 0 0 0-140.92 140.92l-48.62 48.62A175.09 175.09 0 0 1 332 512z"></path><path d="M942.2 486.2Q889.4 375 816.51 304.85L672.37 449A176.08 176.08 0 0 1 445 676.37L322.74 798.63Q407.82 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 0 0 0-51.5z"></path></svg></span>
+                  <span @click="invisible" v-if="!show" class="text-primary cursor-pointer position-absolute"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1.8em" width="1.6em" xmlns="http://www.w3.org/2000/svg"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path></svg></span> -->
+                </div>
+                <div class="text-danger fw-semibold fs-6 py-1"  v-if="v$.password.$error" >
+                  <div v-for="error in v$.password.$errors" :key="error.$uid">
+                  <span v-if="error.$validator =='required'"> Ce champs est obligatoire </span>
+                  <span v-if="error.$validator =='minLength'"> Mot de passe très court (6 caracteres) </span>
+                  </div>
+                </div>
+      
+                </div>
+              </div>
+            </div>
+
+						<button v-if="!mailConfirm" @click="mailConfirm = true" class="btn btn-primary w-100 mt-2" type="submit" style="border-color: #03782f !important;
     					background-color: #03782f !important;">
 						  <span class="" style="font-weight: bold; font-size: medium;" v-if="!chargement">
 							Se connecter
+						  </span>
+						  <span v-else class="d-flex justify-content-center align-items-center">
+							<span class="mx-2 fs-semibold text-light">
+							  chargement ...
+							</span>
+							<div
+							  style="width: 1.5rem; height: 1.5rem"
+							  class="spinner-border text-light"
+							  role="status"
+							>
+							  <span class="sr-only">Loading...</span>
+							</div>
+						  </span>
+						</button>
+
+            <button v-else class="btn btn-primary w-100 mt-2" type="submit" style="border-color: #03782f !important;
+    					background-color: #03782f !important;">
+						  <span class="" style="font-weight: bold; font-size: medium;" v-if="!chargement">
+                Valider 
 						  </span>
 						  <span v-else class="d-flex justify-content-center align-items-center">
 							<span class="mx-2 fs-semibold text-light">
@@ -151,6 +202,7 @@ const route = useRoute();
 //datas
 const chargement = ref(false);
 const errors = ref('');
+ const mailConfirm = ref(false)
 const statePassword = ref("password");
 const show = ref(false);
 const state = reactive({

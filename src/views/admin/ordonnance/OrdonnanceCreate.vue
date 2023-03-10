@@ -61,19 +61,20 @@
               <!-- Invoice Company Details -->
 
               <!-- Invoice Customer Details -->
+             
               <div id="invoice-customer-details" class="row pt-2">
                 <div class="col-sm-6 col-12 text-center text-sm-left">
                   <ul class="px-0 list-unstyled">
                     <li class="text-bold-800">
-                      Patient: <strong>{{ordonances[0].patient.fullName}}</strong>
+                      Patient: <strong v-if="ordonances.patient">{{ordonances.patient.firstname}}</strong>
                     </li>
-                    <li>Sexe: {{ordonances[0].patient.sexe}}</li>
-                    <li>Age: {{ordonances[0].patient.age}} ans</li>
+                    <li v-if="ordonances.patient">Sexe: {{ordonances.patient.sex}}</li>
+                    <li v-if="ordonances.patient">Age: {{ordonances.patient.age}} ans</li>
                   </ul>
                 </div>
                 <div class="col-sm-6 col-12 text-center text-sm-right">
                   <p>
-                    <span class="text-muted"> Délivrée ce, </span> {{ordonances[0].created_at}}
+                    <span class="text-muted"> Délivrée ce, </span> {{ordonances.created_at}}
                   </p>
                 </div>
               </div>
@@ -88,19 +89,16 @@
                         <tr>
                           <th>#</th>
                           <th>Prescription</th>
-                          <th>Quantité</th>
                           <th class="text-right">Posologie et durée</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="(autre,index) in ordonances[0].autre" :key="index">
+                        <tr v-for="(autre,index) in ordonances.lignes" :key="index">
                           <th scope="row">1</th>
                           <td>
-                            <p>{{autre.medicamentDosage}}</p>
+                            <p>{{autre.name}}</p>
                           </td>
-													<td>
-                            <p>{{autre.quantite}}</p>
-                          </td>
+													
                           <td class="text-right">
                             <p class="text-muted">
                               {{autre.posologie}}
@@ -142,23 +140,29 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed,onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { Ordonances } from "../../../api/ordonance";
+import OrdonanceService from "@/services/modules/ordonance.service.js";
 const ordonances = ref([]);
 const router = useRouter();
 const route = useRoute();
 //getData
-const getData = JSON.parse(localStorage.getItem("ordonances"));
-if (getData != null || getData != undefined) {
-  const datas = getData;
-  ordonances.value = [...Ordonances, ...datas];
-} else {
-  ordonances.value = Ordonances;
-}
-ordonances.value = ordonances.value.filter(
-  (ordonance) => ordonance.id == route.params.id
-);
+//getData
+
+const getData = () => {
+  OrdonanceService.get(route.params.id).then((data) => {
+    const datas = data.data.data
+    ordonances.value = datas
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
+ 
+  onMounted(() => {
+    getData()
+   
+  })
+
 </script>
 
 <style></style>

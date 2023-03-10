@@ -64,10 +64,10 @@
                 <div class="col-sm-6 col-12 text-center text-sm-left">
                   <ul class="px-0 list-unstyled">
                     <li class="text-bold-800">
-                      Patient: <strong>{{certificats[0].patient.fullName}}</strong>
+                      Patient: <strong v-if="certificats.patient">{{certificats.patient.firstname}}</strong>
                     </li>
-                    <li>Sexe: {{certificats[0].patient.sexe}}</li>
-                    <li>Age: {{certificats[0].patient.age}} ans</li>
+                    <li v-if="certificats.patient">Sexe: {{certificats.patient.sex}}</li>
+                    <li v-if="certificats.patient">Age: {{certificats.patient.age}} ans</li>
                   </ul>
                 </div>
                   
@@ -75,13 +75,57 @@
 
                 <div class="col-sm-6 col-12 text-center text-sm-right">
                   <p>
-                    <span class="text-muted"> Délivrée ce, </span> {{certificats[0].created_at}}
+                    <span class="text-muted"> Délivrée ce, </span> {{ certificats.created_at }}
                   </p>
                 </div>
 
+                
+
               </div>
               <!-- Invoice Customer Details -->
+              	<!-- Invoice Items Details -->
+							<div id="invoice-items-details" class="pt-2">
+								<div class="row">
+									<div class="table-responsive col-12">
+										<table class="table">
+											<thead>
+												<tr>
+													
+													<th>Contenu</th>
+													<th>Nature</th>
+												
+												</tr>
+											</thead>
+											<tbody>
+												<tr >
+													<td>
+														<p>{{ certificats.nature }}</p>
+													</td>
 
+													<td>
+														<p>{{ certificats.contenu }}</p>
+													</td>
+													
+													
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-7 col-12 text-center text-sm-left"></div>
+									<div class="col-sm-5 col-12">
+										<div class="text-center">
+											<img src="/app-assets/images/pages/signature-scan.png" alt="signature" class="height-100" />
+											<p class="mb-0 mt-1">Dr</p>
+											<br />
+											<p class="text-muted">Médecin généraliste</p>
+										</div>
+									</div>
+								</div>
+								<div></div>
+							</div>
               <!-- Invoice Footer -->
 
               <!-- Invoice Footer -->
@@ -94,24 +138,29 @@
 </template>
 
 <script setup>
-	import { ref, reactive, computed } from "vue";
+	import { ref, reactive, computed,onMounted } from "vue";
 	import { useRouter, useRoute } from "vue-router";
-	import { Certificats } from "../../../api/certificat";
+  import CertificateService from "@/services/modules/certificate.service.js";
 	const certificats = ref([]);
 	const router = useRouter();
 	const route = useRoute();
 	//getData
-	const getData = JSON.parse(localStorage.getItem("certificats"));
-	if (getData != null || getData != undefined) {
-		const datas = getData;
-		certificats.value = [...Certificats, ...datas];
-	} else {
-		certificats.value = Certificats;
-	}
-	certificats.value = certificats.value.filter(
-		(data) => data.id == route.params.id
-	);
-</script>
+	//getData
 
+	const getData = () => {
+    CertificateService.get(route.params.id).then((data) => {
+    const datas = data.data
+    certificats.value = datas.data
+  }).catch((e) => {
+      console.log(e)
+    })
+  }
+	
+		onMounted(() => {
+			getData()
+		
+		})
+
+</script>
 
 <style></style>

@@ -211,63 +211,124 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
-              <div class="row">
-                <div class="col-lg-6">
-                  <fieldset class="form-group floating-label-form-group">
-                    <label for="patient">Rechercher le patient</label>
+            <form @submit.prevent="updateCertificate">
+              <div>
+                <div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <fieldset class="form-group floating-label-form-group">
+                        <label for="patient">Selectionnez le medecin</label>
+                        <input
+                          class="form-control"
+                          id="name"
+                          readonly
+                          name="name"
+                          v-if="!showSelectDoctor"
+                          @click="showSelectDoctor = true"
+                          v-model="saveUpdate.doctor_id"
+                          type="text"
+                        />
+                        <VueMultiselect
+                          v-else
+                          v-model="saveUpdate.doctor_id"
+                          label="name"
+                          track-by="id"
+                          :selectLabel="'Appuyez sur Entrée pour sélectionner'"
+                          :deselectLabel="'Appuyez sur Entrée pour supprimer'"
+                          selectedLabel="Selectionné"
+                          tag-placeholder="Selectionnez un medecin"
+                          placeholder="Selectionnez un medecin"
+                          :options="docteurs"
+                        >
+                        </VueMultiselect>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                      <fieldset class="form-group floating-label-form-group">
+                        <label for="patient">Selectionnez le patient </label>
+                        <input
+                          class="form-control"
+                          id="name"
+                          readonly
+                          name="name"
+                          v-if="!showSelectPatient"
+                          @click="showSelectPatient = true"
+                          v-model="saveUpdate.patient_id"
+                          type="text"
+                        />
+                        <VueMultiselect
+                          v-else
+                          v-model="saveUpdate.patient_id"
+                          label="firstname"
+                          track-by="id"
+                          :selectLabel="'Appuyez sur Entrée pour sélectionner'"
+                          :deselectLabel="'Appuyez sur Entrée pour supprimer'"
+                          selectedLabel="Selectionné"
+                          tag-placeholder="Selectionnez un patient"
+                          placeholder="Selectionnez un patient"
+                          :options="patients"
+                        >
+                        </VueMultiselect>
+                      </fieldset>
+                    </div>
+                  </div>
+                  <div class="row">
+                    
+                    <div class="col-md-12">
+                      <fieldset class="form-group floating-label-form-group">
+                        <label for="patient"
+                          >Entrer la nature de certifcat</label
+                        >
+                        <input
+                          type="text"
+                          required
+                          v-model="saveUpdate.nature"
+                          class="form-control"
+                          placeholder="Exemple: Certificat d'hospitalisation"
+                        />
+                      </fieldset>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <fieldset class="form-group floating-label-form-group">
+                        <label for="contenu">Contenu du certificat</label>
 
-            
-                  </fieldset>
-                </div>
-                <div class="col-lg-6">
-                  <fieldset class="form-group floating-label-form-group">
-                    <label for="patient">Entrer le nature de certifcat</label>
-                    <input
-                      type="text"
-                      v-model="saveUpdate.natureCertificat"
-                      class="form-control"
-                      placeholder="Exemple: Certificat d'hospitalisation"
-                    />
-                  </fieldset>
+                        <textarea
+                          name=""
+                          id="contenu"
+                          v-model="saveUpdate.contenu"
+                          required
+                          class="form-control"
+                          cols="30"
+                          rows="10"
+                        >
+                        </textarea>
+                      </fieldset>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  <fieldset class="form-group floating-label-form-group">
-                    <label for="contenu">Contenu du certificat</label>
-
-                    <textarea
-                      name=""
-                      id="contenu"
-                      v-model="saveUpdate.contenuCertificat"
-                      class="form-control"
-                      cols="30"
-                      rows="10"
-                    >
-                    </textarea>
-                  </fieldset>
+              <button class="btn btn-success w-100 my-4 flex " type="submit">
+                <span class="fs-5 fs-semibold" v-if="!chargement">
+                  {{ submitText }}
+                </span>
+                <span v-else class="d-flex align-items-center justify-content-center">
+                  <span class="mx-2 fs-semibold text-light">
+                  chargement ...
+                </span>
+                <div
+                  style="width: 1.5rem; height: 1.5rem"
+                  class="spinner-border text-light"
+                  role="status"
+                >
+                  <span class="sr-only">Loading...</span>
                 </div>
-              </div>
+                </span>
+              </button>
             </form>
           </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn grey btn-outline-secondary btn-sm"
-              data-dismiss="modal"
-            >
-              Fermer
-            </button>
-            <button
-              type="button"
-              data-dismiss="modal"
-              @click.prevent="updateOrdonance"
-              class="btn btn-outline-success btn-sm"
-            >
-              {{ submitText }}
-            </button>
-          </div>
+          
         </div>
       </div>
     </div>
@@ -305,20 +366,19 @@
             <table class="table mb-0">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Nom & prénom du patient</th>
+                  <th>Patient</th>
+									<th>Docteur</th>
                   <th>Date et heure</th>
-                  <th>Auteur</th>
-                  <th>Actions</th>
+									<th>Actions</th>
                 </tr>
               </thead>
 
               <tbody>
                 <tr v-for="(data, index) in certificats" :key="index">
-                  <td>{{ index + 1 }}</td>
-                  <td>{{ data.patient.fullName }}</td>
-                  <td>{{ data.created_at.getFullYear() }}</td>
-                  <td>Dr Amoussou Florent</td>
+                  <td> {{ index +1}} </td>
+									<td v-if="data.patient"> {{ data.patient.firstname }} </td>
+                  <td v-if="data.doctor"> {{ data.doctor.name }} </td>
+									<td>{{ data.created_at}} </td>
                   <td>
                     <router-link
                       :to="{ name: 'voirCertificat', params: { id: data.id } }"
@@ -407,7 +467,10 @@ const patients = ref([]);
 const docteurs = ref([]);
 const deleteData = reactive({});
 const chargement = ref(false)
-
+const showSelectPatient = ref(false)
+const showSelectDoctor = ref(false)
+const oldData = reactive({}) 
+const updateId = ref(0)
 //getData
 //getData
 
@@ -467,6 +530,48 @@ const storeCertificate = function () {
 };
 
 
+const updateCertificate = function () {
+  if(chargement.value == false) {
+    chargement.value = true
+   
+    if(showSelectDoctor.value) {
+		  saveUpdate.doctor_id = saveUpdate.doctor_id.id
+      saveUpdate.patient_id  = oldData.patient_id
+    }
+
+    if(showSelectPatient.value) {
+      saveUpdate.patient_id = saveUpdate.patient_id.id
+      saveUpdate.doctor_id  = oldData.doctor_id
+    }
+   
+    if(showSelectPatient.value && showSelectDoctor.value) {
+      saveUpdate.patient_id = saveUpdate.patient_id.id
+      saveUpdate.doctor_id = saveUpdate.doctor_id.id
+    }
+    if(showSelectPatient.value === false && showSelectDoctor.value == false) {
+      saveUpdate.doctor_id  = oldData.doctor_id
+      saveUpdate.patient_id  = oldData.patient_id
+    }
+
+    
+   
+		CertificateService.update(updateId.value,saveUpdate).then((data) => {
+      const response = data.data
+			if(response.status === 'error') {
+				chargement.value = false  
+				toast(response.message, 'danger')
+			}
+			else {
+				chargement.value = false
+				getData()
+				close()
+        toast('vous avez effectué une mise à jours', 'success')
+			}
+        
+      })
+  }
+};
+
 
 const formData = reactive({
   "nature": "",
@@ -489,16 +594,18 @@ const close = function () {
 };
 
 const modifier = function (data, index) {
-  indexElement.value = index;
   isUpdate.value = true;
-  title.value = "Modifier une ordonance";
+  updateId.value = data.id
+  oldData.patient_id = data.patient.id
+  oldData.doctor_id = data.doctor.id
+  title.value = "Modifier un bon examen";
   submitText.value = "Modifier";
-  saveUpdate.id = data.id;
-  saveUpdate.patient = data.patient;
-  saveUpdate.natureCertificat =  data.natureCertificat;
-  saveUpdate.contenuCertificat = data.contenuCertificat;
-  saveUpdate.created_at = data.created_at;
+  saveUpdate.nature= data.nature
+  saveUpdate.contenu= data.contenu
+  saveUpdate.patient_id= data.patient.firstname
+  saveUpdate.doctor_id= data.doctor.name
 };
+
 
 const supprimer = function (index, data) {
 		deleteData.id = data.id;
@@ -527,10 +634,7 @@ const deleteCertificat = function () {
 	};
 
 
-const updateOrdonance = function () {
-  certificats.value[indexElement.value] = saveUpdate;
-  toast("Mise à jours effectué avec success ", "success");
-};
+
 
 const toast = (message, type) => {
   createToast(message, { type: type });

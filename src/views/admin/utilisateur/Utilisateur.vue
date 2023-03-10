@@ -82,7 +82,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form  @submit.prevent="storeUser">
+            <form v-if="!isUpdate" @submit.prevent="storeUser">
               <div>
                 <div>
                   <div class="row">
@@ -219,11 +219,11 @@
                   </div>
                 </div>
               </div>
-              <div class=" d-flex justify-content-center py-4 mx-4 ">
+              <div class=" d-flex justify-content-center py-4  ">
                 <button
                   type="button"
                   @click="close"
-                  class="btn grey btn-danger btn-sm fs-5 fs-semibold"
+                  class="btn grey btn-danger btn-sm mx-3 fs-5 fs-semibold"
                   data-dismiss="modal"
                 >
                   Fermer
@@ -231,6 +231,126 @@
             <button :data-dismiss="{'modal':chargement==false}" type="submit" class="btn btn-primary flex" >
 														<span class="fs-5 fs-semibold" v-if="!chargement">
 															creer un utilisateur
+														</span>
+														<span v-else class="d-flex align-items-center">
+															<span class="mx-2 fs-semibold text-light">
+																chargement ...
+															</span>
+															<div
+																style="width: 1.5rem; height: 1.5rem"
+																class="spinner-border text-light"
+																role="status"
+															>
+																<span class="sr-only">Loading...</span>
+															</div>
+														</span>
+            </button>
+              </div>
+            </form>
+            <form v-else @submit.prevent="updateUser">
+              <div>
+                <div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <fieldset class="form-group floating-label-form-group">
+                        <label for="patient"
+                          >Fonction ou profession de l'utilisateur</label
+                        >
+                        <select v-model="saveUpdate.profession" required name="role_list" id="" class="form-control">
+                          <option disabled :value="saveUpdate.profession">{{saveUpdate.profession}}</option>
+                          <option value="Médecin géneraliste">Médecin géneraliste</option>
+                          <option value="Specialiste">Specialiste</option>
+                          <option value="Nutritioniste">Nutritioniste</option>
+                          <option value="Sage Femme">Sage Femme</option>
+                          <option value="Aide soignant">Aide soignant</option>
+                          <option value="Infirmier/ère">Infirmier/ère</option>
+                          <option value="Receptionniste">Receptionniste</option>
+                        </select>
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                      <fieldset class="form-group floating-label-form-group">
+                        <label for="patient">Nom et prénoms </label>
+                        <input
+                          type="text"
+                          v-model="saveUpdate.name"
+                          class="form-control"
+                          required
+                          placeholder="Nom et prénoms de l'utilisateur"
+                        />
+                      </fieldset>
+                    </div>
+                   
+
+                    <!-- <div class="col-lg-6">
+                        <fieldset class="form-group floating-label-form-group">
+                          <label for="patient"
+                            >Rôle</label
+                          >
+                          <input
+                            type="text"
+                            v-model="formData.natureCertificat"
+                            class="form-control"
+                            placeholder="Nom et prénom de l'utilisateur"
+                          />
+                        </fieldset>
+                      </div> -->
+
+                    <div class="col-lg-6">
+                      <fieldset class="form-group floating-label-form-group">
+                        <label for="patient">Telephone </label>
+                        <input
+                          type="text"
+                          v-model="saveUpdate.phone"
+                          class="form-control"
+                          required
+                          placeholder="Telephone"
+                        />
+                      </fieldset>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <fieldset class="form-group floating-label-form-group">
+                        <label for="patient">Email </label>
+                        <input
+                          type="email"
+                          v-model="saveUpdate.email"
+                          class="form-control"
+                          required
+                          placeholder="Email"
+                        />
+                      </fieldset>
+                    </div>
+
+                    <!-- <div class="col-lg-6">
+                        <fieldset class="form-group floating-label-form-group">
+                          <label for="patient"
+                            >Statut du compte</label
+                          >
+                          <select name="statut_user" id=""  class="form-control">
+                            <option value="">Activé</option>
+                            <option value="">Désactivé</option>
+                          </select>
+                         
+                        </fieldset>
+                      </div> -->
+
+                  
+                  </div>
+                </div>
+              </div>
+              <div class=" d-flex justify-content-center py-4 ">
+                <button
+                  type="button"
+                  @click="close"
+                  class="btn grey btn-danger mx-3 btn-sm fs-5 fs-semibold"
+                  data-dismiss="modal"
+                >
+                  Fermer
+              </button>
+            <button :data-dismiss="{'modal':chargement==false}" type="submit" class="btn btn-primary flex" >
+														<span class="fs-5 fs-semibold" v-if="!chargement">
+															modifier
 														</span>
 														<span v-else class="d-flex align-items-center">
 															<span class="mx-2 fs-semibold text-light">
@@ -328,12 +448,14 @@
                     </span>
                   </td>
                   <td>
-                    <button
+                    <div class="d-flex">
+                      <button
                       title="modifier"
                       data-toggle="modal"
                       @click="modifier(data, index)"
-                      data-target="#update"
-                      class="btn btn-primary round btn-sm waves-effect waves-light mx-1"
+                     
+                      data-target="#large"
+                      class="btn btn-primary round mx-1 btn-sm waves-effect waves-light mx-1"
                     >
                       <svg
                         stroke="currentColor"
@@ -376,6 +498,7 @@
                         ></path>
                       </svg>
                     </button>
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -408,7 +531,7 @@ const users = ref([]);
 const permission = ref(null);
 const permissions = ref([]);
 const chargement = ref(false)
-
+const updateId = ref(0)
 const resultQuery = computed(() => {
   if (search.value) {
     return users.value.filter((item) => {
@@ -467,8 +590,8 @@ onMounted(() => {
 });
 
 const formData = reactive({
-  name: "User name",
-  email: "test@test.com",
+  name: "",
+  email: "",
   password: "123456789",
   password_confirmation: "123456789",
   profession: "Doctor",
@@ -495,6 +618,23 @@ const close = function () {
   formData.password = "";
   formData.password_confirmation = "";
 };
+
+const modifier = function (data, index) {
+  isUpdate.value = true;
+  updateId.value = data.id
+  
+  title.value = "Modifier un utilisateur";
+  submitText.value = "Modifier";
+  saveUpdate.name = data.name;
+  saveUpdate.email = data.email;
+  saveUpdate.phone = data.phone;
+  saveUpdate.profession = data.profession;
+ /*  saveUpdate.country = data.country
+  saveUpdate.address = data.address
+  saveUpdate.city = data.city */
+
+};
+
 function storeUser() {
       if(chargement.value == false) {
         const permissions = []
@@ -525,7 +665,37 @@ function storeUser() {
           }
         })
       }
-    }
+}
+
+function updateUser() {
+      if(chargement.value == false) {
+        
+        chargement.value = true
+       
+       
+        
+        
+        UsersService.update(updateId.value,saveUpdate).then((data) => {
+          toast("Utilisateur modifier", "success");
+          close()
+          getData()
+          chargement.value = false  
+        }).catch((e) => {
+          chargement.value = false  
+          if (error.response) {
+            // Requête effectuée mais le serveur a répondu par une erreur.
+            const message = error.response.data.message
+            toast(message, "success");
+          } else if (error.request) {
+            // Demande effectuée mais aucune réponse n'est reçue du serveur.
+            //console.log(error.request);
+          } else {
+            // Une erreur s'est produite lors de la configuration de la demande
+            //console.log('dernier message', error.message);
+          }
+        })
+      }
+}
 
 const supprimer = function (index, data) {
   deleteData.id = data.id;

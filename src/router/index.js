@@ -14,6 +14,7 @@ import * as Admin from '@/views/admin'
 import * as Public from '@/views/public'
 
 import Login from '@/views/auth/Login.vue'
+import Remember from '@/views/auth/Remember.vue'
 
 const routes = [
   {
@@ -77,6 +78,9 @@ const routes = [
   
   { 
     path: '/login', name: 'Login', component: Login 
+  },
+  { 
+    path: '/remember-password', name: 'Remember', component: Remember 
   },
   
  

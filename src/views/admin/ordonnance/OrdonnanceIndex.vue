@@ -173,7 +173,7 @@
                 <span class="fs-5 fs-semibold" v-if="!chargement">
                   {{ submitText }}
                 </span>
-                <span v-else class="d-flex align-items-center">
+                <span v-else class="d-flex justify-content-center align-items-center">
                   <span class="mx-2 fs-semibold text-light">
                   chargement ...
                 </span>
@@ -220,15 +220,25 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form  @submit.prevent="updateOrdonance">
               <div>
                 <div>
                   <div class="row">
                     <div class="col-md-6">
                       <fieldset class="form-group floating-label-form-group">
                         <label for="patient">Selectionnez le medecin</label>
-
+                        <input
+                        class="form-control"
+                        id="name"
+                        readonly
+                        name="name"
+                        v-if="!showSelectDoctor"
+                        @click="showSelectDoctor = true"
+                        v-model="saveUpdate.doctor_id"
+                        type="text"
+                        />
                         <VueMultiselect
+                        v-else
                           v-model="saveUpdate.doctor_id"
                           label="name"
                           track-by="id"
@@ -245,8 +255,18 @@
                     <div class="col-md-6">
                       <fieldset class="form-group floating-label-form-group">
                         <label for="patient">Selectionnez le patient </label>
-
+                        <input
+                        class="form-control"
+                        id="name"
+                        readonly
+                        name="name"
+                        v-if="!showSelectPatient"
+                        @click="showSelectPatient = true"
+                        v-model="saveUpdate.patient_id"
+                        type="text"
+                        />
                         <VueMultiselect
+                          v-else
                           v-model="saveUpdate.patient_id"
                           label="firstname"
                           track-by="id"
@@ -261,44 +281,31 @@
                       </fieldset>
                     </div>
                   </div>
+
                   <hr />
-                  <div v-for="(autre, index) in saveUpdate.autre" :key="index">
+                  <div v-for="(autre, index) in saveUpdate.lignes" :key="index">
                     <div class="d-flex justify-content-end">
-                      <button
-                        @click="deleteItemUpdate(index)"
-                        class="bt btn-danger"
-                      >
+                      <button @click="deleteItem(index)" class="bt btn-danger">
                         X
                       </button>
                     </div>
                     <div class="row">
-                      <div class="col-lg-4">
+                      <div class="col-lg-6">
                         <fieldset class="form-group floating-label-form-group">
                           <label for="title">Médicament & dosage</label>
                           <input
                             type="text"
                             class="form-control"
-                            v-model="autre.medicamentDosage"
+                            v-model="autre.name"
                             id="title"
                             placeholder="Médicament et dosage"
                           />
                         </fieldset>
                       </div>
 
-                      <div class="col-lg-4">
-                        <fieldset class="form-group floating-label-form-group">
-                          <label for="title">Quantité</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="title"
-                            v-model="autre.quantite"
-                            placeholder="Quantité"
-                          />
-                        </fieldset>
-                      </div>
+                      
 
-                      <div class="col-lg-4">
+                      <div class="col-lg-6">
                         <fieldset class="form-group floating-label-form-group">
                           <label for="title1"
                             >Posologie et durée du traitement</label
@@ -316,10 +323,27 @@
                   <hr />
                 </div>
 
-                <button @click.prevent="addFormUpdate" class="btn btn-primary">
+                <button  type="button" @click.stop="addForm" class="btn btn-primary">
                   Ajouter une nouvelle prescription
                 </button>
               </div>
+              <button class="btn btn-success w-100 my-4 flex" type="submit">
+                <span class="fs-5 fs-semibold" v-if="!chargement">
+                  {{ submitText }}
+                </span>
+                <span v-else class="d-flex justify-content-center align-items-center">
+                  <span class="mx-2 fs-semibold text-light">
+                  chargement ...
+                </span>
+                <div
+                  style="width: 1.5rem; height: 1.5rem"
+                  class="spinner-border text-light"
+                  role="status"
+                >
+                  <span class="sr-only">Loading...</span>
+                </div>
+                </span>
+              </button>
             </form>
           </div>
           <div class="modal-footer">
@@ -387,9 +411,9 @@
               <tbody>
                 <tr v-for="(data, index) in ordonances" :key="index">
                   <td>{{ index + 1 }}</td>
-                  <td>dddd</td>
-                  <td>Dr Amoussou Florent</td>
-                  <td>555555</td>
+                  <td v-if="data.patient"> {{ data.patient.firstname }} </td>
+                  <td v-if="data.doctor"> {{ data.doctor.name }} </td>
+                  <td>{{data.created_at}}</td>
                   <td>
                     <router-link
                       :to="{ name: 'voirOrdonance', params: { id: data.id } }"
@@ -477,7 +501,10 @@ const patients = ref([]);
 const docteurs = ref([]);
 const deleteData = reactive({});
 const chargement = ref(false)
-
+const updateId = ref(0)
+const showSelectPatient = ref(false)
+const showSelectDoctor = ref(false)
+const oldData = reactive({})
 //getData
 
 const getData = () => {
@@ -528,7 +555,7 @@ const storeOrdonance = function () {
     chargement.value = true
 		formData.patient_id = formData.patient_id.id
 		formData.doctor_id = formData.doctor_id.id
-		PraticienService.create(formData).then((data) => {
+		OrdonanceService.create(formData).then((data) => {
       const response = data.data
 			if(response.status === 'error') {
 				chargement.value = false  
@@ -544,6 +571,47 @@ const storeOrdonance = function () {
       })
   }
 };
+
+const updateOrdonance = function () {
+  if(chargement.value == false) {
+    chargement.value = true
+    if(showSelectDoctor.value) {
+		  saveUpdate.doctor_id = saveUpdate.doctor_id.id
+      saveUpdate.patient_id  = oldData.patient_id
+    }
+
+    if(showSelectPatient.value) {
+      saveUpdate.patient_id = saveUpdate.patient_id.id
+      saveUpdate.doctor_id  = oldData.doctor_id
+    }
+   
+    if(showSelectPatient.value && showSelectDoctor.value) {
+      saveUpdate.patient_id = saveUpdate.patient_id.id
+      saveUpdate.doctor_id = saveUpdate.doctor_id.id
+    }
+    if(showSelectPatient.value === false && showSelectDoctor.value == false) {
+      saveUpdate.doctor_id  = oldData.doctor_id
+      saveUpdate.patient_id  = oldData.patient_id
+    }
+
+
+		OrdonanceService.update(updateId.value,saveUpdate).then((data) => {
+      const response = data.data
+			if(response.status === 'error') {
+				chargement.value = false  
+				toast(response.message, 'danger')
+			}
+			else {
+				chargement.value = false
+				getData()
+				close()
+        toast('vous avez effectué une mise à jours', 'success')
+			}
+        
+      })
+  }
+};
+
 const close = function () {
   formData.patient_id = null;
   formData.doctor_id = null;
@@ -594,14 +662,15 @@ const addFormUpdate = function () {
 
 
 const modifier = function (data, index) {
-  indexElement.value = index;
+  console.log(data)
   isUpdate.value = true;
   title.value = "Modifier une ordonance";
+  oldData.patient_id = data.patient.id
+  oldData.doctor_id = data.doctor.id
   submitText.value = "Modifier";
-  saveUpdate.id = data.id;
-  saveUpdate.patient = data.patient;
-  saveUpdate.autre = data.autre;
-  saveUpdate.created_at = data.created_at;
+  saveUpdate.lignes= data.lignes
+  saveUpdate.patient_id= data.patient.firstname
+  saveUpdate.doctor_id= data.doctor.name
 };
 
 const deleteItem = function (index) {
@@ -609,11 +678,6 @@ const deleteItem = function (index) {
 };
 const deleteItemUpdate = function (index) {
   saveUpdate.lignes.splice(index, 1);
-};
-
-const updateOrdonance = function () {
-  ordonances.value[indexElement.value] = saveUpdate;
-  toast("Mise à jours effectué avec success ", "success");
 };
 
 const toast = (message, type) => {
