@@ -73,30 +73,60 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal animated bounce text-left" id="bounce" tabindex="-1" role="dialog" aria-labelledby="myModalLabel36" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-                                    <h4 class="modal-title text-danger" id="myModalLabel36">
-                                        <span class="alert-icon text-danger"><i class="la la-warning"></i></span>
-                                        Confirmation de la suppression
-                                      </h4>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                      </button>
-          	</div>
-                                  <div class="modal-body">
-                                      <h5 class="text-danger text-center">Attention! Cette action est irresvocable, êtes vous sur de vouloir continuer ?</h5>
-                                      
-                                      <p>.</p>
-                                  </div>
-                                  <div class="modal-footer">
-                                      <button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Annuler</button>
-                                      <button type="button" @click.prevent="deleteMenuItems" data-dismiss="modal" class="btn btn-outline-danger">Supprimer</button>
-                                  </div>
-          </div>
-        </div>
-    </div>
+		<div class="modal animated bounce text-left" id="bounce" tabindex="-1" role="dialog" aria-labelledby="myModalLabel36"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title text-danger" id="myModalLabel36">
+							<span class="alert-icon text-danger"><i class="la la-warning"></i></span>
+							Confirmation de la suppression
+						</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<h5 class="text-danger text-center">Attention! Cette action est irresvocable, êtes vous sur de vouloir
+							continuer ?</h5>
+
+						<p>.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Annuler</button>
+						<button type="button" @click.prevent="deleteMenuItems" data-dismiss="modal"
+							class="btn btn-outline-danger">Supprimer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal animated bounce text-left" id="bounce2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel36"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title text-danger" id="myModalLabel36">
+							<span class="alert-icon text-danger"><i class="la la-warning"></i></span>
+							Confirmation de la suppression
+						</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<h5 class="text-danger text-center">Attention! Cette action est irresvocable, êtes vous sur de vouloir
+							continuer ?</h5>
+
+						<p>.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Annuler</button>
+						<button type="button" @click.prevent="deleteComponent" data-dismiss="modal"
+							class="btn btn-outline-danger">Supprimer</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="app-content content">
 			<div class="content-overlay"></div>
 			<div class="content-wrapper">
@@ -144,13 +174,12 @@
 															<hr>
 															<h5 class="media-heading">
 																Profession:
-																<span
-																	class="float-right content-header-title">{{ patients[0].infoGeneral.profession }}</span>
+																<span class="float-right content-header-title">{{ patients.profession }}</span>
 															</h5>
 															<hr>
 															<h5 class="media-heading">
 																Sexe
-																<span class="badge badge-info float-right">{{ patients[0].infoGeneral.sexe }}</span>
+																<span class="badge badge-info float-right">{{ patients.sex }}</span>
 															</h5>
 
 														</div>
@@ -168,18 +197,17 @@
 														<div class="media-body">
 															<h5 class="media-heading">
 																Type de Consultation:
-																<span
-																	class="badge badge-info float-right">{{ patients[0].infoGeneral.typeConsultation }}</span>
+																<span class="badge badge-info float-right">{{ patients.consultation_type }}</span>
 															</h5>
 															<hr>
 															<h5 class="media-heading ">
 																Télephone
-																<span class="badge badge-info float-right">{{ patients[0].infoGeneral.telephone }}</span>
+																<span class="badge badge-info float-right">{{ patients.phone }}</span>
 															</h5>
 															<hr>
 															<h5 class="media-heading">
 																Date Arrivée :
-																<span class="badge badge-info float-right">{{ patients[0].infoGeneral.dateArriver }} </span>
+																<span class="badge badge-info float-right">{{ patients.date_arrive }} </span>
 															</h5>
 
 
@@ -263,8 +291,8 @@
 																			<hr>
 
 																			<h5 class="media-heading">
-																				Lieu et date de naissance :
-																				<span class="badge badge-info float-right">20-03-1986 à cotonou</span>
+																				Age :
+																				<span class="badge badge-info float-right">{{ patients.age }}</span>
 																			</h5>
 																			<hr>
 																			<h5 class="media-heading">
@@ -274,8 +302,7 @@
 																			<hr>
 																			<h5 class="media-heading">
 																				Profession
-																				<span
-																					class="badge badge-info float-right">{{ patients[0].infoGeneral.profession }}</span>
+																				<span class="badge badge-info float-right">{{ patients.profession }}</span>
 																			</h5>
 																			<hr>
 
@@ -283,10 +310,10 @@
 																		<div class="media-body">
 																			<h5 class="media-heading">
 																				Situation matrimoniale:
-																				<span class="float-right content-header-title">Marié</span>
+																				<span class="float-right content-header-title">{{patients.marital_status}}</span>
 																			</h5>
 																			<hr>
-																			<h5 class="media-heading">
+																			<!-- <h5 class="media-heading">
 																				Nom et prénom du conjoint:
 																				<span class="float-right content-header-title">Cookie candy</span>
 																			</h5>
@@ -294,7 +321,7 @@
 																			<h5 class="media-heading">
 																				Nombre d'enfants
 																				<span class="badge badge-info float-right">03</span>
-																			</h5>
+																			</h5> -->
 																		</div>
 																	</div>
 
@@ -332,8 +359,9 @@
 																				<div class="col-lg-8 col-md-8 offset-md-2 offset-lg-2 ">
 																					<div class="form-group">
 
-																						<button type="button" @click="openMenuModal" class="btn btn-outline-success block btn-lg"
-																							data-toggle="modal" data-target="#xlarge">
+																						<button type="button" @click="openMenuModal"
+																							class="btn btn-outline-success block btn-lg" data-toggle="modal"
+																							data-target="#xlarge">
 																							Menu habituel
 																						</button>
 
@@ -351,12 +379,36 @@
 																										</button>
 																									</div>
 																									<div class="modal-body">
-																										<form v-if="!isUpdate" >
-																											<div v-for="(data,index) in menuHabituel ">
+																										<form v-if="!isUpdate">
+																											<div class="row">
+																												<div class="col-md-6">
+																													<fieldset class="form-group floating-label-form-group">
+																														<label for="patient">Selectionnez le medecin</label>
+
+																														<VueMultiselect v-model="menuHabituel.doctor_id" label="name"
+																															track-by="id"
+																															:selectLabel="'Appuyez sur Entrée pour sélectionner'"
+																															:deselectLabel="'Appuyez sur Entrée pour supprimer'"
+																															selectedLabel="Selectionné"
+																															tag-placeholder="Selectionnez un medecin"
+																															placeholder="Selectionnez un medecin" :options="docteurs">
+																														</VueMultiselect>
+																													</fieldset>
+																												</div>
+																												<div class="col-md-6">
+																													<label for="Aliment">Nom menu</label>
+																													<input v-model="menuHabituel.name" type="text"
+																														class="form-control" placeholder="Titre du menu">
+																												</div>
+
+																											</div>
+																											<div v-for="(data, index) in menuHabituel.details ">
+
 																												<div class="row">
 																													<div class="col-lg-4">
 																														<label for="type_ratio">Type ratio</label>
-																														<select name="" v-model="data.type" id="" class="form-control">
+																														<select name="" v-model="data.type" id=""
+																															class="form-control">
 																															<option value="Petit dejeuner">Petit dejeuner</option>
 																															<option value="Dejeuner">Dejeuner</option>
 																															<option value="Collation">Collation</option>
@@ -366,7 +418,8 @@
 																													</div>
 																													<div class="col-lg-4">
 																														<label for="Aliment">Aliment</label>
-																														<input v-model="data.aliment" type="text" class="form-control" placeholder="Aliment">
+																														<input v-model="data.aliment" type="text" class="form-control"
+																															placeholder="Aliment">
 																													</div>
 																													<div class="col-lg-4">
 																														<label for="lieu">Lieu</label>
@@ -375,90 +428,166 @@
 																												</div>
 
 																												<div class="row">
-																													
+
 																													<div class="col-lg-4">
 																														<label for="heure">L'heure</label>
 																														<input v-model="data.heure" type="time" class="form-control">
 																													</div>
 																													<div class="col-lg-4">
-																													<label for="vol_poids">Vol./poids</label>
-																													<input type="text" v-model="data.poids_vol" class="form-control">
+																														<label for="vol_poids">Vol./poids</label>
+																														<input type="text" v-model="data.poids_vol"
+																															class="form-control">
 																													</div>
 
 																													<div class="col-lg-4 ">
 																														<label for="Description">Description</label>
-																														<textarea v-model="data.description" name="description" id="" class="form-control"
-																															rows="1"></textarea>
+																														<textarea v-model="data.description" name="description" id=""
+																															class="form-control" rows="1"></textarea>
 																													</div>
 																												</div>
 
 																												<div class="d-flex justify-content-end my-2">
-																													<button type="button" class="btn btn-danger" @click="deleteMenu(index)" >x</button>
+																													<button type="button" class="btn btn-danger"
+																														@click="deleteMenu(index)">x</button>
 																												</div>
 
 																												<hr>
-																												
-																												
+
+
 																											</div>
 																											<div>
-																												<button type="button" @click="addMenu" class="btn btn-primary">+ Ajouter nouveau</button>
+																												<button type="button" @click="addMenu" class="btn btn-primary">+
+																													Ajouter nouveau</button>
 																											</div>
 																										</form>
-																										<form v-else >
-																											<div >
+																										<form v-else>
+																											<div>
 																												<div class="row">
-																													<div class="col-lg-4">
-																														<label for="type_ratio">Type ratio</label>
-																														<select name="" v-model="saveUpdate.type" id="" class="form-control">
-																															<option value="Petit dejeuner">Petit dejeuner</option>
-																															<option value="Dejeuner">Dejeuner</option>
-																															<option value="Collation">Collation</option>
-																															<option value="Souper">Souper</option>
-																															<option value="Diner">Diner</option>
-																														</select>
+																													<div class="col-md-6">
+																														<fieldset class="form-group floating-label-form-group">
+																															<label for="patient">Selectionnez le medecin</label>
+																															<input class="form-control" id="name" readonly name="name"
+																																v-if="!showSelectDoctor" @click="showSelectDoctor = true"
+																																v-model="saveUpdate.doctor_id" type="text" />
+																															<VueMultiselect v-else v-model="saveUpdate.doctor_id"
+																																label="name" track-by="id"
+																																:selectLabel="'Appuyez sur Entrée pour sélectionner'"
+																																:deselectLabel="'Appuyez sur Entrée pour supprimer'"
+																																selectedLabel="Selectionné"
+																																tag-placeholder="Selectionnez un medecin"
+																																placeholder="Selectionnez un medecin" :options="docteurs">
+																															</VueMultiselect>
+																														</fieldset>
 																													</div>
-																													<div class="col-lg-4">
-																														<label for="Aliment">Aliment</label>
-																														<input v-model="saveUpdate.aliment" type="text" class="form-control" placeholder="Aliment">
-																													</div>
-																													<div class="col-lg-4">
-																														<label for="lieu">Lieu</label>
-																														<input v-model="saveUpdate.lieu" type="text" class="form-control">
+																													<div class="col-md-6">
+																														<label for="Aliment">Nom menu</label>
+																														<input v-model="saveUpdate.name" type="text"
+																															class="form-control" placeholder="Titre du menu">
 																													</div>
 																												</div>
+																												<div v-for="(data, index) in saveUpdate.details ">
 
-																												<div class="row">
-																													
-																													<div class="col-lg-4">
-																														<label for="heure">L'heure</label>
-																														<input v-model="saveUpdate.heure" type="time" class="form-control">
-																													</div>
-																													<div class="col-lg-4">
-																													<label for="vol_poids">Vol./poids</label>
-																													<input type="text" v-model="saveUpdate.poids_vol" class="form-control">
+																													<div class="row">
+																														<div class="col-lg-4">
+																															<label for="type_ratio">Type ratio</label>
+																															<select name="" v-model="data.type" id=""
+																																class="form-control">
+																																<option value="Petit dejeuner">Petit dejeuner</option>
+																																<option value="Dejeuner">Dejeuner</option>
+																																<option value="Collation">Collation</option>
+																																<option value="Souper">Souper</option>
+																																<option value="Diner">Diner</option>
+																															</select>
+																														</div>
+																														<div class="col-lg-4">
+																															<label for="Aliment">Aliment</label>
+																															<input v-model="data.aliment" type="text"
+																																class="form-control" placeholder="Aliment">
+																														</div>
+																														<div class="col-lg-4">
+																															<label for="lieu">Lieu</label>
+																															<input v-model="data.lieu" type="text" class="form-control">
+																														</div>
 																													</div>
 
-																													<div class="col-lg-4 ">
-																														<label for="Description">Description</label>
-																														<textarea v-model="saveUpdate.description" name="description" id="" class="form-control"
-																															rows="1"></textarea>
+																													<div class="row">
+
+																														<div class="col-lg-4">
+																															<label for="heure">L'heure</label>
+																															<input v-model="data.heure" type="time"
+																																class="form-control">
+																														</div>
+																														<div class="col-lg-4">
+																															<label for="vol_poids">Vol./poids</label>
+																															<input type="text" v-model="data.poids_vol"
+																																class="form-control">
+																														</div>
+
+																														<div class="col-lg-4 ">
+																															<label for="Description">Description</label>
+																															<textarea v-model="data.description" name="description"
+																																id="" class="form-control" rows="1"></textarea>
+																														</div>
 																													</div>
+
+																													<div class="d-flex justify-content-end my-2">
+																														<button type="button" class="btn btn-danger"
+																															@click="deleteMenu(index)">x</button>
+																													</div>
+
+																													<hr>
+
+
+																												</div>
+																												<div>
+																													<button type="button" @click="addMenu" class="btn btn-primary">+
+																														Ajouter nouveau</button>
 																												</div>
 
-																											
-																												
-																												
+
+
+
 																											</div>
-																											
+
 																										</form>
 																									</div>
 																									<div class="modal-footer">
 																										<button type="button" class="btn grey btn-outline-secondary"
 																											data-dismiss="modal">Fermer</button>
-																										<button v-if="!isUpdate" @click="saveMenu" type="button" data-dismiss="modal"
-																											class="btn btn-outline-primary">Enregister</button>
-																											<button v-else @click="updateMenu" type="button" data-dismiss="modal"
-																											class="btn btn-outline-primary">Modifier</button>
+																										<button v-if="!isUpdate" @click="saveMenu" type="button"
+																											data-dismiss="modal" class="btn btn-outline-primary">
+																											<span class="fs-5 fs-semibold" v-if="!chargement">
+																												Enregistrer
+																											</span>
+																											<span v-else
+																												class="d-flex justify-content-center align-items-center">
+																												<span class="mx-2 fs-semibold text-light">
+																													chargement ...
+																												</span>
+																												<div style="width: 1.5rem; height: 1.5rem"
+																													class="spinner-border text-light" role="status">
+																													<span class="sr-only">Loading...</span>
+																												</div>
+																											</span>
+
+																										</button>
+																										<button v-else @click="updateMenu" type="button" data-dismiss="modal"
+																											class="btn btn-outline-primary">
+
+																											<span class="fs-5 fs-semibold" v-if="!chargement">
+																												Modifier
+																											</span>
+																											<span v-else
+																												class="d-flex justify-content-center align-items-center">
+																												<span class="mx-2 fs-semibold text-light">
+																													chargement ...
+																												</span>
+																												<div style="width: 1.5rem; height: 1.5rem"
+																													class="spinner-border text-light" role="status">
+																													<span class="sr-only">Loading...</span>
+																												</div>
+																											</span>
+																										</button>
 																									</div>
 																								</div>
 																							</div>
@@ -467,8 +596,45 @@
 																				</div>
 																			</div>
 
-																			<div class="row">
-																				
+																			<div v-for="(data, index) in menus" :key="index">
+																				<div class="d-flex justify-content-between align-items-center ">
+																					<div>
+																						<p>Docteur: <strong>{{ data.doctor.name }}</strong> </p>
+																						<p>Menu : <strong>{{ data.name }}</strong> </p>
+																					</div>
+																					<div class="d-flex">
+																						<button title="modifer un menu" type="button" data-toggle="modal"
+																							data-target="#xlarge" @click.prevent="modifierMenu(index, data)"
+																							class="btn btn-primary mx-1 round btn-sm waves-effect waves-light">
+																							<span>
+																								<svg stroke="currentColor" fill="none" stroke-width="2"
+																									viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"
+																									height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg">
+																									<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+																									</path>
+																									<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+																									</path>
+																								</svg>
+																							</span>
+
+																						</button>
+																						<button data-toggle="modal" data-target="#bounce" title="supprimer un menu"
+																							@click.prevent="supprimerMenu(index, data)"
+																							class=" mx-2 btn btn-danger  round btn-sm waves-effect waves-light">
+																							<span>
+																								<svg stroke="currentColor" fill="currentColor" stroke-width="0"
+																									viewBox="0 0 24 24" height="1.3em" width="1.3em"
+																									xmlns="http://www.w3.org/2000/svg">
+																									<path fill="none" d="M0 0h24v24H0z"></path>
+																									<path
+																										d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z">
+																									</path>
+																								</svg>
+																							</span>
+
+																						</button>
+																					</div>
+																				</div>
 																				<table class="table table-bordered table-responsive-lg">
 																					<thead>
 																						<tr>
@@ -478,54 +644,30 @@
 																							<th scope="col">Heure</th>
 																							<th scope="col">Vol./Poids</th>
 																							<th scope="col">Description</th>
-																							<th scope="col">Actions</th>
-																						
+
+
 
 																						</tr>
 																					</thead>
 																					<tbody>
-																						<tr v-for="(data,index) in menus" :key="index">
-																							<th scope="row">{{data.type}}</th>
-																							<td> {{ data.aliment }} </td>
-																							<td> {{ data.lieu }} </td>
-																							<td> {{data.heure}} </td>
-																							<td>  {{ data.poids_vol }} </td>
+																						<tr v-for="(menu, indexM) in data.details" :key="indexM">
+																							<th scope="row">{{ menu.type }}</th>
+																							<td> {{ menu.aliment }} </td>
+																							<td> {{ menu.lieu }} </td>
+																							<td> {{ menu.heure }} </td>
+																							<td> {{ menu.poids_vol }} </td>
 																							<td>
-																								{{data.description}}
-																							</td>
-																							<td>
-																								<div class="d-flex">
-																									<button
-																									title="modifer un menu"
-																									type="button"
-																									data-toggle="modal" data-target="#xlarge"
-																									@click.prevent="modifierMenu(index,data)"
-																									class="btn btn-primary mx-1 round btn-sm waves-effect waves-light"
-                              									>
-																								<span>
-																									<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-																								</span>
-                                
-																								</button>
-																								<button 
-																									data-toggle="modal" data-target="#bounce"
-																									title="supprimer un menu"
-																									@click.prevent="supprimerMenu(index,data)"
-																									class=" mx-2 btn btn-danger  round btn-sm waves-effect waves-light"
-																								>
-																									<span>
-																										<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
-																									</span>
-																								
-																								</button>
-																								</div>
+																								{{ menu.description }}
 																							</td>
 
+
 																						</tr>
-																						
+
 																					</tbody>
 																				</table>
+																				<hr>
 																			</div>
+
 																		</div>
 
 
@@ -550,7 +692,7 @@
 
 																<div class="row">
 																	<div class="col-lg-8 col-md-8 offset-md-2 offset-lg-2 ">
-																		<button type="button" class="btn btn-outline-primary block btn-lg" data-toggle="modal"
+																		<button @click="openComponentModal" type="button" class="btn btn-outline-primary block btn-lg" data-toggle="modal"
 																			data-target="#large">
 																			Composantes nutritionnelles
 																		</button>
@@ -571,40 +713,124 @@
 																								</button>
 																							</div>
 																							<div class="modal-body">
+																								<form v-if="!isUpdate" @submit.prevent="saveComponent">
+																									<div class="row">
+																										<div class="col-md-6">
+																											<fieldset class="form-group floating-label-form-group">
+																												<label for="patient">Selectionnez le medecin</label>
 
-																								<div v-for="(data,index) in composanteNutritionnelles " :key="index" class="row my-1">
-
-																									<div class="col-lg-4">
-																										<label for="Composante">Composantes</label>
-																										<input v-model="data.composantes" type="text" class="form-control">
+																												<VueMultiselect v-model="composanteNutritionnelles.doctor_id"
+																													label="name" track-by="id"
+																													:selectLabel="'Appuyez sur Entrée pour sélectionner'"
+																													:deselectLabel="'Appuyez sur Entrée pour supprimer'"
+																													selectedLabel="Selectionné"
+																													tag-placeholder="Selectionnez un medecin"
+																													placeholder="Selectionnez un medecin" :options="docteurs">
+																												</VueMultiselect>
+																											</fieldset>
+																										</div>
+																										<div class="col-lg-6">
+																											<label for="Composante">Composantes</label>
+																											<input v-model="composanteNutritionnelles.component" type="text"
+																												class="form-control">
+																										</div>
 																									</div>
-																									<div class="col-lg-4">
-																										<label for="resultat">Résultat</label>
-																										<input v-model="data.resultats" type="resultat" class="form-control">
+																									<div class="row my-1">
+
+
+																										<div class="col-lg-6">
+																											<label for="resultat">Résultat</label>
+																											<input v-model="composanteNutritionnelles.result" type="resultat"
+																												class="form-control">
+																										</div>
+
+
+																										<div class="col-lg-6 ">
+																											<label for="Observation">Observation</label>
+																											<textarea v-model="composanteNutritionnelles.observation"
+																												name="Observation" id="" class="form-control" rows="1"></textarea>
+																										</div>
+
 																									</div>
 
+																									<button type="submit" 
+																										class="btn btn-primary w-100 ">
+																										<span class="fs-5 fs-semibold" v-if="!chargement">
+																											Enregistrer
+																										</span>
+																										<span v-else class="d-flex justify-content-center align-items-center">
+																											<span class="mx-2 fs-semibold text-light">
+																												chargement ...
+																											</span>
+																											<div style="width: 1.5rem; height: 1.5rem"
+																												class="spinner-border text-light" role="status">
+																												<span class="sr-only">Loading...</span>
+																											</div>
+																										</span>
 
-																									<div class="col-lg-3 ">
-																										<label for="Observation">Observation</label>
-																										<textarea v-model="data.observations" name="Observation" id="" class="form-control"
-																											rows="1"></textarea>
+																									</button>
+																								</form>
+																								<form v-else @submit.prevent="updateComponent">
+																									<div class="row">
+																										<div class="col-md-6">
+																														<fieldset class="form-group floating-label-form-group">
+																															<label for="patient">Selectionnez le medecin</label>
+																															<input class="form-control" id="name" readonly name="name"
+																																v-if="!showSelectDoctor" @click="showSelectDoctor = true"
+																																v-model="saveUpdate.doctor_id" type="text" />
+																															<VueMultiselect v-else v-model="saveUpdate.doctor_id"
+																																label="name" track-by="id"
+																																:selectLabel="'Appuyez sur Entrée pour sélectionner'"
+																																:deselectLabel="'Appuyez sur Entrée pour supprimer'"
+																																selectedLabel="Selectionné"
+																																tag-placeholder="Selectionnez un medecin"
+																																placeholder="Selectionnez un medecin" :options="docteurs">
+																															</VueMultiselect>
+																														</fieldset>
+																													</div>
+																										<div class="col-lg-6">
+																											<label for="Composante">Composantes</label>
+																											<input v-model="saveUpdate.component" type="text"
+																												class="form-control">
+																										</div>
 																									</div>
-																									<div class=" col-lg-1">
-																											<button type="button" class="btn btn-danger" @click="deleteComposante(index)" >x</button>
+																									<div class="row my-1">
+
+
+																										<div class="col-lg-6">
+																											<label for="resultat">Résultat</label>
+																											<input v-model="saveUpdate.result" type="resultat"
+																												class="form-control">
+																										</div>
+
+
+																										<div class="col-lg-6 ">
+																											<label for="Observation">Observation</label>
+																											<textarea v-model="saveUpdate.observation"
+																												name="Observation" id="" class="form-control" rows="1"></textarea>
+																										</div>
+
 																									</div>
-																								</div>
 
-																								<div class="my-2">
-																									<button @click="addComponent" class="btn btn-primary">+ Ajouter nouveau</button>
-																								</div>
+																									<button type="submit" 
+																										class="btn btn-primary">
+																										<span class="fs-5 fs-semibold w-full " v-if="!chargement">
+																											Modifier
+																										</span>
+																										<span v-else class="d-flex justify-content-center align-items-center">
+																											<span class="mx-2 fs-semibold text-light">
+																												chargement ...
+																											</span>
+																											<div style="width: 1.5rem; height: 1.5rem"
+																												class="spinner-border text-light" role="status">
+																												<span class="sr-only">Loading...</span>
+																											</div>
+																										</span>
 
-
+																									</button>
+																								</form>
 																							</div>
-																							<div class="modal-footer">
-																								<button type="button" class="btn grey btn-outline-secondary"
-																									data-dismiss="modal">Annuler</button>
-																								<button data-dismiss="modal"  @click="saveComponent" type="button" class="btn btn-outline-primary">Enregistrer</button>
-																							</div>
+
 																						</div>
 																					</div>
 																				</div>
@@ -619,22 +845,57 @@
 																		<thead class="thead-dark">
 																			<tr>
 																				<th class="text-left">#</th>
+																				<th class="text-left">Medecin</th>
 																				<th class="text-left">Composantes </th>
 																				<th class="text-left">Resultats</th>
 																				<th class="text-left">Observation </th>
-
-
+																				<th class="text-left">Actions </th>
 																			</tr>
 																		</thead>
 																		<tbody>
-																			<tr v-for="(data,index) in composantes" :key="index">
+																			<tr v-for="(data, index) in composantes" :key="index">
 																				<th scope="row"> {{ index }} </th>
-																				<td> {{ data.composantes }} </td>
-																				<td> {{ data.resultats }} </td>
-																				<td> {{ data.observations }} </td>
+																				<td> {{ data.doctor.name }} </td>
+																				<td> {{ data.component }} </td>
+																				<td> {{ data.result }} </td>
+																				<td> {{ data.observation }} </td>
+																				<tr>
+																					<div class="d-flex">
+																						<button title="modifer un composant" type="button" data-toggle="modal"
+																						data-target="#large" @click.prevent="modifierComposant(index, data)"
+																							class="btn btn-primary mx-1 round btn-sm waves-effect waves-light">
+																							<span>
+																								<svg stroke="currentColor" fill="none" stroke-width="2"
+																									viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"
+																									height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg">
+																									<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+																									</path>
+																									<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+																									</path>
+																								</svg>
+																							</span>
+
+																						</button>
+																						<button data-toggle="modal" data-target="#bounce2" title="supprimer un composant"
+																							@click.prevent="supprimerComposant(index, data)"
+																							class=" mx-2 btn btn-danger  round btn-sm waves-effect waves-light">
+																							<span>
+																								<svg stroke="currentColor" fill="currentColor" stroke-width="0"
+																									viewBox="0 0 24 24" height="1.3em" width="1.3em"
+																									xmlns="http://www.w3.org/2000/svg">
+																									<path fill="none" d="M0 0h24v24H0z"></path>
+																									<path
+																										d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z">
+																									</path>
+																								</svg>
+																							</span>
+
+																						</button>
+																					</div>
+																				</tr>
 
 																			</tr>
-																			
+
 
 																		</tbody>
 																	</table>
@@ -666,7 +927,7 @@
 													</h2>
 
 													<div class="table-responsive">
-														
+
 														<table class="table table-bordered table-striped">
 															<thead>
 																<tr>
@@ -859,53 +1120,134 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
-import { Patients } from "../../../api/patient"
+import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from "vue-router"
+import VueMultiselect from "vue-multiselect";
+import PatientService from "@/services/modules/patient.service.js";
+import MenusService from "@/services/modules/menus.service.js";
+import ComposantService from "@/services/modules/composant.nutrition.service.js";
+import PraticienService from "@/services/modules/praticien.service.js";
+import { createToast } from "mosha-vue-toastify";
+// import the styling for the toast
+import "mosha-vue-toastify/dist/style.css";
+
+
 const router = useRouter()
 const route = useRoute()
 const patients = ref([])
+const docteurs = ref([])
 const deleteData = reactive({})
 const saveUpdate = reactive({})
 const isUpdate = ref(false)
-const getData = JSON.parse(localStorage.getItem('patients'))
-if (getData != null || getData != undefined) {
-	const datas = getData
-	patients.value = [...Patients, ...datas]
-} else {
-	patients.value = Patients
+const chargement = ref(false)
+const showSelectDoctor = ref(false)
+const getData = () => {
+	PatientService.get(route.params.id).then((data) => {
+		const datas = data.data.data
+		patients.value = datas
+
+	}).catch((e) => {
+		console.log(e)
+	})
 }
 
-patients.value = patients.value.filter(patient => patient.id == route.params.id)
-const composanteNutritionnelles = ref([
+const getDocteurs = () => {
+	PraticienService.get().then((data) => {
+		const datas = data.data.data
+		docteurs.value = datas.data
+	}).catch((e) => {
+		console.log(e)
+	})
+}
+
+const getMenu = () => {
+	MenusService.get().then((data) => {
+		const datas = data.data.data
+		menus.value = datas.data
+
+	}).catch((e) => {
+		console.log(e)
+	})
+}
+const getComposante = () => {
+	ComposantService.get().then((data) => {
+		const datas = data.data.data
+		composantes.value = datas.data
+
+	}).catch((e) => {
+		console.log(e)
+	})
+}
+
+onMounted(() => {
+	getData()
+	getMenu()
+	getComposante()
+	getDocteurs()
+})
+const composanteNutritionnelles = reactive(
 	{
-		composantes:'',
-		resultats:'',
-		observations:'',
+		component: '',
+		result: '',
+		observation: '',
+		patient_id: null,
+		doctor_id: null,
 	}
-])
+)
 
 const composantes = ref([
-	
+
 ])
 
+const oldData = reactive({})
+const updateId = ref(0)
 const menus = ref([
-	
+
 ])
 
-const menuHabituel = ref([
-{
-		type:'Dejeuner',
-		aliment:'',
-		lieu:'',
-		heure:'',
-		poids_vol:'',
-		description:'',
+const menuHabituel = reactive(
+	{
+		name: '',
+		details: [
+			{
+				type: 'Dejeuner',
+				aliment: '',
+				lieu: '',
+				heure: '',
+				poids_vol: '',
+				description: '',
+			}
+
+		],
+		patient_id: null,
+		doctor_id: null
 
 	}
-]
-	
 )
+
+function closeMenu() {
+	menuHabituel.doctor_id = null
+	menuHabituel.details = [
+		{
+			type: 'Dejeuner',
+			aliment: '',
+			lieu: '',
+			heure: '',
+			poids_vol: '',
+			description: '',
+		}
+
+	]
+}
+
+function closeComposante() {
+	composanteNutritionnelles.doctor_id = null
+	composanteNutritionnelles.component = ''
+	composanteNutritionnelles.result = ''
+	composanteNutritionnelles.observation = ''
+	
+}
+
 
 const elementStresseurs = ref([
 	{ name: "Ai-je subi, tout au cours de ma vie, des situations  traumatiques (Décès, perte d’emploi ; déception amoureuse ; etc...)", pasDuTout: false, faiblement: false, unPeu: false, assez: false, beaucoup: false, extremement: true },
@@ -1018,85 +1360,214 @@ const totalStress = computed(() => {
 	return totalPasDuTout + totalBeaucoup + totalExtremement + totalUnPeu + totalAssez + totalFaiblement
 })
 
-function addComponent() {
-	composanteNutritionnelles.value.push({
-		composantes:'',
-		resultats:'',
-		observations:''
-	})
-}
+
 
 function openMenuModal() {
 	isUpdate.value = false
 }
+function openComponentModal() {
+	isUpdate.value = false
+}
 
 function addMenu() {
-	menuHabituel.value.push({
-		type:'Dejeuner',
-		aliment:'',
-		lieu:'',
-		heure:'',
-		poids_vol:'',
-		description:'',
+	menuHabituel.details.push({
+		type: 'Dejeuner',
+		aliment: '',
+		lieu: '',
+		heure: '',
+		poids_vol: '',
+		description: '',
 	})
 }
 
-function saveComponent() {
-	composantes.value = {...composanteNutritionnelles.value}
-	composanteNutritionnelles.value = [
-		{
-			composantes:'',
-			resultats:'',
-			observations:''
-		}
-	]
-}
 
-function saveMenu() {
-	menus.value = [...menuHabituel.value]
-	menuHabituel.value = [
-		{
-			type:'Dejeuner',
-			aliment:'',
-			lieu:'',
-			heure:'',
-			poids_vol:'',
-			description:'',
-		}
-	]
-}
+
+
 
 function deleteMenu(index) {
-	menuHabituel.value.splice(index, 1);
+	menuHabituel.details.splice(index, 1);
 }
 
-function deleteComposante(index) {
-	composanteNutritionnelles.value.splice(index, 1);
+
+const modifierComposant = function (index, data) {
+	updateId.value = data.id
+	saveUpdate.index = index
+	saveUpdate.component = data.component
+	saveUpdate.result = data.result
+	saveUpdate.observation = data.observation
+	oldData.doctor_id = data.doctor.id
+	saveUpdate.doctor_id = data.doctor.name
+	isUpdate.value = true
 }
 
-	const supprimerMenu = function(index,data) {
-    deleteData.index = index
-  }
+const modifierMenu = function (index, data) {
+	updateId.value = data.id
+	saveUpdate.index = index
+	saveUpdate.details = data.details
+	saveUpdate.name = data.name
+	oldData.doctor_id = data.doctor.id
+	saveUpdate.doctor_id = data.doctor.name
+	isUpdate.value = true
 
-	const modifierMenu = function(index,data) {
-		saveUpdate.index = index
-		saveUpdate.type = data.type
-		saveUpdate.aliment = data.aliment
-		saveUpdate.lieu = data.lieu
-		saveUpdate.heure = data.heure
-		saveUpdate.poids_vol = data.poids_vol
-		saveUpdate.description = data.description
-		isUpdate.value = true
+}
 
+
+//crud menu 
+
+
+const saveMenu = function () {
+	if (chargement.value == false) {
+		chargement.value = true
+		menuHabituel.doctor_id = menuHabituel.doctor_id.id
+		menuHabituel.patient_id = route.params.id
+		MenusService.create(menuHabituel).then((data) => {
+			const response = data.data
+			if (response.status === 'error') {
+				chargement.value = false
+				toast(response.message, 'danger')
+			}
+			else {
+				chargement.value = false
+				getMenu()
+				closeMenu()
+				toast("vous avez creer un menu", 'success')
+			}
+
+		})
 	}
-	const updateMenu = function() {
-		menus.value[saveUpdate.index] = {type:saveUpdate.type,aliment:saveUpdate.aliment,lieu:saveUpdate.aliment,heure:saveUpdate.heure,poids_vol:saveUpdate.poids_vol,description:saveUpdate.description}
+};
+const updateMenu = function () {
+	if (chargement.value == false) {
+		chargement.value = true
+		if (showSelectDoctor.value) {
+			saveUpdate.doctor_id = saveUpdate.doctor_id.id
+		} else {
+			saveUpdate.doctor_id = oldData.doctor_id
+		}
+		saveUpdate.patient_id = route.params.id
+
+		MenusService.update(updateId.value, saveUpdate).then((data) => {
+			const response = data.data
+			if (response.status === 'error') {
+				chargement.value = false
+				toast(response.message, 'danger')
+			}
+			else {
+				chargement.value = false
+				getMenu()
+				closeMenu()
+				toast('vous avez effectué une mise à jours', 'success')
+			}
+
+		})
 	}
-  const deleteMenuItems = () => {
-		console.log(deleteData.index)
-		menus.value.splice(deleteData.index, 1);
-  }
-  
+};
+
+const supprimerMenu = function (index, data) {
+	deleteData.id = data.id;
+	deleteData.nom = data.nom;
+	deleteData.index = index;
+};
+const deleteMenuItems = function () {
+	menus.value.splice(menus.value.indexOf(deleteData.index), 1);
+	MenusService.destroy(deleteData.id)
+		.then((data) => {
+			toast("Suppression effectué avec succèss", "success");
+			getMenu()
+		})
+		.catch((error) => {
+			if (error.response) {
+				// Requête effectuée mais le serveur a répondu par une erreur.
+				const erreurs = error.response.data.message;
+				toast(erreurs, "danger");
+			} else if (error.request) {
+				// Demande effectuée mais aucune réponse n'est reçue du serveur.
+				//console.log(error.request);
+			} else {
+				// Une erreur s'est produite lors de la configuration de la demande
+			}
+		});
+};
+
+// crud composantes
+
+const saveComponent = function () {
+	if (chargement.value == false) {
+		chargement.value = true
+		console.log(composanteNutritionnelles)
+		composanteNutritionnelles.doctor_id = composanteNutritionnelles.doctor_id.id
+		composanteNutritionnelles.patient_id = route.params.id
+		ComposantService.create(composanteNutritionnelles).then((data) => {
+			const response = data.data
+			if (response.status === 'error') {
+				chargement.value = false
+				toast(response.message, 'danger')
+			}
+			else {
+				chargement.value = false
+				getComposante()
+				closeComposante()
+				toast("vous avez creer un composant nutrionnel ", 'success')
+			}
+		})
+	}
+};
+const updateComponent = function () {
+	if (chargement.value == false) {
+		chargement.value = true
+		if (showSelectDoctor.value) {
+			saveUpdate.doctor_id = saveUpdate.doctor_id.id
+		} else {
+			saveUpdate.doctor_id = oldData.doctor_id
+		}
+		saveUpdate.patient_id = route.params.id
+
+		ComposantService.update(updateId.value, saveUpdate).then((data) => {
+			const response = data.data
+			if (response.status === 'error') {
+				chargement.value = false
+				toast(response.message, 'danger')
+			}
+			else {
+				chargement.value = false
+				getComposante()
+				closeComposante()
+				toast('vous avez effectué une mise à jours', 'success')
+			}
+
+		})
+	}
+};
+
+const supprimerComposant = function (index, data) {
+	deleteData.id = data.id;
+	deleteData.nom = data.nom;
+	deleteData.index = index;
+};
+const deleteComponent = function () {
+	composantes.value.splice(composantes.value.indexOf(deleteData.index), 1);
+	ComposantService.destroy(deleteData.id)
+		.then((data) => {
+			toast("Suppression effectué avec succèss", "success");
+			getComposante()
+		})
+		.catch((error) => {
+			if (error.response) {
+				// Requête effectuée mais le serveur a répondu par une erreur.
+				const erreurs = error.response.data.message;
+				toast(erreurs, "danger");
+			} else if (error.request) {
+				// Demande effectuée mais aucune réponse n'est reçue du serveur.
+				//console.log(error.request);
+			} else {
+				// Une erreur s'est produite lors de la configuration de la demande
+			}
+		});
+};
+
+const toast = (message, type) => {
+	createToast(message, { type: type });
+};
 
 </script>
 
